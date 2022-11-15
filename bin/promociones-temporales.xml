@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="16.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.HashSet">
+  <void method="add">
+   <object class="modelo.promociones.PromocionTemporal">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>SABADO</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="esAcumulable">
+     <boolean>true</boolean>
+    </void>
+    <void property="formaPago">
+     <string>Efectivo</string>
+    </void>
+    <void property="id">
+     <string>347c3760-a39b-4bc3-a6e7-97ddd05e79b5</string>
+    </void>
+    <void property="nombre">
+     <string>Clientes</string>
+    </void>
+    <void property="porcentajeDescuento">
+     <float>20.0</float>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionTemporal">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>MIERCOLES</string>
+       </object>
+      </void>
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>JUEVES</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="esAcumulable">
+     <boolean>true</boolean>
+    </void>
+    <void property="formaPago">
+     <string>Efectivo</string>
+    </void>
+    <void property="id">
+     <string>2530732e-c0c1-4623-af4b-da2a47ab3641</string>
+    </void>
+    <void property="nombre">
+     <string>Verano</string>
+    </void>
+    <void property="porcentajeDescuento">
+     <float>20.0</float>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

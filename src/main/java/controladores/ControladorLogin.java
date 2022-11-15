@@ -5,6 +5,8 @@ import excepciones.UsuarioIncorrectoException;
 import modelo.Empresa;
 import modelo.Operario;
 import vistas.ILogin;
+import vistas.InterfazOptionPanel;
+import vistas.MiOptionPane;
 import vistas.VistaLogin;
 
 import java.awt.event.ActionEvent;
@@ -18,12 +20,17 @@ public class ControladorLogin implements ActionListener {
 	private Empresa empresa;
 	private ILogin vistaLogin;
 	private static Operario logueado;
+	private InterfazOptionPanel optionPane = new MiOptionPane();
 
-	private ControladorLogin() {
+	public ControladorLogin() {
 		this.vistaLogin = new VistaLogin();
 		this.empresa = Empresa.getEmpresa();
 		this.vistaLogin.setActionListener(this);
 
+	}
+	
+	public void setOptionPane(InterfazOptionPanel optionPane) {
+		this.optionPane = optionPane;
 	}
 
 	public Empresa getEmpresa() {

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.HashSet">
+  <void method="add">
+   <object class="modelo.Operario">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="nombreCompleto">
+     <string>bauti</string>
+    </void>
+    <void property="password">
+     <string>123</string>
+    </void>
+    <void property="username">
+     <string>bau</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Operario">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="nombreCompleto">
+     <string>admin</string>
+    </void>
+    <void property="password">
+     <string>admin1234</string>
+    </void>
+    <void property="username">
+     <string>admin</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
