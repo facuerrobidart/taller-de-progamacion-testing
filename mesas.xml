@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.2" class="java.beans.XMLDecoder">
+<java version="16.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.HashSet">
   <void method="add">
    <object class="modelo.Mesa">
@@ -27,7 +27,7 @@
        <string>28/08/2000</string>
       </void>
       <void property="id">
-       <string>3f7fc833-bdcf-444f-b8e5-9cfc241880fe</string>
+       <string>cf160383-0200-474c-aae8-02eb248d0553</string>
       </void>
       <void property="nombreCompleto">
        <string>Juan</string>
@@ -42,19 +42,13 @@
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>5</int>
-    </void>
-    <void property="comanda">
-     <object class="modelo.Comanda"/>
+     <int>4</int>
     </void>
     <void property="estadoMesa">
-     <object class="java.lang.Enum" id="EstadoMesa1" method="valueOf">
-      <class>enums.EstadoMesa</class>
-      <string>OCUPADA</string>
-     </object>
+     <object idref="EstadoMesa0"/>
     </void>
     <void property="nroMesa">
-     <int>10</int>
+     <int>1003</int>
     </void>
    </object>
   </void>
@@ -99,6 +93,73 @@
      <object class="modelo.Comanda"/>
     </void>
     <void property="estadoMesa">
+     <object class="java.lang.Enum" id="EstadoMesa1" method="valueOf">
+      <class>enums.EstadoMesa</class>
+      <string>OCUPADA</string>
+     </object>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa1"/>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>4</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="mozoAsignado">
+     <object class="modelo.Mozo">
+      <void property="cantidadHijos">
+       <int>10</int>
+      </void>
+      <void property="estadoMozo">
+       <object idref="EstadoMozo0"/>
+      </void>
+      <void property="fechaNacimiento">
+       <string>2022-01-01</string>
+      </void>
+      <void property="id">
+       <string>519fe889-f2e2-4f4b-bdff-c6f976d49528</string>
+      </void>
+      <void property="nombreCompleto">
+       <string>[TEST] Mozo</string>
+      </void>
+     </object>
+    </void>
+    <void property="nroMesa">
+     <int>1000</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
      <object idref="EstadoMesa1"/>
     </void>
     <void property="nroMesa">
@@ -125,19 +186,6 @@
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>2</int>
-    </void>
-    <void property="estadoMesa">
-     <object idref="EstadoMesa0"/>
-    </void>
-    <void property="nroMesa">
-     <int>123</int>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Mesa">
-    <void property="cantSillas">
      <int>5</int>
     </void>
     <void property="estadoMesa">
@@ -155,12 +203,70 @@
        <string>28/08/2000</string>
       </void>
       <void property="id">
-       <string>cf160383-0200-474c-aae8-02eb248d0553</string>
+       <string>3f7fc833-bdcf-444f-b8e5-9cfc241880fe</string>
       </void>
       <void property="nombreCompleto">
        <string>Juan</string>
       </void>
      </object>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa1"/>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>4</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>1002</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>2</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>123</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa1"/>
     </void>
     <void property="nroMesa">
      <int>10</int>
@@ -193,54 +299,6 @@
        <string>Juan</string>
       </void>
      </object>
-    </void>
-    <void property="nroMesa">
-     <int>10</int>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Mesa">
-    <void property="cantSillas">
-     <int>5</int>
-    </void>
-    <void property="comanda">
-     <object class="modelo.Comanda"/>
-    </void>
-    <void property="estadoMesa">
-     <object idref="EstadoMesa1"/>
-    </void>
-    <void property="nroMesa">
-     <int>10</int>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Mesa">
-    <void property="cantSillas">
-     <int>5</int>
-    </void>
-    <void property="comanda">
-     <object class="modelo.Comanda"/>
-    </void>
-    <void property="estadoMesa">
-     <object idref="EstadoMesa1"/>
-    </void>
-    <void property="nroMesa">
-     <int>10</int>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Mesa">
-    <void property="cantSillas">
-     <int>5</int>
-    </void>
-    <void property="comanda">
-     <object class="modelo.Comanda"/>
-    </void>
-    <void property="estadoMesa">
-     <object idref="EstadoMesa1"/>
     </void>
     <void property="nroMesa">
      <int>10</int>

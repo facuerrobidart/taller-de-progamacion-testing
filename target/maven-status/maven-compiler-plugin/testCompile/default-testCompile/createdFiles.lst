@@ -1,0 +1,11 @@
+testIntegracion/TestIntegracionMozosMesa.class
+testCajaNegra/GestionDeOperariosTest.class
+testCajaBlanca/EditPromocionesCajaBlancaTest.class
+testCajaNegra/GestionDeProductosTest.class
+testCajaNegra/GestionDeMozosTest.class
+testCajaNegra/EscenarioConAdminLogueado.class
+testCajaNegra/EscenarioMesaConDatos.class
+testPersistencia/TestPersistenciaMozos.class
+testCajaBlanca/EscenariosEditPromociones.class
+testCajaNegra/GestionDeMesasTest.class
+testCajaNegra/GestionDeComandasTest.class
