@@ -32,7 +32,7 @@ public class TestPersistenciaMozos {
 	public void setUp() {
 		
 		this.g= GestionDeMozos.get();
-		this.listaMozosAnt=Empresa.getEmpresa().getMozos();
+		this.listaMozosAnt = Empresa.getEmpresa().getMozos();
 		Empresa.getEmpresa().setMozos(new HashSet<>());
 		this.listaMozosExp=new HashSet<>();
 		File archivo= new File("mozos.xml");

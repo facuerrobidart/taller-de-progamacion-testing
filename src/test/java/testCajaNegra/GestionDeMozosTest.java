@@ -1,12 +1,8 @@
-package testA;
+package testCajaNegra;
 
-import dto.MesaDTO;
 import dto.MozoDTO;
-import enums.EstadoMesa;
 import enums.EstadoMozo;
-import excepciones.MesaExistenteException;
 import excepciones.MozoExistenteException;
-import modelo.Mesa;
 import modelo.Mozo;
 import negocio.GestionDeMozos;
 

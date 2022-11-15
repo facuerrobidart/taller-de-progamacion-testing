@@ -1,4 +1,4 @@
-package testA;
+package testCajaNegra;
 
 import dto.MesaDTO;
 import dto.MozoDTO;
@@ -6,7 +6,6 @@ import dto.MozoDTO;
 import excepciones.MesaExistenteException;
 import excepciones.StockInsuficienteException;
 import modelo.Mesa;
-import modelo.Mozo;
 import modelo.Pedido;
 import modelo.Producto;
 import negocio.GestionDeComandas;

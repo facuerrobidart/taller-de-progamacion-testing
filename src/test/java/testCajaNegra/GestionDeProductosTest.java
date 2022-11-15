@@ -1,14 +1,10 @@
-package testA;
+package testCajaNegra;
 
-
-import modelo.Mesa;
-import modelo.Operario;
 import modelo.Pedido;
 import modelo.Producto;
 import negocio.GestionDeProductos;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

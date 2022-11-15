@@ -1,8 +1,6 @@
-package testA;
-
+package testCajaNegra;
 
 import excepciones.PermisoDenegadoException;
-import modelo.Mozo;
 import modelo.Operario;
 import negocio.GestionDeOperarios;
 

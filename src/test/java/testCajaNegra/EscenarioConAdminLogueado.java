@@ -1,4 +1,4 @@
-package testA;
+package testCajaNegra;
 
 import enums.EstadoMesa;
 import excepciones.ContrasenaIncorrectaException;

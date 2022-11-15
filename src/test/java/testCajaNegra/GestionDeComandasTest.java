@@ -1,9 +1,8 @@
-package testA;
+package testCajaNegra;
 
 import enums.EstadoMesa;
 
 import excepciones.StockInsuficienteException;
-import modelo.Empresa;
 import modelo.Mesa;
 import modelo.Pedido;
 import modelo.Producto;
@@ -12,8 +11,6 @@ import negocio.GestionDeComandas;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Set;
 
 import static org.junit.Assert.*;
 
