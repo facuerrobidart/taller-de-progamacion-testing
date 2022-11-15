@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="16.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.HashSet">
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="java.lang.Enum" id="Dias0" method="valueOf">
+        <class>enums.Dias</class>
+        <string>LUNES</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>da305fdc-5dc5-4ea3-a72a-ebc862cbb70e</string>
+    </void>
+    <void property="nombre">
+     <string>flanL</string>
+    </void>
+    <void property="producto">
+     <object class="modelo.Producto">
+      <void property="costo">
+       <float>30.0</float>
+      </void>
+      <void property="id">
+       <string>3e342c7c-d741-42dd-a527-28e5574a07f9</string>
+      </void>
+      <void property="nombre">
+       <string>Flan</string>
+      </void>
+      <void property="precio">
+       <float>125.0</float>
+      </void>
+      <void property="stock">
+       <int>20</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object idref="Dias0"/>
+      </void>
+     </object>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>f5db9695-4efc-4922-b526-2b981acfb253</string>
+    </void>
+    <void property="nombre">
+     <string>menuL</string>
+    </void>
+    <void property="producto">
+     <object class="modelo.Producto">
+      <void property="costo">
+       <float>20.0</float>
+      </void>
+      <void property="id">
+       <string>e9dd11ae-6e7d-4c67-81a6-56dea34ec143</string>
+      </void>
+      <void property="nombre">
+       <string>Ensalada</string>
+      </void>
+      <void property="precio">
+       <float>100.0</float>
+      </void>
+      <void property="stock">
+       <int>30</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>VIERNES</string>
+       </object>
+      </void>
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>DOMINGO</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>a0138c0c-2479-46cf-a2a9-4b880344cc7f</string>
+    </void>
+    <void property="nombre">
+     <string>Cocucha for All</string>
+    </void>
+    <void property="producto">
+     <object class="modelo.Producto">
+      <void property="costo">
+       <float>10.0</float>
+      </void>
+      <void property="id">
+       <string>12aaa7cb-c976-4078-b61d-4a86b40abb1b</string>
+      </void>
+      <void property="nombre">
+       <string>Coca-cola</string>
+      </void>
+      <void property="precio">
+       <float>30.0</float>
+      </void>
+      <void property="stock">
+       <int>50</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>MARTES</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>8026f5b0-c93b-4e08-b32b-e4c297578519</string>
+    </void>
+    <void property="nombre">
+     <string>ManzanaM</string>
+    </void>
+    <void property="producto">
+     <object class="modelo.Producto">
+      <void property="costo">
+       <float>10.0</float>
+      </void>
+      <void property="id">
+       <string>12aaa7cb-c976-4078-b61d-4a86b40abb1b</string>
+      </void>
+      <void property="nombre">
+       <string>Coca-cola</string>
+      </void>
+      <void property="precio">
+       <float>30.0</float>
+      </void>
+      <void property="stock">
+       <int>50</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

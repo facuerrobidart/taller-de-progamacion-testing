@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.HashSet">
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="estadoMesa">
+     <object class="java.lang.Enum" id="EstadoMesa0" method="valueOf">
+      <class>enums.EstadoMesa</class>
+      <string>LIBRE</string>
+     </object>
+    </void>
+    <void property="mozoAsignado">
+     <object class="modelo.Mozo">
+      <void property="cantidadHijos">
+       <int>2</int>
+      </void>
+      <void property="estadoMozo">
+       <object class="java.lang.Enum" id="EstadoMozo0" method="valueOf">
+        <class>enums.EstadoMozo</class>
+        <string>ACTIVO</string>
+       </object>
+      </void>
+      <void property="fechaNacimiento">
+       <string>28/08/2000</string>
+      </void>
+      <void property="id">
+       <string>3f7fc833-bdcf-444f-b8e5-9cfc241880fe</string>
+      </void>
+      <void property="nombreCompleto">
+       <string>Juan</string>
+      </void>
+     </object>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object class="java.lang.Enum" id="EstadoMesa1" method="valueOf">
+      <class>enums.EstadoMesa</class>
+      <string>OCUPADA</string>
+     </object>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="mozoAsignado">
+     <object class="modelo.Mozo">
+      <void property="cantidadHijos">
+       <int>2</int>
+      </void>
+      <void property="estadoMozo">
+       <object idref="EstadoMozo0"/>
+      </void>
+      <void property="fechaNacimiento">
+       <string>28/08/2000</string>
+      </void>
+      <void property="id">
+       <string>d96bc2c7-f605-41c4-b22c-9b8ea8b8e71f</string>
+      </void>
+      <void property="nombreCompleto">
+       <string>Juan</string>
+      </void>
+     </object>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa1"/>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa1"/>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>2</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>123</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="mozoAsignado">
+     <object class="modelo.Mozo">
+      <void property="cantidadHijos">
+       <int>2</int>
+      </void>
+      <void property="estadoMozo">
+       <object idref="EstadoMozo0"/>
+      </void>
+      <void property="fechaNacimiento">
+       <string>28/08/2000</string>
+      </void>
+      <void property="id">
+       <string>cf160383-0200-474c-aae8-02eb248d0553</string>
+      </void>
+      <void property="nombreCompleto">
+       <string>Juan</string>
+      </void>
+     </object>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="mozoAsignado">
+     <object class="modelo.Mozo">
+      <void property="cantidadHijos">
+       <int>2</int>
+      </void>
+      <void property="estadoMozo">
+       <object idref="EstadoMozo0"/>
+      </void>
+      <void property="fechaNacimiento">
+       <string>28/08/2000</string>
+      </void>
+      <void property="id">
+       <string>61d8a57e-fbe3-400b-affc-2978ae6c6e90</string>
+      </void>
+      <void property="nombreCompleto">
+       <string>Juan</string>
+      </void>
+     </object>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa1"/>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa1"/>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>5</int>
+    </void>
+    <void property="comanda">
+     <object class="modelo.Comanda"/>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa1"/>
+    </void>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
