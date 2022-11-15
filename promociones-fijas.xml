@@ -60,41 +60,6 @@
     <void property="activo">
      <boolean>true</boolean>
     </void>
-    <void property="dosPorUno">
-     <boolean>true</boolean>
-    </void>
-    <void property="id">
-     <string>7780550b-7056-429d-bc74-c1b5bcc74b0e</string>
-    </void>
-    <void property="nombre">
-     <string>Promo 1 Pepsi</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.promociones.PromocionFija">
-    <void property="activo">
-     <boolean>true</boolean>
-    </void>
-    <void property="dosPorUno">
-     <boolean>true</boolean>
-    </void>
-    <void property="dtoPorCantPrecioU">
-     <double>80.0</double>
-    </void>
-    <void property="id">
-     <string>834cc93e-6919-4acf-b943-207d3c25b1a9</string>
-    </void>
-    <void property="nombre">
-     <string>Promo 1 Coca</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.promociones.PromocionFija">
-    <void property="activo">
-     <boolean>true</boolean>
-    </void>
     <void property="diasPromo">
      <object class="java.util.ArrayList">
       <void method="add">
@@ -135,50 +100,6 @@
        <int>50</int>
       </void>
      </object>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.promociones.PromocionFija">
-    <void property="activo">
-     <boolean>true</boolean>
-    </void>
-    <void property="dtoPorCant">
-     <boolean>true</boolean>
-    </void>
-    <void property="dtoPorCantMin">
-     <int>3</int>
-    </void>
-    <void property="dtoPorCantPrecioU">
-     <double>10.0</double>
-    </void>
-    <void property="id">
-     <string>abb2e999-d798-4977-ba8c-4ca88ddca8d7</string>
-    </void>
-    <void property="nombre">
-     <string>Promo 2 Coca</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.promociones.PromocionFija">
-    <void property="activo">
-     <boolean>true</boolean>
-    </void>
-    <void property="dtoPorCant">
-     <boolean>true</boolean>
-    </void>
-    <void property="dtoPorCantMin">
-     <int>3</int>
-    </void>
-    <void property="dtoPorCantPrecioU">
-     <double>10.0</double>
-    </void>
-    <void property="id">
-     <string>ec8462d0-a577-4b50-9a34-cbdc87f493ba</string>
-    </void>
-    <void property="nombre">
-     <string>Promo 2 Pepsi</string>
     </void>
    </object>
   </void>

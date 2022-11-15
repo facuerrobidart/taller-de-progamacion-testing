@@ -62,11 +62,4 @@ public class Promocion {
             this.diasPromo.remove(diaPromo);
     }
 
-
-
-
-
-
-
-
 }

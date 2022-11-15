@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cbfcde8-ba40-4d61-9025-0c22302c3d3c" name="Changes" comment="test de integracion Mesa-Mozo">
-      <change afterPath="$PROJECT_DIR$/src/test/java/testCajaNegra/TestEditPromocionCajaNegra.java" afterDir="false" />
+    <list default="true" id="9cbfcde8-ba40-4d61-9025-0c22302c3d3c" name="Changes" comment="caja negra edit promocion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/testIntegracion/testIntegracion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testIntegracion/TestIntegracion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promociones-fijas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/promociones-fijas.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modelo/promociones/Promocion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modelo/promociones/Promocion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/testIntegracion/TestIntegracion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testIntegracion/TestIntegracion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/MiOptionPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/MiOptionPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testGUI/FalsoOptionPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testGUI/FalsoOptionPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testGUI/GuiTestEnabledDisabled.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testGUI/GuiTestEnabledDisabled.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testGUI/GuiTestIngresoDatos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testGUI/GuiTestIngresoDatos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testGUI/TestUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testGUI/TestUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testIntegracion/testIntegracion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testIntegracion/testIntegracion.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +71,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestIntegracionMozosMesa.test">
+  <component name="RunManager" selected="JUnit.TestIntegracion.testAgregarPedidos">
     <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.main" />
       <module name="tp-taller-de-programacion1" />
@@ -100,12 +108,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestIntegracion.testAgregarPedidos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp-taller-de-programacion1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="testIntegracion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="testIntegracion" />
+      <option name="MAIN_CLASS_NAME" value="testIntegracion.TestIntegracion" />
+      <option name="METHOD_NAME" value="testAgregarPedidos" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.main" />
+      <item itemvalue="JUnit.TestIntegracion.testAgregarPedidos" />
       <item itemvalue="JUnit.TestIntegracionMozosMesa.test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestIntegracion.testAgregarPedidos" />
         <item itemvalue="JUnit.TestIntegracionMozosMesa.test" />
         <item itemvalue="Application.main" />
       </list>
@@ -119,7 +145,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668547044017</updated>
-      <workItem from="1668547045383" duration="6353000" />
+      <workItem from="1668547045383" duration="7537000" />
     </task>
     <task id="LOCAL-00001" summary="testing caja blanca y refactor">
       <created>1668547248321</created>
@@ -156,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668552612769</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="caja negra edit promocion">
+      <created>1668553820535</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668553820535</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,7 +212,8 @@
     <MESSAGE value="fix" />
     <MESSAGE value="coverage fix" />
     <MESSAGE value="test de integracion Mesa-Mozo" />
-    <option name="LAST_COMMIT_MESSAGE" value="test de integracion Mesa-Mozo" />
+    <MESSAGE value="caja negra edit promocion" />
+    <option name="LAST_COMMIT_MESSAGE" value="caja negra edit promocion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -191,6 +225,12 @@
             <option name="lambda-ordinal" value="-1" />
           </properties>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="dias == null" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/main/java/negocio/GestionDePromociones.java</url>
+          <line>227</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
