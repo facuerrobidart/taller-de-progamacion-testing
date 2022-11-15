@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 public class EscenariosEditPromociones {
-    private Empresa empresa;
+    private Empresa empresa = Empresa.getEmpresa();
     private Producto prod1;
     private Producto prod2;
     private PromocionFija promo1;
@@ -22,7 +22,6 @@ public class EscenariosEditPromociones {
 
 
     public void cargarListaPromociones() {
-        empresa = Empresa.getEmpresa();
         prod1 = new Producto("Coca Cola", 100, 75, 20);
         empresa.getProductos().add(prod1);
         prod2 = new Producto("Pepsi", 100, 75, 20);
