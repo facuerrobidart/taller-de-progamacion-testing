@@ -14,10 +14,10 @@ public class EscenariosEditPromociones {
     private Empresa empresa = Empresa.getEmpresa();
     private Producto prod1;
     private Producto prod2;
-    private PromocionFija promo1;
-    private PromocionFija promo2;
-    private PromocionFija promo3;
-    private PromocionFija promo4;
+    private PromocionFija promo1 = new PromocionFija("Promo 1 Coca", List.of(Dias.LUNES,Dias.MARTES), prod1, true, false, 0, 0.0);
+    private PromocionFija promo2 = new PromocionFija("Promo 2 Coca", List.of(Dias.LUNES,Dias.MARTES), prod1, false, true, 3, 10.0);
+    private PromocionFija promo3 = new PromocionFija("Promo 1 Pepsi", List.of(Dias.LUNES,Dias.MARTES), prod2, true, false, 0, 0.0);
+    private PromocionFija promo4 = new PromocionFija("Promo 2 Pepsi", List.of(Dias.LUNES,Dias.MARTES), prod2, false, true, 3, 10.0);
     Set<PromocionFija> promocionesFijas = new HashSet<>();
 
 
@@ -26,11 +26,6 @@ public class EscenariosEditPromociones {
         empresa.getProductos().add(prod1);
         prod2 = new Producto("Pepsi", 100, 75, 20);
         empresa.getProductos().add(prod2);
-
-        PromocionFija promo1 = new PromocionFija("Promo 1 Coca", List.of(Dias.LUNES,Dias.MARTES), prod1, true, false, 0, 0.0);
-        PromocionFija promo2 = new PromocionFija("Promo 2 Coca", List.of(Dias.LUNES,Dias.MARTES), prod1, false, true, 3, 10.0);
-        PromocionFija promo3 = new PromocionFija("Promo 1 Pepsi", List.of(Dias.LUNES,Dias.MARTES), prod2, true, false, 0, 0.0);
-        PromocionFija promo4 = new PromocionFija("Promo 2 Pepsi", List.of(Dias.LUNES,Dias.MARTES), prod2, false, true, 3, 10.0);
 
         empresa.getPromocionesFijas().addAll(List.of(promo1, promo2, promo3, promo4));
     }
