@@ -45,10 +45,10 @@ public class GuiTestIngresoDatos {
     {
         robot.delay(TestUtils.getDelay());
         //obtengo las referencias a los componentes necesarios
-        JTextField nombre = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "textFieldUsername");
-        JTextField password = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "textFieldContrasena");
+        JTextField nombre = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "usernameField");
+        JTextField password = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "passwordField");
 
-        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "btnEntrar");
+        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "loginButton");
 
         TestUtils.clickComponent(nombre, robot);
         TestUtils.tipeaTexto("admin", robot);
@@ -66,10 +66,10 @@ public class GuiTestIngresoDatos {
     {
         robot.delay(TestUtils.getDelay());
 
-        JTextField nombre = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "textFieldUsername");
-        JTextField password = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "textFieldContrasena");
+        JTextField nombre = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "usernameField");
+        JTextField password = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "passwordField");
 
-        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "btnEntrar");
+        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "loginButton");
 
         TestUtils.clickComponent(nombre, robot);
         TestUtils.tipeaTexto("admin", robot);
@@ -79,10 +79,8 @@ public class GuiTestIngresoDatos {
 
         TestUtils.clickComponent(btnEntrar, robot);
 
-        assertEquals("Mensaje incorrecto, deberia decir: Usuario o contraseña incorrectos" ,"Usuario o contraseña incorrectos" ,op.getMensaje());
+        String mensaje = op.getMensaje();
+
+        assertEquals("Mensaje incorrecto, deberia decir: Usuario o contrasena incorrectos", "Usuario o contrasena incorrectos" , mensaje);
     }
-
-
-
-
 }

@@ -67,6 +67,7 @@ public class ControladorLogin implements ActionListener {
 			} catch (UsuarioIncorrectoException err) {
 				this.vistaLogin.usuarioNoEncontrado();
 			} catch (ContrasenaIncorrectaException err) {
+				this.optionPane.ShowMessage(null, "Usuario o contrasena incorrectos");
 				this.vistaLogin.contrasenaIncorrecta();
 			}
 

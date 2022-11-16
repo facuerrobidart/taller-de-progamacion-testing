@@ -45,8 +45,8 @@ public class GuiTestEnabledDisabled
     {
         robot.delay(TestUtils.getDelay());
 
-        JTextField nombre = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "textFieldUsername");
-        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "btnEntrar");
+        JTextField nombre = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "usernameField");
+        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "loginButton");
 
         TestUtils.clickComponent(nombre, robot);
         TestUtils.tipeaTexto("admin", robot);
@@ -57,7 +57,7 @@ public class GuiTestEnabledDisabled
     @Test
     public void testVacios()
     {
-        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "btnEntrar");
+        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "loginButton");
 
         Assert.assertFalse("El boton de entrar deberia estar deshablitado", btnEntrar.isEnabled());
     }
@@ -67,8 +67,8 @@ public class GuiTestEnabledDisabled
     {
         robot.delay(TestUtils.getDelay());
 
-        JTextField password = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "textFieldContrasena");
-        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "btnEntrar");
+        JTextField password = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "passwordField");
+        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "loginButton");
 
         TestUtils.clickComponent(password, robot);
         TestUtils.tipeaTexto("admin1234", robot);
@@ -81,10 +81,10 @@ public class GuiTestEnabledDisabled
     {
         robot.delay(TestUtils.getDelay());
 
-        JTextField nombre = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "textFieldUsername");
-        JTextField password = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "textFieldContrasena");
+        JTextField nombre = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "usernameField");
+        JTextField password = (JTextField) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "passwordField");
 
-        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "btnEntrar");
+        JButton btnEntrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVistaLogin(), "loginButton");
 
         TestUtils.clickComponent(nombre, robot);
         TestUtils.tipeaTexto("admin", robot);

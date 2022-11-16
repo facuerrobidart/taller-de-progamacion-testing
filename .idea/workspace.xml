@@ -4,18 +4,120 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cbfcde8-ba40-4d61-9025-0c22302c3d3c" name="Changes" comment="caja negra edit promocion">
+    <list default="true" id="9cbfcde8-ba40-4d61-9025-0c22302c3d3c" name="Changes" comment="Test de integracion PedidoMesa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/promociones-fijas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/promociones-fijas.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modelo/promociones/Promocion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modelo/promociones/Promocion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/testIntegracion/TestIntegracion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testIntegracion/TestIntegracion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controladores/ControladorLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controladores/ControladorLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vistas/VistaLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vistas/VistaLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/testGUI/GuiTestEnabledDisabled.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testGUI/GuiTestEnabledDisabled.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/testGUI/GuiTestIngresoDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testGUI/GuiTestIngresoDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaMesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaMesa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaMozo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaMozo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaOperario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaOperario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaProducto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaProducto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaPromocionProducto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaPromocionProducto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaPromocionTemporal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorAltaPromocionTemporal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorAsignarMozo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorAsignarMozo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorCambioEstadoMozo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorCambioEstadoMozo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionMesas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionMesas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionMozos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionMozos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionOperario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionOperario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionProductos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionProductos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionPromociones.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorGestionPromociones.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorInicio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorInicio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorLocalAbierto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorLocalAbierto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controladores/ControladorLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controladores/ControladorLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vistas/MiOptionPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/MiOptionPane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/testGUI/FalsoOptionPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testGUI/FalsoOptionPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dto/MesaDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/MesaDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dto/MozoDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/MozoDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dto/OperarioDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/OperarioDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dto/PedidoDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/PedidoDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dto/ProductoDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/ProductoDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dto/PromocionDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/PromocionDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dto/PromocionProductoDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/PromocionProductoDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dto/PromocionTemporalDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/PromocionTemporalDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/Dias.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/Dias.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/EstadoComanda.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/EstadoComanda.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/EstadoMesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/EstadoMesa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/EstadoMozo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/EstadoMozo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/CambioNombreException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/CambioNombreException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/CierreMesaConEstadoLibreException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/CierreMesaConEstadoLibreException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/ContrasenaIncorrectaException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/ContrasenaIncorrectaException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/CredencialesInvalidasException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/CredencialesInvalidasException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/MesaExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/MesaExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/MesaNoExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/MesaNoExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/MozoExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/MozoExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/MozoNoExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/MozoNoExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/OperarioExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/OperarioExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/OperarioNoExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/OperarioNoExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/PermisoDenegadoException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/PermisoDenegadoException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/ProductoExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/ProductoExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/ProductoNoExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/ProductoNoExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/PromocionExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/PromocionExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/PromocionNoExistenteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/PromocionNoExistenteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/StockInsuficienteException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/StockInsuficienteException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/excepciones/UsuarioIncorrectoException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/excepciones/UsuarioIncorrectoException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/Comanda.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/Comanda.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/Cuenta.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/Cuenta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/Empresa.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/Empresa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/Mesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/Mesa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/Mozo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/Mozo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/Operario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/Operario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/Pedido.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/Pedido.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/Producto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/Producto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/promociones/PromocionFija.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/promociones/PromocionFija.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/modelo/promociones/PromocionTemporal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/modelo/promociones/PromocionTemporal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/negocio/GestionDeComandas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/negocio/GestionDeComandas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/negocio/GestionDeMesas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/negocio/GestionDeMesas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/negocio/GestionDeMozos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/negocio/GestionDeMozos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/negocio/GestionDeOperarios.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/negocio/GestionDeOperarios.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/negocio/GestionDeProductos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/negocio/GestionDeProductos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/negocio/GestionDePromociones.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/negocio/GestionDePromociones.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/persistencia/IPersistencia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/persistencia/IPersistencia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/persistencia/PersistenciaXML.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/persistencia/PersistenciaXML.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaMesa$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaMesa$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaMesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaMesa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaMozo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaMozo$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaMozo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaMozo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaOperario$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaOperario$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaOperario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaOperario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaProducto$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaProducto$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaProducto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaProducto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaPromocionProducto$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaPromocionProducto$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaPromocionProducto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaPromocionProducto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaPromocionTemporal$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaPromocionTemporal$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAltaPromocionTemporal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAltaPromocionTemporal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAsignarMozo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAsignarMozo$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaAsignarMozo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaAsignarMozo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaCambioEstadoMozo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaCambioEstadoMozo$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaCambioEstadoMozo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaCambioEstadoMozo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionMesas$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionMesas$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionMesas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionMesas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionMozos$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionMozos$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionMozos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionMozos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionOperarios$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionOperarios$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionOperarios.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionOperarios.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionProductos$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionProductos$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionProductos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionProductos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionPromociones$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionPromociones$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaGestionPromociones.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaGestionPromociones.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaInicio$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaInicio$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaInicio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaInicio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaLocalAbierto$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaLocalAbierto$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaLocalAbierto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaLocalAbierto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaLogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaLogin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vistas/VistaLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vistas/VistaLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaBlanca/EditPromocionesCajaBlancaTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaBlanca/EditPromocionesCajaBlancaTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaBlanca/EscenariosEditPromociones.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaBlanca/EscenariosEditPromociones.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaNegra/EscenarioConAdminLogueado.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaNegra/EscenarioConAdminLogueado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaNegra/EscenarioMesaConDatos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaNegra/EscenarioMesaConDatos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeComandasTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeComandasTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeMesasTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeMesasTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeMozosTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeMozosTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeOperariosTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeOperariosTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeProductosTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testCajaNegra/GestionDeProductosTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/testGUI/GuiTestEnabledDisabled.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testGUI/GuiTestEnabledDisabled.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/testGUI/GuiTestIngresoDatos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testGUI/GuiTestIngresoDatos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/testGUI/TestUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testGUI/TestUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/testIntegracion/testIntegracion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testIntegracion/testIntegracion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/testPersistencia/TestPersistenciaMozos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/testPersistencia/TestPersistenciaMozos.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,38 +173,66 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestIntegracion.testAgregarPedidos">
-    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.main" />
+  <component name="RunManager" selected="JUnit.GuiTestIngresoDatos.testLoginFail">
+    <configuration name="GuiTestEnabledDisabled.testLleno" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tp-taller-de-programacion1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="testGUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="testGUI" />
+      <option name="MAIN_CLASS_NAME" value="testGUI.GuiTestEnabledDisabled" />
+      <option name="METHOD_NAME" value="testLleno" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestIntegracionMozosMesa.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GuiTestEnabledDisabled.testSoloContrasena" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tp-taller-de-programacion1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="testIntegracion.*" />
+          <option name="PATTERN" value="testGUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-        <option name="credential" />
-        <option name="region" />
-        <option name="useCurrentConnection" value="false" />
+      <option name="PACKAGE_NAME" value="testGUI" />
+      <option name="MAIN_CLASS_NAME" value="testGUI.GuiTestEnabledDisabled" />
+      <option name="METHOD_NAME" value="testSoloContrasena" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GuiTestEnabledDisabled.testSoloNombre" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp-taller-de-programacion1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="testGUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
       </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="16" />
-      <option name="PACKAGE_NAME" value="testIntegracion" />
-      <option name="MAIN_CLASS_NAME" value="testIntegracion.TestIntegracionMozosMesa" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="PACKAGE_NAME" value="testGUI" />
+      <option name="MAIN_CLASS_NAME" value="testGUI.GuiTestEnabledDisabled" />
+      <option name="METHOD_NAME" value="testSoloNombre" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GuiTestIngresoDatos.testLoginFail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp-taller-de-programacion1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="testGUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="testGUI" />
+      <option name="MAIN_CLASS_NAME" value="testGUI.GuiTestIngresoDatos" />
+      <option name="METHOD_NAME" value="testLoginFail" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -125,15 +255,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.main" />
+      <item itemvalue="JUnit.GuiTestEnabledDisabled.testLleno" />
+      <item itemvalue="JUnit.GuiTestEnabledDisabled.testSoloContrasena" />
+      <item itemvalue="JUnit.GuiTestEnabledDisabled.testSoloNombre" />
+      <item itemvalue="JUnit.GuiTestIngresoDatos.testLoginFail" />
       <item itemvalue="JUnit.TestIntegracion.testAgregarPedidos" />
-      <item itemvalue="JUnit.TestIntegracionMozosMesa.test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GuiTestIngresoDatos.testLoginFail" />
+        <item itemvalue="JUnit.GuiTestEnabledDisabled.testLleno" />
+        <item itemvalue="JUnit.GuiTestEnabledDisabled.testSoloContrasena" />
+        <item itemvalue="JUnit.GuiTestEnabledDisabled.testSoloNombre" />
         <item itemvalue="JUnit.TestIntegracion.testAgregarPedidos" />
-        <item itemvalue="JUnit.TestIntegracionMozosMesa.test" />
-        <item itemvalue="Application.main" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +279,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668547044017</updated>
-      <workItem from="1668547045383" duration="7537000" />
+      <workItem from="1668547045383" duration="9299000" />
     </task>
     <task id="LOCAL-00001" summary="testing caja blanca y refactor">
       <created>1668547248321</created>
@@ -189,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668553820535</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Test de integracion PedidoMesa">
+      <created>1668554774374</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668554774374</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +354,8 @@
     <MESSAGE value="coverage fix" />
     <MESSAGE value="test de integracion Mesa-Mozo" />
     <MESSAGE value="caja negra edit promocion" />
-    <option name="LAST_COMMIT_MESSAGE" value="caja negra edit promocion" />
+    <MESSAGE value="Test de integracion PedidoMesa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test de integracion PedidoMesa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -231,6 +373,26 @@
           <url>file://$PROJECT_DIR$/src/main/java/negocio/GestionDePromociones.java</url>
           <line>227</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/testGUI/GuiTestEnabledDisabled.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/testGUI/GuiTestIngresoDatos.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/testGUI/FalsoOptionPane.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controladores/ControladorLogin.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

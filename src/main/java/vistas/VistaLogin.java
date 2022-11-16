@@ -64,6 +64,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		panelCentro.add(panel_1);
 
 		usernameField = new JTextField();
+		usernameField.setName("usernameField");
 		usernameField.setBounds(5, 0, 358, 25);
 		usernameField.addKeyListener(this);
 		panel_1.setLayout(null);
@@ -77,6 +78,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		panelCentro.add(lblNewLabel_1);
 		
 		passwordField = new JPasswordField();
+		passwordField.setName("passwordField");
 		passwordField.setColumns(20);
 		passwordField.setBounds(5, 110, 357, 25);
 		passwordField.addKeyListener(this);
@@ -87,6 +89,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		panelSur.setLayout(new BorderLayout(0, 0));
 
 		loginButton = new JButton("Entrar");
+		loginButton.setName("loginButton");
 		loginButton.setActionCommand("LOGIN");
 		loginButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		loginButton.setEnabled(false);
@@ -129,7 +132,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	}
 
 	public void contrasenaIncorrecta() {
-		JOptionPane.showMessageDialog(this, "Contrasena incorrecta");
+		JOptionPane.showMessageDialog(this, "Usuario o contrasena incorrectos");
 	}
 
 	@Override
