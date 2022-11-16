@@ -259,7 +259,7 @@ public class GestionDePromociones {
                 cont++;
             }
         }
-        return cont==2;
+        return true;
     }
 
 
