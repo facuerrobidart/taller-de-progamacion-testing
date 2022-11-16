@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaAltaPromocionProducto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaAltaPromocionProducto.java</span></div><h1>VistaAltaPromocionProducto.java</h1><pre class="source lang-java linenums">package vistas;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.*;
+
+public class VistaAltaPromocionProducto extends JFrame implements MouseListener,KeyListener{
+
+	private JPanel contentPane;
+	private JTextField txtNombre;
+	private JTextField txtCantMinima;
+	private JCheckBox chckbxLunes,chckbxMartes,chckbxMiercoles,chckbxJueves,chckbxViernes,chckbxSabado,chckbxDomingo;
+	private JCheckBox chckbx2x1,chckbxDesc,chckbxActiva;
+	private JButton btnFinalizar,btnVolver;
+	private JTextField textPrecio;
+	private ButtonGroup tipoDesc;
+	private String nombre,cantMin,precio;
+<span class="nc" id="L24">	private int cantMinima = 0;</span>
+<span class="nc" id="L25">	private float precioPromo = 0;</span>
+
+	private JComboBox comboBox;
+
+
+	public static void main(String[] args) {
+<span class="nc" id="L31">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L34">					VistaAltaPromocionProducto frame = new VistaAltaPromocionProducto();</span>
+<span class="nc" id="L35">					frame.setVisible(true);</span>
+<span class="nc" id="L36">				} catch (Exception e) {</span>
+<span class="nc" id="L37">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L39">			}</span>
+		});
+<span class="nc" id="L41">	}</span>
+
+	/**
+	 * Create the frame.
+	 */
+<span class="nc" id="L46">	public VistaAltaPromocionProducto() {</span>
+<span class="nc" id="L47">		setTitle(&quot;Promocion por Producto&quot;);</span>
+<span class="nc" id="L48">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L49">		setBounds(100, 100, 698, 482);</span>
+<span class="nc" id="L50">		contentPane = new JPanel();</span>
+<span class="nc" id="L51">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L52">		setContentPane(contentPane);</span>
+<span class="nc" id="L53">		contentPane.setLayout(null);</span>
+		
+<span class="nc" id="L55">		JLabel lblNewLabel = new JLabel(&quot;Nombre de la Promocion:&quot;);</span>
+<span class="nc" id="L56">		lblNewLabel.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L57">		lblNewLabel.setBounds(10, 26, 189, 38);</span>
+<span class="nc" id="L58">		contentPane.add(lblNewLabel);</span>
+		
+<span class="nc" id="L60">		txtNombre = new JTextField();</span>
+<span class="nc" id="L61">		txtNombre.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L62">		txtNombre.setBounds(220, 26, 221, 38);</span>
+<span class="nc" id="L63">		contentPane.add(txtNombre);</span>
+<span class="nc" id="L64">		txtNombre.setColumns(10);</span>
+<span class="nc" id="L65">		txtNombre.addKeyListener(this);</span>
+
+<span class="nc" id="L67">		JLabel lblNewLabel_1 = new JLabel(&quot;Elija el producto&quot;);</span>
+<span class="nc" id="L68">		lblNewLabel_1.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L69">		lblNewLabel_1.setBounds(10, 100, 120, 26);</span>
+<span class="nc" id="L70">		contentPane.add(lblNewLabel_1);</span>
+		
+<span class="nc" id="L72">		comboBox = new JComboBox();</span>
+<span class="nc" id="L73">		comboBox.setBounds(220, 94, 221, 38);</span>
+<span class="nc" id="L74">		contentPane.add(comboBox);</span>
+		
+<span class="nc" id="L76">		JLabel lblNewLabel_2 = new JLabel(&quot;Elija el/los dias:&quot;);</span>
+<span class="nc" id="L77">		lblNewLabel_2.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L78">		lblNewLabel_2.setBounds(10, 183, 120, 26);</span>
+<span class="nc" id="L79">		contentPane.add(lblNewLabel_2);</span>
+		
+<span class="nc" id="L81">		chckbxLunes = new JCheckBox(&quot;Lunes&quot;);</span>
+<span class="nc" id="L82">		chckbxLunes.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L83">		chckbxLunes.setBounds(220, 168, 99, 23);</span>
+<span class="nc" id="L84">		contentPane.add(chckbxLunes);</span>
+		
+<span class="nc" id="L86">		chckbxMartes = new JCheckBox(&quot;Martes&quot;);</span>
+<span class="nc" id="L87">		chckbxMartes.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L88">		chckbxMartes.setBounds(220, 213, 99, 23);</span>
+<span class="nc" id="L89">		contentPane.add(chckbxMartes);</span>
+		
+<span class="nc" id="L91">		chckbxMiercoles = new JCheckBox(&quot;Miercoles&quot;);</span>
+<span class="nc" id="L92">		chckbxMiercoles.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L93">		chckbxMiercoles.setBounds(327, 168, 99, 23);</span>
+<span class="nc" id="L94">		contentPane.add(chckbxMiercoles);</span>
+		
+<span class="nc" id="L96">		chckbxJueves = new JCheckBox(&quot;Jueves&quot;);</span>
+<span class="nc" id="L97">		chckbxJueves.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L98">		chckbxJueves.setBounds(327, 213, 99, 23);</span>
+<span class="nc" id="L99">		contentPane.add(chckbxJueves);</span>
+		
+<span class="nc" id="L101">		chckbxViernes = new JCheckBox(&quot;Viernes&quot;);</span>
+<span class="nc" id="L102">		chckbxViernes.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L103">		chckbxViernes.setBounds(441, 168, 99, 23);</span>
+<span class="nc" id="L104">		contentPane.add(chckbxViernes);</span>
+		
+<span class="nc" id="L106">		chckbxSabado = new JCheckBox(&quot;Sabado&quot;);</span>
+<span class="nc" id="L107">		chckbxSabado.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L108">		chckbxSabado.setBounds(441, 213, 99, 23);</span>
+<span class="nc" id="L109">		contentPane.add(chckbxSabado);</span>
+		
+<span class="nc" id="L111">		chckbxDomingo = new JCheckBox(&quot;Domingo&quot;);</span>
+<span class="nc" id="L112">		chckbxDomingo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L113">		chckbxDomingo.setBounds(557, 185, 99, 23);</span>
+<span class="nc" id="L114">		contentPane.add(chckbxDomingo);</span>
+		
+<span class="nc" id="L116">		chckbx2x1 = new JCheckBox(&quot;Aplica 2x1&quot;);</span>
+<span class="nc" id="L117">		chckbx2x1.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L118">		chckbx2x1.setBounds(25, 297, 99, 23);</span>
+<span class="nc" id="L119">		contentPane.add(chckbx2x1);</span>
+		
+<span class="nc" id="L121">		chckbxDesc = new JCheckBox(&quot;Aplica descuento por Cantidad&quot;);</span>
+<span class="nc" id="L122">		chckbxDesc.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L123">		chckbxDesc.setBounds(25, 328, 239, 23);</span>
+<span class="nc" id="L124">		contentPane.add(chckbxDesc);</span>
+		
+<span class="nc" id="L126">		txtCantMinima = new JTextField();</span>
+<span class="nc" id="L127">		txtCantMinima.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L128">		txtCantMinima.setColumns(10);</span>
+<span class="nc" id="L129">		txtCantMinima.setBounds(293, 327, 126, 26);</span>
+<span class="nc" id="L130">		contentPane.add(txtCantMinima);</span>
+
+<span class="nc" id="L132">		tipoDesc = new ButtonGroup();</span>
+<span class="nc" id="L133">		tipoDesc.add(chckbxDesc);</span>
+<span class="nc" id="L134">		tipoDesc.add(chckbx2x1);</span>
+<span class="nc" id="L135">		chckbxDesc.addMouseListener(this);</span>
+<span class="nc" id="L136">		chckbx2x1.addMouseListener(this);</span>
+		
+<span class="nc" id="L138">		btnVolver = new JButton(&quot;Volver&quot;);</span>
+<span class="nc" id="L139">		btnVolver.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L140">		btnVolver.setBounds(10, 401, 107, 33);</span>
+<span class="nc" id="L141">		contentPane.add(btnVolver);</span>
+		
+<span class="nc" id="L143">		btnFinalizar = new JButton(&quot;Finalizar&quot;);</span>
+<span class="nc" id="L144">		btnFinalizar.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L145">		btnFinalizar.setBounds(567, 401, 107, 33);</span>
+<span class="nc" id="L146">		contentPane.add(btnFinalizar);</span>
+<span class="nc" id="L147">		btnFinalizar.setEnabled(false);</span>
+
+<span class="nc" id="L149">		JLabel lblNewLabel_3 = new JLabel(&quot;Cantidad Minima:&quot;);</span>
+<span class="nc" id="L150">		lblNewLabel_3.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L151">		lblNewLabel_3.setBounds(292, 303, 120, 14);</span>
+<span class="nc" id="L152">		contentPane.add(lblNewLabel_3);</span>
+		
+<span class="nc" id="L154">		textPrecio = new JTextField();</span>
+<span class="nc" id="L155">		textPrecio.setBounds(482, 327, 126, 26);</span>
+<span class="nc" id="L156">		contentPane.add(textPrecio);</span>
+<span class="nc" id="L157">		textPrecio.setColumns(10);</span>
+<span class="nc" id="L158">		textPrecio.addKeyListener(this);</span>
+
+<span class="nc" id="L160">		JLabel lblNewLabel_4 = new JLabel(&quot;Precio U. con descuento:&quot;);</span>
+<span class="nc" id="L161">		lblNewLabel_4.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L162">		lblNewLabel_4.setBounds(482, 303, 174, 14);</span>
+<span class="nc" id="L163">		contentPane.add(lblNewLabel_4);</span>
+		
+<span class="nc" id="L165">		chckbxActiva = new JCheckBox(&quot;Activar instantaneamente&quot;);</span>
+<span class="nc" id="L166">		chckbxActiva.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L167">		chckbxActiva.setBounds(25, 362, 205, 23);</span>
+<span class="nc" id="L168">		contentPane.add(chckbxActiva);</span>
+<span class="nc" id="L169">		chckbxActiva.addMouseListener(this);</span>
+<span class="nc" id="L170">	}</span>
+
+	public void setActionListener(ActionListener actionListener){
+<span class="nc" id="L173">		btnFinalizar.addActionListener(actionListener);</span>
+<span class="nc" id="L174">		btnVolver.addActionListener(actionListener);</span>
+<span class="nc" id="L175">	}</span>
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L181">	}</span>
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L187">	}</span>
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L192">		this.nombre = this.txtNombre.getText();</span>
+<span class="nc" id="L193">		this.cantMin = this.txtCantMinima.getText();</span>
+<span class="nc" id="L194">		this.precio = this.textPrecio.getText();</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">		if (chckbx2x1.isSelected()) {</span>
+<span class="nc" id="L196">			this.btnFinalizar.setEnabled(</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">					this.comboBox.getSelectedItem() != null</span>
+							&amp;&amp;
+<span class="nc bnc" id="L199" title="All 2 branches missed.">							(this.chckbxLunes.isSelected() ||</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">									this.chckbxMartes.isSelected() ||</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">									this.chckbxMiercoles.isSelected() ||</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">									this.chckbxJueves.isSelected() ||</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">									this.chckbxViernes.isSelected() ||</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">									this.chckbxSabado.isSelected() ||</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">									this.chckbxDomingo.isSelected())</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">							&amp;&amp; this.nombre.length() &gt; 0);</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">		} else if (chckbxDesc.isSelected()) {</span>
+<span class="nc" id="L208">				this.btnFinalizar.setEnabled(</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">						this.comboBox.getSelectedItem() != null</span>
+						&amp;&amp;
+<span class="nc bnc" id="L211" title="All 2 branches missed.">						(this.chckbxLunes.isSelected() ||</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">								this.chckbxMartes.isSelected() ||</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">								this.chckbxMiercoles.isSelected() ||</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">								this.chckbxJueves.isSelected() ||</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">								this.chckbxViernes.isSelected() ||</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">								this.chckbxSabado.isSelected() ||</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">								this.chckbxDomingo.isSelected())</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">						&amp;&amp; this.nombre.length() &gt; 0</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">								&amp;&amp; this.cantMin.length() &gt; 0</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">								&amp;&amp; this.precio.length()&gt;0</span>
+								);
+		}
+<span class="nc" id="L223">	}</span>
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+<span class="nc" id="L227">	}</span>
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+<span class="nc" id="L231">	}</span>
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+<span class="nc" id="L235">		this.nombre = this.txtNombre.getText();</span>
+<span class="nc" id="L236">		this.cantMin = this.txtCantMinima.getText();</span>
+<span class="nc" id="L237">		this.precio = this.textPrecio.getText();</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">			if (chckbx2x1.isSelected()) {</span>
+<span class="nc" id="L239">				this.btnFinalizar.setEnabled(</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">						this.comboBox.getSelectedItem() != null</span>
+								&amp;&amp;
+<span class="nc bnc" id="L242" title="All 2 branches missed.">								(this.chckbxLunes.isSelected() ||</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">										this.chckbxMartes.isSelected() ||</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">										this.chckbxMiercoles.isSelected() ||</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">										this.chckbxJueves.isSelected() ||</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">										this.chckbxViernes.isSelected() ||</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">										this.chckbxSabado.isSelected() ||</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">										this.chckbxDomingo.isSelected())</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">								&amp;&amp; this.nombre.length() &gt; 0);</span>
+<span class="nc bnc" id="L250" title="All 2 branches missed.">			} else if (chckbxDesc.isSelected()) {</span>
+<span class="nc" id="L251">				this.btnFinalizar.setEnabled(</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">						this.comboBox.getSelectedItem() != null</span>
+								&amp;&amp;
+<span class="nc bnc" id="L254" title="All 2 branches missed.">								(this.chckbxLunes.isSelected() ||</span>
+<span class="nc bnc" id="L255" title="All 2 branches missed.">										this.chckbxMartes.isSelected() ||</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">										this.chckbxMiercoles.isSelected() ||</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">										this.chckbxJueves.isSelected() ||</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">										this.chckbxViernes.isSelected() ||</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">										this.chckbxSabado.isSelected() ||</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">										this.chckbxDomingo.isSelected())</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">								&amp;&amp; this.nombre.length() &gt; 0</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">								&amp;&amp; this.cantMin.length() &gt; 0</span>
+<span class="nc bnc" id="L263" title="All 2 branches missed.">								&amp;&amp; this.precio.length()&gt;0);</span>
+
+			}
+<span class="nc" id="L266">		}</span>
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+<span class="nc" id="L270">	}</span>
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+<span class="nc" id="L275">	}</span>
+	
+	public void mostrar() {
+<span class="nc" id="L278">		this.setVisible(true);</span>
+<span class="nc" id="L279">	}</span>
+	
+	public void esconder() {
+<span class="nc" id="L282">		this.setVisible(false);</span>
+<span class="nc" id="L283">		limpiaCampos();</span>
+<span class="nc" id="L284">	}</span>
+	
+	public void limpiaCampos() {
+<span class="nc" id="L287">		this.txtNombre.setText(&quot;&quot;);</span>
+<span class="nc" id="L288">		this.txtCantMinima.setText(&quot;&quot;);</span>
+<span class="nc" id="L289">		this.textPrecio.setText(&quot;&quot;);</span>
+<span class="nc" id="L290">		tipoDesc.clearSelection();</span>
+<span class="nc" id="L291">		chckbxDesc.setSelected(false);</span>
+<span class="nc" id="L292">		chckbxLunes.setSelected(false);</span>
+<span class="nc" id="L293">		chckbxMartes.setSelected(false);</span>
+<span class="nc" id="L294">		chckbxMiercoles.setSelected(false);</span>
+<span class="nc" id="L295">		chckbxJueves.setSelected(false);</span>
+<span class="nc" id="L296">		chckbxViernes.setSelected(false);</span>
+<span class="nc" id="L297">		chckbxSabado.setSelected(false);</span>
+<span class="nc" id="L298">		chckbxDomingo.setSelected(false);</span>
+<span class="nc" id="L299">		this.chckbxActiva.setSelected(false);</span>
+<span class="nc" id="L300">	}</span>
+	
+	public void success(String msg) {
+<span class="nc" id="L303">		JOptionPane.showMessageDialog(this, msg, &quot;Resultado exitoso&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L304">	}</span>
+
+	public void failure(String msg) {
+<span class="nc" id="L307">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L308">	}</span>
+
+	public JCheckBox getChckbxLunes() {
+<span class="nc" id="L311">		return chckbxLunes;</span>
+	}
+
+	public void setChckbxLunes(JCheckBox chckbxLunes) {
+<span class="nc" id="L315">		this.chckbxLunes = chckbxLunes;</span>
+<span class="nc" id="L316">	}</span>
+
+	public JCheckBox getChckbxMartes() {
+<span class="nc" id="L319">		return chckbxMartes;</span>
+	}
+
+	public void setChckbxMartes(JCheckBox chckbxMartes) {
+<span class="nc" id="L323">		this.chckbxMartes = chckbxMartes;</span>
+<span class="nc" id="L324">	}</span>
+
+	public JCheckBox getChckbxMiercoles() {
+<span class="nc" id="L327">		return chckbxMiercoles;</span>
+	}
+
+	public void setChckbxMiercoles(JCheckBox chckbxMiercoles) {
+<span class="nc" id="L331">		this.chckbxMiercoles = chckbxMiercoles;</span>
+<span class="nc" id="L332">	}</span>
+
+	public JCheckBox getChckbxJueves() {
+<span class="nc" id="L335">		return chckbxJueves;</span>
+	}
+
+	public void setChckbxJueves(JCheckBox chckbxJueves) {
+<span class="nc" id="L339">		this.chckbxJueves = chckbxJueves;</span>
+<span class="nc" id="L340">	}</span>
+
+	public JCheckBox getChckbxViernes() {
+<span class="nc" id="L343">		return chckbxViernes;</span>
+	}
+
+	public void setChckbxViernes(JCheckBox chckbxViernes) {
+<span class="nc" id="L347">		this.chckbxViernes = chckbxViernes;</span>
+<span class="nc" id="L348">	}</span>
+
+	public JCheckBox getChckbxSabado() {
+<span class="nc" id="L351">		return chckbxSabado;</span>
+	}
+
+	public void setChckbxSabado(JCheckBox chckbxSabado) {
+<span class="nc" id="L355">		this.chckbxSabado = chckbxSabado;</span>
+<span class="nc" id="L356">	}</span>
+
+	public JCheckBox getChckbxDomingo() {
+<span class="nc" id="L359">		return chckbxDomingo;</span>
+	}
+
+	public void setChckbxDomingo(JCheckBox chckbxDomingo) {
+<span class="nc" id="L363">		this.chckbxDomingo = chckbxDomingo;</span>
+<span class="nc" id="L364">	}</span>
+
+	public JCheckBox getChckbx2x1() {
+<span class="nc" id="L367">		return chckbx2x1;</span>
+	}
+
+	public void setChckbx2x1(JCheckBox chckbx2x1) {
+<span class="nc" id="L371">		this.chckbx2x1 = chckbx2x1;</span>
+<span class="nc" id="L372">	}</span>
+
+	public JCheckBox getChckbxDesc() {
+<span class="nc" id="L375">		return chckbxDesc;</span>
+	}
+
+	public void setChckbxDesc(JCheckBox chckbxDesc) {
+<span class="nc" id="L379">		this.chckbxDesc = chckbxDesc;</span>
+<span class="nc" id="L380">	}</span>
+
+	public JComboBox getComboBox() {
+<span class="nc" id="L383">		return comboBox;</span>
+	}
+
+	public void setComboBox(JComboBox comboBox) {
+<span class="nc" id="L387">		this.comboBox = comboBox;</span>
+<span class="nc" id="L388">	}</span>
+
+	public ButtonGroup getTipoDesc() {
+<span class="nc" id="L391">		return tipoDesc;</span>
+	}
+
+	public void setTipoDesc(ButtonGroup tipoDesc) {
+<span class="nc" id="L395">		this.tipoDesc = tipoDesc;</span>
+<span class="nc" id="L396">	}</span>
+
+	public String getNombre() {
+<span class="nc" id="L399">		return nombre;</span>
+	}
+
+	public void setNombre(String nombre) {
+<span class="nc" id="L403">		this.nombre = nombre;</span>
+<span class="nc" id="L404">	}</span>
+
+	public int getCantMinima() {
+
+		try{
+<span class="nc" id="L409">			this.cantMinima = Integer.parseInt(this.txtCantMinima.getText());</span>
+<span class="nc" id="L410">		}</span>
+<span class="nc" id="L411">		catch(Exception e){</span>
+<span class="nc" id="L412">			JOptionPane.showMessageDialog(this, &quot;No ingreso correctamente la cantidad minima de pedido&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L413">			this.txtCantMinima.setText(&quot;&quot;);</span>
+<span class="nc" id="L414">			return 0;</span>
+		}
+<span class="nc" id="L416">		return cantMinima;</span>
+	}
+
+	public void setCantMinima(int cantMinima) {
+<span class="nc" id="L420">		this.cantMinima = cantMinima;</span>
+<span class="nc" id="L421">	}</span>
+
+	public float getPrecioPromo() {
+
+		try{
+<span class="nc" id="L426">			this.precioPromo = Float.parseFloat(this.textPrecio.getText());</span>
+<span class="nc" id="L427">		}</span>
+<span class="nc" id="L428">		catch(Exception e){</span>
+<span class="nc" id="L429">			JOptionPane.showMessageDialog(this, &quot;No ingreso correctamente el precio unitario en Promocion&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L430">			this.textPrecio.setText(&quot;&quot;);</span>
+<span class="nc" id="L431">			return 0;</span>
+		}
+<span class="nc" id="L433">		return precioPromo;</span>
+	}
+
+	public void setPrecioPromo(float precioPromo) {
+<span class="nc" id="L437">		this.precioPromo = precioPromo;</span>
+<span class="nc" id="L438">	}</span>
+
+	public JCheckBox getChckbxActiva() {
+<span class="nc" id="L441">		return chckbxActiva;</span>
+	}
+
+	public void setChckbxActiva(JCheckBox chckbxActiva) {
+<span class="nc" id="L445">		this.chckbxActiva = chckbxActiva;</span>
+<span class="nc" id="L446">	}</span>
+
+	public JTextField getTxtNombre() {
+<span class="nc" id="L449">		return txtNombre;</span>
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+<span class="nc" id="L453">		this.txtNombre = txtNombre;</span>
+<span class="nc" id="L454">	}</span>
+
+	public JTextField getTxtCantMinima() {
+<span class="nc" id="L457">		return txtCantMinima;</span>
+	}
+
+	public void setTxtCantMinima(JTextField txtCantMinima) {
+<span class="nc" id="L461">		this.txtCantMinima = txtCantMinima;</span>
+<span class="nc" id="L462">	}</span>
+
+	public JTextField getTextPrecio() {
+<span class="nc" id="L465">		return textPrecio;</span>
+	}
+
+	public void setTextPrecio(JTextField textPrecio) {
+<span class="nc" id="L469">		this.textPrecio = textPrecio;</span>
+<span class="nc" id="L470">	}</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

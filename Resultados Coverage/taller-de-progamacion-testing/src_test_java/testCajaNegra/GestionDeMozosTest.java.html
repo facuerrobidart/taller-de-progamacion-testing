@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GestionDeMozosTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">testCajaNegra</a> &gt; <span class="el_source">GestionDeMozosTest.java</span></div><h1>GestionDeMozosTest.java</h1><pre class="source lang-java linenums">package testCajaNegra;
+
+import dto.MozoDTO;
+import enums.EstadoMozo;
+import excepciones.MozoExistenteException;
+import modelo.Mozo;
+import negocio.GestionDeMozos;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Optional;
+
+import static org.junit.Assert.*;
+
+<span class="fc" id="L17">public class GestionDeMozosTest {</span>
+
+    private EscenarioConAdminLogueado escenario;
+    private GestionDeMozos gestionDeMozos;
+
+    @Before
+    public void setUp() throws Exception {
+<span class="fc" id="L24">        this.gestionDeMozos = GestionDeMozos.get();</span>
+<span class="fc" id="L25">        escenario = new EscenarioConAdminLogueado();</span>
+<span class="fc" id="L26">        escenario.aplicaEscenarioConAdminLogueado();</span>
+<span class="fc" id="L27">    }</span>
+
+    @After
+    public void tearDown() throws Exception {
+<span class="fc" id="L31">        escenario.borrarEscenario();</span>
+<span class="fc" id="L32">    }</span>
+
+    @Test
+    public void altaMozoOk() {
+
+<span class="fc" id="L37">        MozoDTO mozoDTO = new MozoDTO( &quot;Jorge&quot; , &quot;31/12/1999&quot; , 1);</span>
+        try {
+<span class="fc" id="L39">            this.gestionDeMozos.altaMozo(mozoDTO);</span>
+<span class="pc" id="L40">        } catch (MozoExistenteException e) {</span>
+<span class="nc" id="L41">            fail(&quot;No deberia lanzar excepcion&quot; + e.getMessage());</span>
+        }
+
+<span class="fc" id="L44">        Boolean seAgrego = this.gestionDeMozos.getMozos().stream().anyMatch( m -&gt; m.getNombreCompleto().equals(mozoDTO.getNombreCompleto())  );</span>
+<span class="fc" id="L45">        this.gestionDeMozos.bajaMozo(new Mozo( mozoDTO.getNombreCompleto(),mozoDTO.getFechaNacimiento(),mozoDTO.getCantidadHijos() ));</span>
+<span class="fc" id="L46">        assertEquals( &quot;La mesa no se ha agregado&quot;, seAgrego, true );</span>
+
+<span class="fc" id="L48">    }</span>
+
+    @Test
+    public void altaMozoFail() {
+
+<span class="fc" id="L53">        Mozo mozoEscenario = this.escenario.getMozo();</span>
+
+<span class="fc" id="L55">        MozoDTO mozoDTO = new MozoDTO(mozoEscenario.getNombreCompleto(), mozoEscenario.getFechaNacimiento(), mozoEscenario.getCantidadHijos());</span>
+
+<span class="pc" id="L57">        assertThrows( &quot;No ha lanzado correctamente la excepcion&quot;, MozoExistenteException.class, () -&gt; this.gestionDeMozos.altaMozo(mozoDTO));</span>
+<span class="fc" id="L58">        this.gestionDeMozos.bajaMozo(mozoEscenario);</span>
+
+<span class="fc" id="L60">    }</span>
+
+    @Test
+    public void modEstadoMozo() {
+
+<span class="fc" id="L65">        Mozo mozoEscenario = this.escenario.getMozo(); //Estado mozo = activo</span>
+<span class="fc" id="L66">        EstadoMozo estadoMod = EstadoMozo.FRANCO;</span>
+
+<span class="fc" id="L68">        gestionDeMozos.modEstadoMozo(mozoEscenario, estadoMod);</span>
+
+<span class="fc" id="L70">        Optional&lt;Mozo&gt; mozoModificado = gestionDeMozos.getMozos().stream().filter(m -&gt; m.getNombreCompleto().equals(mozoEscenario.getNombreCompleto())).findFirst();</span>
+
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if(mozoModificado.isPresent())</span>
+<span class="fc" id="L73">            assertEquals(&quot;No se modifico el estado correctamente&quot;,mozoEscenario.getEstadoMozo(), estadoMod);</span>
+
+<span class="fc" id="L75">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

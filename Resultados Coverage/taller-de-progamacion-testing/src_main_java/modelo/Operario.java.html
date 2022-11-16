@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Operario.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">Operario.java</span></div><h1>Operario.java</h1><pre class="source lang-java linenums">package modelo;
+
+import dto.MozoDTO;
+import enums.EstadoMozo;
+import excepciones.*;
+import negocio.GestionDeMozos;
+import negocio.GestionDeMesas;
+
+public class Operario {
+
+    private String nombreCompleto;
+    private String username;
+    private String password;
+    private Boolean activo;
+
+<span class="fc" id="L16">    public Operario(String nombreCompleto, String username, String password) {</span>
+<span class="fc" id="L17">        this.nombreCompleto = nombreCompleto;</span>
+<span class="fc" id="L18">        this.username = username;</span>
+<span class="fc" id="L19">        this.password = password;</span>
+<span class="fc" id="L20">        this.activo = true;</span>
+<span class="fc" id="L21">    }</span>
+
+<span class="fc" id="L23">    public Operario(String nombreCompleto, String username, String password, boolean activo) {</span>
+<span class="fc" id="L24">        this.nombreCompleto = nombreCompleto;</span>
+<span class="fc" id="L25">        this.username = username;</span>
+<span class="fc" id="L26">        this.password = password;</span>
+<span class="fc" id="L27">        this.activo = activo;</span>
+<span class="fc" id="L28">    }</span>
+
+<span class="fc" id="L30">    public Operario() {</span>
+<span class="fc" id="L31">    }</span>
+
+    public static Operario admin() {
+<span class="nc" id="L34">        return new Operario(&quot;admin&quot;, &quot;admin&quot;, &quot;admin1234&quot;);</span>
+    }
+
+    public String getNombreCompleto() {
+<span class="fc" id="L38">        return nombreCompleto;</span>
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+<span class="fc" id="L42">        this.nombreCompleto = nombreCompleto;</span>
+<span class="fc" id="L43">    }</span>
+
+    public String getUsername() {
+<span class="fc" id="L46">        return username;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="fc" id="L50">        this.username = username;</span>
+<span class="fc" id="L51">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L54">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="fc" id="L58">        this.password = password;</span>
+<span class="fc" id="L59">    }</span>
+
+    public Boolean getActivo() {
+<span class="fc" id="L62">        return activo;</span>
+    }
+
+    public void setActivo(Boolean activo) {
+<span class="fc" id="L66">        this.activo = activo;</span>
+<span class="fc" id="L67">    }</span>
+
+    public boolean validaContrasena(String contrasena) throws ContrasenaIncorrectaException {
+<span class="fc" id="L70">        boolean ingreso = false;</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (contrasena.equals(this.password))</span>
+<span class="fc" id="L72">            ingreso = true;</span>
+        else {
+<span class="fc" id="L74">            throw new ContrasenaIncorrectaException(contrasena, &quot;contrasena incorrecta&quot;);</span>
+        }
+<span class="fc" id="L76">        return ingreso;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L81">        return &quot;Nombre: &quot; + nombreCompleto +</span>
+<span class="nc" id="L82">                &quot; | Activo: &quot; + activo;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

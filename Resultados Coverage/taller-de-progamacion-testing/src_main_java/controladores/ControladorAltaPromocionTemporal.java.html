@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorAltaPromocionTemporal.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorAltaPromocionTemporal.java</span></div><h1>ControladorAltaPromocionTemporal.java</h1><pre class="source lang-java linenums">package controladores;
+
+import dto.PromocionTemporalDTO;
+import enums.Dias;
+import excepciones.PromocionExistenteException;
+import modelo.Producto;
+import modelo.promociones.PromocionTemporal;
+import negocio.GestionDePromociones;
+import vistas.VistaAltaPromocionTemporal;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ControladorAltaPromocionTemporal implements ActionListener {
+
+    private GestionDePromociones gestionDePromociones;
+<span class="nc" id="L19">    private static ControladorAltaPromocionTemporal controladorAltaPromocionTemporal = null;</span>
+    private VistaAltaPromocionTemporal vistaAltaPromocionTemporal;
+    private String op;
+    private PromocionTemporalDTO promocionTemporal;
+
+<span class="nc" id="L24">    public ControladorAltaPromocionTemporal(){</span>
+<span class="nc" id="L25">        vistaAltaPromocionTemporal = new VistaAltaPromocionTemporal();</span>
+<span class="nc" id="L26">        vistaAltaPromocionTemporal.setActionListener(this);</span>
+<span class="nc" id="L27">        this.gestionDePromociones = GestionDePromociones.get();</span>
+<span class="nc" id="L28">    }</span>
+
+    public static ControladorAltaPromocionTemporal getControladorAltaPromocionTemporal(String op) {
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (controladorAltaPromocionTemporal == null) {</span>
+<span class="nc" id="L32">            controladorAltaPromocionTemporal = new ControladorAltaPromocionTemporal();</span>
+        }
+<span class="nc" id="L34">        controladorAltaPromocionTemporal.op = op;</span>
+<span class="nc" id="L35">        controladorAltaPromocionTemporal.vistaAltaPromocionTemporal.mostrar();</span>
+
+<span class="nc" id="L37">        return controladorAltaPromocionTemporal;</span>
+    }
+
+    public static ControladorAltaPromocionTemporal getControladorAltaPromocionTemporal(String op, PromocionTemporalDTO promocionTemporal) {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (controladorAltaPromocionTemporal == null) {</span>
+<span class="nc" id="L42">            controladorAltaPromocionTemporal = new ControladorAltaPromocionTemporal();</span>
+        }
+<span class="nc" id="L44">        controladorAltaPromocionTemporal.op = op;</span>
+<span class="nc" id="L45">        controladorAltaPromocionTemporal.promocionTemporal = promocionTemporal;</span>
+<span class="nc" id="L46">        controladorAltaPromocionTemporal.vistaAltaPromocionTemporal.mostrar();</span>
+
+<span class="nc" id="L48">        return controladorAltaPromocionTemporal;</span>
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L54">        String comando = e.getActionCommand();</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if(comando.equalsIgnoreCase(&quot;Aceptar&quot;)){</span>
+<span class="nc" id="L57">            List&lt;Dias&gt; dias = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if(vistaAltaPromocionTemporal.getChckbxLunes().isSelected())</span>
+<span class="nc" id="L59">                dias.add(Dias.LUNES);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            if(vistaAltaPromocionTemporal.getChckbxMartes().isSelected())</span>
+<span class="nc" id="L61">                dias.add(Dias.MARTES);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if(vistaAltaPromocionTemporal.getChckbxMiercoles().isSelected())</span>
+<span class="nc" id="L63">                dias.add(Dias.MIERCOLES);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if(vistaAltaPromocionTemporal.getChckbxJueves().isSelected())</span>
+<span class="nc" id="L65">                dias.add(Dias.JUEVES);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            if(vistaAltaPromocionTemporal.getChckbxViernes().isSelected())</span>
+<span class="nc" id="L67">                dias.add(Dias.VIERNES);</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">            if(vistaAltaPromocionTemporal.getChckbxSabado().isSelected())</span>
+<span class="nc" id="L69">                dias.add(Dias.SABADO);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            if(vistaAltaPromocionTemporal.getChckbxDomingo().isSelected())</span>
+<span class="nc" id="L71">                dias.add(Dias.DOMINGO);</span>
+<span class="nc" id="L72">            String formaDePago = vistaAltaPromocionTemporal.getSelection();</span>
+<span class="nc" id="L73">            float porcentajeDesc = vistaAltaPromocionTemporal.getPorcentajeDesc();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            if(porcentajeDesc &lt;= 0){</span>
+<span class="nc" id="L75">                this.vistaAltaPromocionTemporal.failure(&quot;El PORCENTAJE DE DESCUENTO debe ser mayor a cero &quot;);</span>
+<span class="nc" id="L76">                this.vistaAltaPromocionTemporal.getTxtPorcentajeDesc().setText(&quot;&quot;);</span>
+<span class="nc" id="L77">            }</span>
+            else {
+<span class="nc" id="L79">                boolean isAcumulable = vistaAltaPromocionTemporal.getChckbxPromoAcumulable().isSelected();</span>
+<span class="nc" id="L80">                boolean activa = vistaAltaPromocionTemporal.getChckbxPromoActiva().isSelected();</span>
+<span class="nc" id="L81">                String nombre = vistaAltaPromocionTemporal.getNombre();</span>
+<span class="nc" id="L82">                PromocionTemporalDTO promo = new PromocionTemporalDTO(nombre, activa, dias, formaDePago, porcentajeDesc, isAcumulable);</span>
+                try {
+
+<span class="nc bnc" id="L85" title="All 2 branches missed.">                    if(op.equalsIgnoreCase(&quot;Alta&quot;)){</span>
+<span class="nc" id="L86">                        gestionDePromociones.altaPromocionTemporal(promo);</span>
+<span class="nc" id="L87">                        vistaAltaPromocionTemporal.success(&quot;La promocion fija: &quot; + promo.getNombre() + &quot; se ha dado de alta con exito&quot;);</span>
+<span class="nc" id="L88">                    }else{</span>
+<span class="nc" id="L89">                        boolean existePromocion = gestionDePromociones.getPromocionesTemporales().stream().anyMatch(p -&gt; p.getNombre().equals(promo.getNombre()));</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                        if( !existePromocion ){</span>
+<span class="nc" id="L91">                            gestionDePromociones.bajaPromocionTemporal(promocionTemporal.getId());</span>
+<span class="nc" id="L92">                            gestionDePromociones.altaPromocionTemporal(promo);</span>
+<span class="nc" id="L93">                            vistaAltaPromocionTemporal.success(&quot;La promocion fija: &quot; + promo.getNombre() + &quot; se ha modificado con exito&quot;);</span>
+<span class="nc" id="L94">                        }else</span>
+<span class="nc" id="L95">                            throw new PromocionExistenteException(promo.getNombre());</span>
+                    }
+
+<span class="nc" id="L98">                } catch (PromocionExistenteException ex) {</span>
+<span class="nc" id="L99">                    this.vistaAltaPromocionTemporal.failure(&quot;La promocion &quot; + promo.getNombre() + &quot; ya se encuentra en el sistema&quot;);</span>
+                }
+<span class="nc" id="L101">                vistaAltaPromocionTemporal.esconder();</span>
+            }
+<span class="nc" id="L103">        }</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        else if( comando.equals(&quot;Volver&quot;)) {</span>
+<span class="nc" id="L105">            vistaAltaPromocionTemporal.esconder();</span>
+        }
+<span class="nc" id="L107">            ControladorGestionPromociones con = ControladorGestionPromociones.getControladorGestionPromociones();</span>
+<span class="nc" id="L108">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

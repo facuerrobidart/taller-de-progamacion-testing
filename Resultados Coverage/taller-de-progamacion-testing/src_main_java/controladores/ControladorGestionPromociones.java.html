@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorGestionPromociones.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorGestionPromociones.java</span></div><h1>ControladorGestionPromociones.java</h1><pre class="source lang-java linenums">package controladores;
+
+import dto.PromocionProductoDTO;
+import dto.PromocionTemporalDTO;
+import excepciones.ProductoNoExistenteException;
+import excepciones.PromocionExistenteException;
+import modelo.promociones.Promocion;
+import modelo.promociones.PromocionFija;
+import modelo.promociones.PromocionTemporal;
+import negocio.GestionDePromociones;
+import vistas.VistaGestionPromociones;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Set;
+
+public class ControladorGestionPromociones implements ActionListener {
+
+    private static VistaGestionPromociones vistaGestionPromociones;
+    private static GestionDePromociones gestionPromociones;
+
+<span class="nc" id="L23">    private static ControladorGestionPromociones controladorGestionPromociones = null;</span>
+
+
+<span class="nc" id="L26">    private ControladorGestionPromociones() {</span>
+<span class="nc" id="L27">        vistaGestionPromociones = new VistaGestionPromociones();</span>
+<span class="nc" id="L28">        vistaGestionPromociones.setActionListener(this);</span>
+<span class="nc" id="L29">        gestionPromociones = GestionDePromociones.get();</span>
+<span class="nc" id="L30">    }</span>
+
+    public static ControladorGestionPromociones getControladorGestionPromociones() {
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (controladorGestionPromociones == null)</span>
+<span class="nc" id="L34">            controladorGestionPromociones = new ControladorGestionPromociones();</span>
+
+<span class="nc" id="L36">        controladorGestionPromociones.actualizarListaPromos();</span>
+
+<span class="nc" id="L38">        vistaGestionPromociones.mostrar();</span>
+
+<span class="nc" id="L40">        return controladorGestionPromociones;</span>
+    }
+
+    public void actualizarListaPromos() {
+<span class="nc" id="L44">        Set&lt;PromocionFija&gt; promocionesFijas = gestionPromociones.getPromocionesFijas();</span>
+<span class="nc" id="L45">        Set&lt;PromocionTemporal&gt; promocionesTemporales = gestionPromociones.getPromocionesTemporales();</span>
+<span class="nc" id="L46">        DefaultListModel&lt;Promocion&gt; listaPromociones = new DefaultListModel&lt;&gt;();</span>
+<span class="nc" id="L47">        promocionesFijas.forEach(listaPromociones::addElement);</span>
+<span class="nc" id="L48">        promocionesTemporales.forEach(listaPromociones::addElement);</span>
+<span class="nc" id="L49">        vistaGestionPromociones.setModel(listaPromociones);</span>
+<span class="nc" id="L50">    }</span>
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+<span class="nc" id="L57">        String comando =  e.getActionCommand();</span>
+
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if(comando.equals(&quot;Alta Promocion Temporal&quot;)) {</span>
+<span class="nc" id="L60">            vistaGestionPromociones.esconder();</span>
+<span class="nc" id="L61">            ControladorAltaPromocionTemporal con = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal(&quot;Alta&quot;);</span>
+<span class="nc" id="L62">        }</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        else if(comando.equals(&quot;Alta promocion por producto&quot;)){</span>
+<span class="nc" id="L64">            vistaGestionPromociones.esconder();</span>
+<span class="nc" id="L65">            ControladorAltaPromocionProducto con = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto(&quot;Alta&quot;);</span>
+<span class="nc" id="L66">        }</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        else if( comando.equals(&quot;Modificar Promocion&quot;)) {</span>
+
+<span class="nc" id="L69">            Promocion promocion = (Promocion) vistaGestionPromociones.getSeleccion();</span>
+<span class="nc" id="L70">            PromocionTemporalDTO promocionTemporalDTO = null;</span>
+<span class="nc" id="L71">            PromocionProductoDTO promocionProductoDTO = null;</span>
+
+<span class="nc" id="L73">            vistaGestionPromociones.esconder();</span>
+
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (promocion instanceof PromocionTemporal) {</span>
+<span class="nc" id="L76">                PromocionTemporal promocionTemporal = (PromocionTemporal) promocion;</span>
+<span class="nc" id="L77">                promocionTemporalDTO = new PromocionTemporalDTO(promocionTemporal.getNombre(),</span>
+<span class="nc" id="L78">                        promocionTemporal.isActivo(),</span>
+<span class="nc" id="L79">                        promocionTemporal.getDiasPromo(),</span>
+<span class="nc" id="L80">                        promocionTemporal.getFormaPago(),</span>
+<span class="nc" id="L81">                        promocionTemporal.getPorcentajeDescuento(),</span>
+<span class="nc" id="L82">                        promocionTemporal.isEsAcumulable()</span>
+                );
+<span class="nc" id="L84">                promocionTemporalDTO.setId(promocion.getId());</span>
+
+<span class="nc" id="L86">                ControladorAltaPromocionTemporal controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal(&quot;Modificar&quot;, promocionTemporalDTO);</span>
+
+<span class="nc" id="L88">            } else {</span>
+<span class="nc" id="L89">                PromocionFija promocionFija = (PromocionFija) promocion;</span>
+<span class="nc" id="L90">                promocionProductoDTO = new PromocionProductoDTO(promocionFija.getNombre(),</span>
+<span class="nc" id="L91">                        promocionFija.isActivo(),</span>
+<span class="nc" id="L92">                        promocionFija.getDiasPromo(),</span>
+<span class="nc" id="L93">                        promocionFija.getProducto(),</span>
+<span class="nc" id="L94">                        promocionFija.isDosPorUno(),</span>
+<span class="nc" id="L95">                        promocionFija.isDtoPorCant(),</span>
+<span class="nc" id="L96">                        promocionFija.getDtoPorCantMin(),</span>
+<span class="nc" id="L97">                        promocionFija.getDtoPorCantPrecioU()</span>
+                );
+<span class="nc" id="L99">                promocionProductoDTO.setId(promocion.getId());</span>
+<span class="nc" id="L100">                ControladorAltaPromocionProducto controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto(&quot;Modificar&quot;, promocionProductoDTO);</span>
+
+            }
+<span class="nc" id="L103">        }</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        else if (comando.equals(&quot;Baja Promocion&quot;)) {</span>
+
+<span class="nc" id="L106">            Promocion promocion = (Promocion) vistaGestionPromociones.getSeleccion();</span>
+
+<span class="nc bnc" id="L108" title="All 2 branches missed.">            if (promocion instanceof PromocionTemporal) {</span>
+<span class="nc" id="L109">                gestionPromociones.bajaPromocionTemporal(promocion.getId());</span>
+<span class="nc" id="L110">                vistaGestionPromociones.success(&quot;Promocion temporal: &quot; + promocion.getNombre() + &quot;dada de baja&quot;);</span>
+<span class="nc" id="L111">            } else {</span>
+<span class="nc" id="L112">                gestionPromociones.bajaPromocionFija(promocion.getId());</span>
+<span class="nc" id="L113">                vistaGestionPromociones.success(&quot;Promocion fija: &quot; + promocion.getNombre() + &quot;dada de baja&quot;);</span>
+            }
+<span class="nc" id="L115">            vistaGestionPromociones.limpia();</span>
+<span class="nc" id="L116">            this.actualizarListaPromos();</span>
+
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        }else if( comando.equals(&quot;Volver&quot;) ){</span>
+<span class="nc" id="L119">            vistaGestionPromociones.esconder();</span>
+<span class="nc" id="L120">            ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);</span>
+        }
+<span class="nc" id="L122">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

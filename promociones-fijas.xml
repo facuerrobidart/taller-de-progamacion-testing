@@ -6,100 +6,14 @@
     <void property="activo">
      <boolean>true</boolean>
     </void>
-    <void property="diasPromo">
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>enums.Dias</class>
-        <string>VIERNES</string>
-       </object>
-      </void>
-      <void method="add">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>enums.Dias</class>
-        <string>DOMINGO</string>
-       </object>
-      </void>
-     </object>
-    </void>
     <void property="dosPorUno">
      <boolean>true</boolean>
     </void>
-    <void property="dtoPorCant">
-     <boolean>true</boolean>
-    </void>
     <void property="id">
-     <string>a0138c0c-2479-46cf-a2a9-4b880344cc7f</string>
+     <string>855d111e-0b77-4983-b173-4a246f4a4679</string>
     </void>
     <void property="nombre">
-     <string>Cocucha for All</string>
-    </void>
-    <void property="producto">
-     <object class="modelo.Producto">
-      <void property="costo">
-       <float>10.0</float>
-      </void>
-      <void property="id">
-       <string>12aaa7cb-c976-4078-b61d-4a86b40abb1b</string>
-      </void>
-      <void property="nombre">
-       <string>Coca-cola</string>
-      </void>
-      <void property="precio">
-       <float>30.0</float>
-      </void>
-      <void property="stock">
-       <int>50</int>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.promociones.PromocionFija">
-    <void property="activo">
-     <boolean>true</boolean>
-    </void>
-    <void property="diasPromo">
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>enums.Dias</class>
-        <string>MARTES</string>
-       </object>
-      </void>
-     </object>
-    </void>
-    <void property="dosPorUno">
-     <boolean>true</boolean>
-    </void>
-    <void property="dtoPorCant">
-     <boolean>true</boolean>
-    </void>
-    <void property="id">
-     <string>8026f5b0-c93b-4e08-b32b-e4c297578519</string>
-    </void>
-    <void property="nombre">
-     <string>ManzanaM</string>
-    </void>
-    <void property="producto">
-     <object class="modelo.Producto">
-      <void property="costo">
-       <float>10.0</float>
-      </void>
-      <void property="id">
-       <string>12aaa7cb-c976-4078-b61d-4a86b40abb1b</string>
-      </void>
-      <void property="nombre">
-       <string>Coca-cola</string>
-      </void>
-      <void property="precio">
-       <float>30.0</float>
-      </void>
-      <void property="stock">
-       <int>50</int>
-      </void>
-     </object>
+     <string>Promo 1 Pepsi</string>
     </void>
    </object>
   </void>
@@ -156,6 +70,316 @@
     <void property="activo">
      <boolean>true</boolean>
     </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantMin">
+     <int>3</int>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>10.0</double>
+    </void>
+    <void property="id">
+     <string>0d945c29-ef71-4793-a987-15a5d8df7400</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 2 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>VIERNES</string>
+       </object>
+      </void>
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>DOMINGO</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>a0138c0c-2479-46cf-a2a9-4b880344cc7f</string>
+    </void>
+    <void property="nombre">
+     <string>Cocucha for All</string>
+    </void>
+    <void property="producto">
+     <object class="modelo.Producto">
+      <void property="costo">
+       <float>10.0</float>
+      </void>
+      <void property="id">
+       <string>12aaa7cb-c976-4078-b61d-4a86b40abb1b</string>
+      </void>
+      <void property="nombre">
+       <string>Coca-cola</string>
+      </void>
+      <void property="precio">
+       <float>30.0</float>
+      </void>
+      <void property="stock">
+       <int>50</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>3e6377c0-ef29-42dc-9464-7b0a6e0877d1</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Pepsi</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>80.0</double>
+    </void>
+    <void property="id">
+     <string>4e88062a-fe15-4348-9f66-9dfd3973f4c4</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>80.0</double>
+    </void>
+    <void property="id">
+     <string>f3e9955a-fee5-41ce-8135-2b58c8a69275</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantMin">
+     <int>3</int>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>10.0</double>
+    </void>
+    <void property="id">
+     <string>462606b2-01ca-4525-9e2c-e752f2f384d2</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 2 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantMin">
+     <int>3</int>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>10.0</double>
+    </void>
+    <void property="id">
+     <string>f75a39d3-78c3-4620-a364-68a176528979</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 2 Pepsi</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantMin">
+     <int>3</int>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>10.0</double>
+    </void>
+    <void property="id">
+     <string>eb943173-dc7a-4586-85fb-67c8fc15e190</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 2 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>5cb7e732-ea10-478d-aa99-7b9c2a7ae841</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Pepsi</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>80.0</double>
+    </void>
+    <void property="id">
+     <string>1d8bb14c-2df9-44f5-98f7-bfc6a2b16857</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantMin">
+     <int>3</int>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>10.0</double>
+    </void>
+    <void property="id">
+     <string>7249bb6d-8e89-4e9d-91f6-4fdaff272352</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 2 Pepsi</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>80.0</double>
+    </void>
+    <void property="id">
+     <string>57fe0ccc-10eb-4ddd-ad5f-9b34e2274081</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantMin">
+     <int>3</int>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>10.0</double>
+    </void>
+    <void property="id">
+     <string>25c4f7a7-5279-4436-8009-c930e981cf35</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 2 Pepsi</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>fe794663-6fae-4d8d-990c-8a4a82b7c26b</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Pepsi</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
     <void property="diasPromo">
      <object class="java.util.ArrayList">
       <void method="add">
@@ -193,6 +417,136 @@
        <int>30</int>
       </void>
      </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantMin">
+     <int>3</int>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>10.0</double>
+    </void>
+    <void property="id">
+     <string>ffd39f38-1bbc-4efa-b393-0d731e69ff61</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 2 Pepsi</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>80.0</double>
+    </void>
+    <void property="id">
+     <string>c55385c8-a920-4620-9192-6c2ab81e4fb5</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>80.0</double>
+    </void>
+    <void property="id">
+     <string>73ca41b9-165f-448b-83e9-fe5a218af201</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 1 Coca</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
+        <string>MARTES</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="dosPorUno">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="id">
+     <string>8026f5b0-c93b-4e08-b32b-e4c297578519</string>
+    </void>
+    <void property="nombre">
+     <string>ManzanaM</string>
+    </void>
+    <void property="producto">
+     <object class="modelo.Producto">
+      <void property="costo">
+       <float>10.0</float>
+      </void>
+      <void property="id">
+       <string>12aaa7cb-c976-4078-b61d-4a86b40abb1b</string>
+      </void>
+      <void property="nombre">
+       <string>Coca-cola</string>
+      </void>
+      <void property="precio">
+       <float>30.0</float>
+      </void>
+      <void property="stock">
+       <int>50</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionFija">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCant">
+     <boolean>true</boolean>
+    </void>
+    <void property="dtoPorCantMin">
+     <int>3</int>
+    </void>
+    <void property="dtoPorCantPrecioU">
+     <double>10.0</double>
+    </void>
+    <void property="id">
+     <string>5f4805af-f136-4b08-aa6f-4c52db0cb966</string>
+    </void>
+    <void property="nombre">
+     <string>Promo 2 Coca</string>
     </void>
    </object>
   </void>

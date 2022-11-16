@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorGestionMozos.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorGestionMozos.java</span></div><h1>ControladorGestionMozos.java</h1><pre class="source lang-java linenums">package controladores;
+
+import excepciones.MozoNoExistenteException;
+import excepciones.PermisoDenegadoException;
+import modelo.Mozo;
+import negocio.GestionDeMozos;
+import vistas.IVistaGestion;
+import vistas.VistaGestionMozos;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Set;
+
+public class ControladorGestionMozos implements ActionListener {
+
+    private static IVistaGestion vistaGestionMozos;
+    private static GestionDeMozos gestionDeMozos;
+
+<span class="nc" id="L20">    private static ControladorGestionMozos controladorGestionMozos = null;</span>
+
+
+<span class="nc" id="L23">    private ControladorGestionMozos() {</span>
+<span class="nc" id="L24">        vistaGestionMozos = new VistaGestionMozos();</span>
+<span class="nc" id="L25">        vistaGestionMozos.setActionListener(this);</span>
+<span class="nc" id="L26">        gestionDeMozos = GestionDeMozos.get();</span>
+<span class="nc" id="L27">    }</span>
+
+    public static ControladorGestionMozos getControladorGestionMozos() {
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (controladorGestionMozos == null)</span>
+<span class="nc" id="L31">            controladorGestionMozos = new ControladorGestionMozos();</span>
+
+<span class="nc" id="L33">        controladorGestionMozos.actualizaListaMozos();</span>
+
+<span class="nc" id="L35">        vistaGestionMozos.mostrar();</span>
+
+<span class="nc" id="L37">        return controladorGestionMozos;</span>
+    }
+
+    public void actualizaListaMozos(){
+<span class="nc" id="L41">        Set&lt;Mozo&gt; mozos = gestionDeMozos.getMozos();</span>
+<span class="nc" id="L42">        DefaultListModel&lt;Mozo&gt; listaMozos = new DefaultListModel&lt;&gt;();</span>
+<span class="nc" id="L43">        mozos.forEach(listaMozos::addElement);</span>
+<span class="nc" id="L44">        ControladorGestionMozos.vistaGestionMozos.setModel(listaMozos);</span>
+<span class="nc" id="L45">    }</span>
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+<span class="nc" id="L50">        String comando =  e.getActionCommand();</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if(comando.equals(&quot;Alta Mozo&quot;)) {</span>
+<span class="nc" id="L52">            vistaGestionMozos.esconder();</span>
+<span class="nc" id="L53">            ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo(&quot;Alta&quot;);</span>
+<span class="nc" id="L54">        }</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        else if( comando.equals(&quot;Baja Mozo&quot;) ){</span>
+<span class="nc" id="L56">            Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();</span>
+<span class="nc" id="L57">            gestionDeMozos.bajaMozo(mozo);</span>
+<span class="nc" id="L58">            vistaGestionMozos.success(&quot;El Mozo: &quot; + mozo.getNombreCompleto() + &quot; fue dado de baja con exito&quot;);</span>
+<span class="nc" id="L59">            vistaGestionMozos.limpia();</span>
+<span class="nc" id="L60">            this.actualizaListaMozos();</span>
+<span class="nc" id="L61">        }</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        else if( comando.equals(&quot;Modificar Mozo&quot;) ){</span>
+<span class="nc" id="L63">            vistaGestionMozos.esconder();</span>
+<span class="nc" id="L64">            Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();</span>
+<span class="nc" id="L65">            ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo(&quot;Modificar&quot;, mozo);</span>
+<span class="nc" id="L66">        }</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        else if( comando.equals(&quot;Volver&quot;) ) {</span>
+<span class="nc" id="L68">            ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);</span>
+<span class="nc" id="L69">            vistaGestionMozos.esconder();</span>
+<span class="nc" id="L70">        }</span>
+        else {
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                if (comando.equalsIgnoreCase(&quot;Calculo sueldo&quot;)) {</span>
+<span class="nc" id="L73">                    Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();</span>
+<span class="nc" id="L74">                    double sueldo = gestionDeMozos.calculaSueldo(mozo);</span>
+<span class="nc" id="L75">                    vistaGestionMozos.success(&quot;El mozo &quot;+ mozo.getNombreCompleto()+&quot; tiene un sueldo de $&quot;+sueldo);</span>
+<span class="nc" id="L76">                    vistaGestionMozos.limpia();</span>
+<span class="nc" id="L77">                } else {</span>
+<span class="nc" id="L78">                    Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();</span>
+<span class="nc" id="L79">                    ControladorCambioEstadoMozo.getControladorCambioEstadoMozo(mozo);</span>
+<span class="nc" id="L80">                    vistaGestionMozos.esconder();</span>
+                }
+            }
+<span class="nc" id="L83">        }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GestionDeComandas.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">negocio</a> &gt; <span class="el_source">GestionDeComandas.java</span></div><h1>GestionDeComandas.java</h1><pre class="source lang-java linenums">package negocio;
+
+import enums.EstadoMesa;
+import excepciones.StockInsuficienteException;
+import modelo.Comanda;
+import modelo.Empresa;
+import modelo.Mesa;
+import modelo.Pedido;
+
+import java.util.Iterator;
+import java.util.Set;
+
+
+public class GestionDeComandas {
+
+    private final Empresa empresa;
+<span class="fc" id="L17">    private static GestionDeComandas gestionDeComandas = null;</span>
+
+<span class="fc" id="L19">    private GestionDeComandas() {</span>
+<span class="fc" id="L20">        this.empresa = Empresa.getEmpresa();</span>
+<span class="fc" id="L21">    }</span>
+
+    public static GestionDeComandas get() {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if( gestionDeComandas == null )</span>
+<span class="fc" id="L25">            gestionDeComandas = new GestionDeComandas();</span>
+
+<span class="fc" id="L27">        return gestionDeComandas;</span>
+    }
+
+    /**
+     * Crea una comando de forma simultanea a la apertura de la mesa
+     * precondition: mesa!=null &amp;&amp; mesa.getEstado()!=Estado.Ocupado
+     * postcondition: mesa.getEstado()==Estado.Ocupado
+     * @param mesa
+     */
+    public void abrirComanda(Mesa mesa){
+
+<span class="fc" id="L38">        Set&lt;Mesa&gt; mesas = empresa.getMesas();</span>
+
+<span class="fc" id="L40">        mesas.remove(mesa);</span>
+<span class="fc" id="L41">        mesa.setComanda(new Comanda());</span>
+<span class="fc" id="L42">        mesa.setEstadoMesa(EstadoMesa.OCUPADA);</span>
+<span class="fc" id="L43">        mesas.add(mesa);</span>
+<span class="fc" id="L44">        this.empresa.setMesas(mesas);</span>
+
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Se agrega un pedido a una mesa
+     * precondition: mesa.getEstado()==Estado.Ocupada
+     * @param mesa: mesa donde se agregara el pedido
+     * @param pedido: pedido a cargar
+     */
+    public void cargarPedido(Mesa mesa,  Pedido pedido) throws StockInsuficienteException {
+
+<span class="fc" id="L56">        Set&lt;Mesa&gt; mesas = empresa.getMesas();</span>
+<span class="fc" id="L57">        Iterator&lt;Mesa&gt; it = mesas.iterator();</span>
+
+<span class="fc" id="L59">        Comanda comanda = mesa.getComanda();</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if(GestionDeProductos.get().descontarStock( pedido )){</span>
+<span class="nc" id="L61">            comanda.getPedidos().add(pedido);</span>
+<span class="nc" id="L62">            mesas.remove(mesa);</span>
+<span class="nc" id="L63">            mesa.setComanda( comanda );</span>
+<span class="nc" id="L64">            mesas.add(mesa);</span>
+<span class="nc" id="L65">            this.empresa.setMesas(mesas);</span>
+<span class="nc" id="L66">        }else{</span>
+<span class="fc" id="L67">            throw new StockInsuficienteException();</span>
+        }
+<span class="nc" id="L69">        }</span>
+    }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

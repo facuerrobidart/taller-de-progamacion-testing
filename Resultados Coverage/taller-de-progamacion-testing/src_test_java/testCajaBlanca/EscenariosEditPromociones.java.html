@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EscenariosEditPromociones.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">testCajaBlanca</a> &gt; <span class="el_source">EscenariosEditPromociones.java</span></div><h1>EscenariosEditPromociones.java</h1><pre class="source lang-java linenums">package testCajaBlanca;
+
+import enums.Dias;
+import modelo.Empresa;
+import modelo.Producto;
+import modelo.promociones.Promocion;
+import modelo.promociones.PromocionFija;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+<span class="fc" id="L13">public class EscenariosEditPromociones {</span>
+<span class="fc" id="L14">    private Empresa empresa = Empresa.getEmpresa();</span>
+    private Producto prod1;
+    private Producto prod2;
+<span class="fc" id="L17">    private PromocionFija promo1 = new PromocionFija(&quot;Promo 1 Coca&quot;, List.of(Dias.LUNES,Dias.MARTES), prod1, true, false, 0, 0.0);</span>
+<span class="fc" id="L18">    private PromocionFija promo2 = new PromocionFija(&quot;Promo 2 Coca&quot;, List.of(Dias.LUNES,Dias.MARTES), prod1, false, true, 3, 10.0);</span>
+<span class="fc" id="L19">    private PromocionFija promo3 = new PromocionFija(&quot;Promo 1 Pepsi&quot;, List.of(Dias.LUNES,Dias.MARTES), prod2, true, false, 0, 0.0);</span>
+<span class="fc" id="L20">    private PromocionFija promo4 = new PromocionFija(&quot;Promo 2 Pepsi&quot;, List.of(Dias.LUNES,Dias.MARTES), prod2, false, true, 3, 10.0);</span>
+<span class="fc" id="L21">    Set&lt;PromocionFija&gt; promocionesFijas = new HashSet&lt;&gt;();</span>
+
+
+    public void cargarListaPromociones() {
+<span class="fc" id="L25">        prod1 = new Producto(&quot;Coca Cola&quot;, 100, 75, 20);</span>
+<span class="fc" id="L26">        empresa.getProductos().add(prod1);</span>
+<span class="fc" id="L27">        prod2 = new Producto(&quot;Pepsi&quot;, 100, 75, 20);</span>
+<span class="fc" id="L28">        empresa.getProductos().add(prod2);</span>
+
+<span class="fc" id="L30">        empresa.getPromocionesFijas().addAll(List.of(promo1, promo2, promo3, promo4));</span>
+<span class="fc" id="L31">    }</span>
+
+    public void cargarListaVacia() {
+<span class="fc" id="L34">        promocionesFijas = empresa.getPromocionesFijas();</span>
+<span class="fc" id="L35">        empresa.setPromocionesFijas(new HashSet&lt;&gt;());</span>
+<span class="fc" id="L36">    }</span>
+
+    public void removerListaPromociones() {
+<span class="fc" id="L39">        empresa.getProductos().remove(prod1);</span>
+<span class="fc" id="L40">        empresa.getProductos().remove(prod2);</span>
+<span class="fc" id="L41">        empresa.getPromocionesFijas().remove(promo1);</span>
+<span class="fc" id="L42">        empresa.getPromocionesFijas().remove(promo2);</span>
+<span class="fc" id="L43">        empresa.getPromocionesFijas().remove(promo3);</span>
+<span class="fc" id="L44">        empresa.getPromocionesFijas().remove(promo4);</span>
+<span class="fc" id="L45">    }</span>
+
+    public void restaurarListaPromociones() {
+<span class="fc" id="L48">        empresa.getProductos().add(prod1);</span>
+<span class="fc" id="L49">        empresa.getProductos().add(prod2);</span>
+<span class="fc" id="L50">        empresa.getPromocionesFijas().addAll(promocionesFijas);</span>
+<span class="fc" id="L51">    }</span>
+
+    public PromocionFija getPromo1() {
+<span class="fc" id="L54">        return promo1;</span>
+    }
+
+    public Producto getProd1() {
+<span class="fc" id="L58">        return prod1;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

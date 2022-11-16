@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Mozo.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">Mozo.java</span></div><h1>Mozo.java</h1><pre class="source lang-java linenums">package modelo;
+
+import enums.EstadoMozo;
+
+import java.util.Date;
+import java.util.UUID;
+
+public class Mozo {
+
+    private String nombreCompleto;
+    private String fechaNacimiento;
+    private int cantidadHijos;
+    private EstadoMozo estadoMozo;
+    private String id;
+    private double ventas;
+
+<span class="fc" id="L17">    public Mozo() {</span>
+<span class="fc" id="L18">    }</span>
+
+<span class="fc" id="L20">    public Mozo(String nombreCompleto, String fechaNacimiento, int cantidadHijos) {</span>
+<span class="fc" id="L21">        this.nombreCompleto = nombreCompleto;</span>
+<span class="fc" id="L22">        this.fechaNacimiento = fechaNacimiento;</span>
+<span class="fc" id="L23">        this.cantidadHijos = cantidadHijos;</span>
+<span class="fc" id="L24">        this.estadoMozo = EstadoMozo.ACTIVO;</span>
+<span class="fc" id="L25">        this.id = UUID.randomUUID().toString();</span>
+<span class="fc" id="L26">    }</span>
+
+    public void setId(String id) {
+<span class="fc" id="L29">        this.id = id;</span>
+<span class="fc" id="L30">    }</span>
+
+    public double getVentas() {
+<span class="fc" id="L33">        return ventas;</span>
+    }
+
+    public void setVentas(double ventas) {
+<span class="nc" id="L37">        this.ventas = ventas;</span>
+<span class="nc" id="L38">    }</span>
+
+    public String getNombreCompleto() {
+<span class="fc" id="L41">        return nombreCompleto;</span>
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+<span class="fc" id="L45">        this.nombreCompleto = nombreCompleto;</span>
+<span class="fc" id="L46">    }</span>
+
+    public String getFechaNacimiento() {
+<span class="fc" id="L49">        return fechaNacimiento;</span>
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+<span class="fc" id="L53">        this.fechaNacimiento = fechaNacimiento;</span>
+<span class="fc" id="L54">    }</span>
+
+    public int getCantidadHijos() {
+<span class="fc" id="L57">        return cantidadHijos;</span>
+    }
+
+    public void setCantidadHijos(int cantidadHijos) {
+<span class="fc" id="L61">        this.cantidadHijos = cantidadHijos;</span>
+<span class="fc" id="L62">    }</span>
+
+    public EstadoMozo getEstadoMozo() {
+<span class="fc" id="L65">        return estadoMozo;</span>
+    }
+
+    public void setEstadoMozo(EstadoMozo estadoMozo) {
+<span class="fc" id="L69">        this.estadoMozo = estadoMozo;</span>
+<span class="fc" id="L70">    }</span>
+
+    public String getId() {
+<span class="fc" id="L73">        return id;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L78">        return &quot;Nombre: &quot; + nombreCompleto +</span>
+<span class="fc" id="L79">                &quot; | Cantidad de hijos: &quot; + cantidadHijos +</span>
+<span class="fc" id="L80">                &quot; | Fecha de nacimiento: &quot; +  fechaNacimiento +</span>
+<span class="fc" id="L81">                &quot; | Estado: &quot; + estadoMozo;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorAltaMozo.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorAltaMozo.java</span></div><h1>ControladorAltaMozo.java</h1><pre class="source lang-java linenums">package controladores;
+
+
+import dto.MozoDTO;
+import excepciones.MesaExistenteException;
+import excepciones.MozoExistenteException;
+import excepciones.PermisoDenegadoException;
+import modelo.Mozo;
+import negocio.GestionDeMozos;
+import vistas.VistaAltaMozo;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ControladorAltaMozo implements ActionListener {
+<span class="nc" id="L16">    private static ControladorAltaMozo controladorAltaMozo = null;</span>
+    private final GestionDeMozos gestionDeMozos;
+    private final VistaAltaMozo vistaAltaMozo;
+    private String op;
+    private Mozo mozo;
+
+<span class="nc" id="L22">    private ControladorAltaMozo() {</span>
+<span class="nc" id="L23">        this.vistaAltaMozo = new VistaAltaMozo();</span>
+<span class="nc" id="L24">        this.vistaAltaMozo.setActionListener(this);</span>
+<span class="nc" id="L25">        this.gestionDeMozos = GestionDeMozos.get();</span>
+<span class="nc" id="L26">    }</span>
+
+    public static ControladorAltaMozo getControladorAltaMozo(String op) {
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (controladorAltaMozo == null) {</span>
+<span class="nc" id="L30">            controladorAltaMozo = new ControladorAltaMozo();</span>
+        }
+<span class="nc" id="L32">        controladorAltaMozo.op = op;</span>
+<span class="nc" id="L33">        controladorAltaMozo.vistaAltaMozo.mostrar();</span>
+
+<span class="nc" id="L35">        return controladorAltaMozo;</span>
+    }
+
+    public static ControladorAltaMozo getControladorAltaMozo(String op, Mozo mozo) {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (controladorAltaMozo == null) {</span>
+<span class="nc" id="L40">            controladorAltaMozo = new ControladorAltaMozo();</span>
+        }
+<span class="nc" id="L42">        controladorAltaMozo.op = op;</span>
+<span class="nc" id="L43">        controladorAltaMozo.mozo = mozo;</span>
+<span class="nc" id="L44">        controladorAltaMozo.vistaAltaMozo.mostrar();</span>
+
+<span class="nc" id="L46">        return controladorAltaMozo;</span>
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L51">        String comando = e.getActionCommand();</span>
+
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if( comando.equalsIgnoreCase(&quot;Aceptar&quot;) ){</span>
+<span class="nc" id="L54">            String nombre = this.vistaAltaMozo.getNombre();</span>
+<span class="nc" id="L55">            int hijos = this.vistaAltaMozo.getCantHijos();</span>
+<span class="nc" id="L56">            String fecha = this.vistaAltaMozo.getFechaNacimiento();</span>
+<span class="nc" id="L57">            MozoDTO mozoDTO = new MozoDTO(nombre,fecha,hijos);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if( hijos &lt; 0 ){</span>
+<span class="nc" id="L59">                vistaAltaMozo.failure(&quot;La CANTIDAD DE HIJOS deber ser mayor o igual a cero&quot;);</span>
+<span class="nc" id="L60">                vistaAltaMozo.getTxtCantHijos().setText(&quot;&quot;);</span>
+<span class="nc" id="L61">            }else{</span>
+                try {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">                    if(op.equalsIgnoreCase(&quot;Alta&quot;)){</span>
+<span class="nc" id="L64">                        gestionDeMozos.altaMozo(mozoDTO);</span>
+<span class="nc" id="L65">                        this.vistaAltaMozo.success(&quot;El mozo: &quot; + mozoDTO.getNombreCompleto() + &quot; fue dado de alta con exito&quot;);</span>
+<span class="nc" id="L66">                    }else{</span>
+<span class="nc" id="L67">                        boolean existeMozo = gestionDeMozos.getMozos().stream().anyMatch(m -&gt; m.getNombreCompleto().equalsIgnoreCase(mozoDTO.getNombreCompleto()) );</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                        if( !existeMozo ){</span>
+<span class="nc" id="L69">                            gestionDeMozos.bajaMozo(mozo);</span>
+<span class="nc" id="L70">                            gestionDeMozos.altaMozo(mozoDTO);</span>
+<span class="nc" id="L71">                            this.vistaAltaMozo.success(&quot;El mozo: &quot; + mozoDTO.getNombreCompleto() + &quot; fue modificado con exito&quot;);</span>
+<span class="nc" id="L72">                        }else</span>
+<span class="nc" id="L73">                            throw new MozoExistenteException();</span>
+                    }
+<span class="nc" id="L75">                } catch (MozoExistenteException ex) {</span>
+<span class="nc" id="L76">                    this.vistaAltaMozo.failure(&quot;El mozo: &quot; + mozoDTO.getNombreCompleto() + &quot; ya se encuentra en el sistema&quot;);</span>
+                }
+<span class="nc" id="L78">                this.vistaAltaMozo.esconder();</span>
+            }
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        }else if( comando.equalsIgnoreCase(&quot;Volver&quot;) ){</span>
+<span class="nc" id="L81">            this.vistaAltaMozo.esconder();</span>
+        }
+<span class="nc" id="L83">        ControladorGestionMozos CMosos = ControladorGestionMozos.getControladorGestionMozos();</span>
+<span class="nc" id="L84">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

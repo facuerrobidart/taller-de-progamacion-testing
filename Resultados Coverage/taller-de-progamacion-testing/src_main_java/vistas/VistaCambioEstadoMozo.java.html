@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaCambioEstadoMozo.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaCambioEstadoMozo.java</span></div><h1>VistaCambioEstadoMozo.java</h1><pre class="source lang-java linenums">package vistas;
+
+import controladores.ControladorCambioEstadoMozo;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JCheckBox;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Enumeration;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+public class VistaCambioEstadoMozo extends JFrame implements MouseListener {
+
+	private JPanel contentPane;
+	private JButton btnAceptar,btnVolver;
+	private ButtonGroup grupoEstado;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L34">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L37">					VistaCambioEstadoMozo frame = new VistaCambioEstadoMozo();</span>
+<span class="nc" id="L38">					frame.setVisible(true);</span>
+<span class="nc" id="L39">				} catch (Exception e) {</span>
+<span class="nc" id="L40">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L42">			}</span>
+		});
+<span class="nc" id="L44">	}</span>
+
+	/**
+	 * Create the frame.
+	 */
+<span class="nc" id="L49">	public VistaCambioEstadoMozo() {</span>
+<span class="nc" id="L50">		setTitle(&quot;Cambio Estado de Mozo&quot;);</span>
+<span class="nc" id="L51">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L52">		setBounds(100, 100, 528, 331);</span>
+<span class="nc" id="L53">		contentPane = new JPanel();</span>
+<span class="nc" id="L54">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L55">		setContentPane(contentPane);</span>
+<span class="nc" id="L56">		contentPane.setLayout(null);</span>
+		
+<span class="nc" id="L58">		JCheckBox chckbxAusente = new JCheckBox(&quot;Ausente&quot;);</span>
+<span class="nc" id="L59">		chckbxAusente.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L60">		chckbxAusente.setBounds(195, 84, 126, 33);</span>
+<span class="nc" id="L61">		contentPane.add(chckbxAusente);</span>
+<span class="nc" id="L62">		chckbxAusente.addMouseListener(this);</span>
+		
+<span class="nc" id="L64">		JCheckBox chckbxDeFranco = new JCheckBox(&quot;De Franco&quot;);</span>
+<span class="nc" id="L65">		chckbxDeFranco.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L66">		chckbxDeFranco.setBounds(195, 134, 99, 23);</span>
+<span class="nc" id="L67">		contentPane.add(chckbxDeFranco);</span>
+<span class="nc" id="L68">		chckbxDeFranco.addMouseListener(this);</span>
+		
+<span class="nc" id="L70">		JCheckBox chckbxActivo = new JCheckBox(&quot;Activo&quot;);</span>
+<span class="nc" id="L71">		chckbxActivo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L72">		chckbxActivo.setBounds(195, 182, 99, 23);</span>
+<span class="nc" id="L73">		contentPane.add(chckbxActivo);</span>
+<span class="nc" id="L74">		chckbxActivo.addMouseListener(this);</span>
+		
+<span class="nc" id="L76">		this.grupoEstado = new ButtonGroup();</span>
+<span class="nc" id="L77">		this.grupoEstado.add(chckbxActivo);</span>
+<span class="nc" id="L78">		this.grupoEstado.add(chckbxAusente);</span>
+<span class="nc" id="L79">		this.grupoEstado.add(chckbxDeFranco);</span>
+		
+<span class="nc" id="L81">		btnVolver = new JButton(&quot;Volver&quot;);</span>
+<span class="nc" id="L82">		btnVolver.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L83">		btnVolver.setBounds(10, 243, 112, 40);</span>
+<span class="nc" id="L84">		contentPane.add(btnVolver);</span>
+		
+<span class="nc" id="L86">		btnAceptar = new JButton(&quot;Aceptar&quot;);</span>
+<span class="nc" id="L87">		btnAceptar.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L88">		btnAceptar.setBounds(392, 243, 112, 40);</span>
+<span class="nc" id="L89">		contentPane.add(btnAceptar);</span>
+<span class="nc" id="L90">		btnAceptar.setEnabled(false);</span>
+		
+<span class="nc" id="L92">		JLabel lblNewLabel = new JLabel(&quot;Seleccione el nuevo estado del mozo seleccionado:&quot;);</span>
+<span class="nc" id="L93">		lblNewLabel.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L94">		lblNewLabel.setBounds(74, 30, 367, 37);</span>
+<span class="nc" id="L95">		contentPane.add(lblNewLabel);</span>
+<span class="nc" id="L96">	}</span>
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L102">	}</span>
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L108">	}</span>
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+<span class="nc bnc" id="L113" title="All 2 branches missed.">		this.btnAceptar.setEnabled(grupoEstado.getSelection()!=null);</span>
+<span class="nc" id="L114">	}</span>
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L120">	}</span>
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L126">	}</span>
+	
+	public void mostrar(){
+<span class="nc" id="L129">		this.setVisible(true);</span>
+<span class="nc" id="L130">	}</span>
+	public void esconder(){
+<span class="nc" id="L132">		this.setVisible(false);</span>
+<span class="nc" id="L133">		this.limpia();</span>
+<span class="nc" id="L134">	}</span>
+	public void limpia() {
+<span class="nc" id="L136">		this.btnAceptar.setEnabled(false);</span>
+<span class="nc" id="L137">		this.grupoEstado.clearSelection();</span>
+<span class="nc" id="L138">	}</span>
+	
+	public String getSelection() {
+		
+<span class="nc" id="L142">		AbstractButton button=null;</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">		for (Enumeration&lt;AbstractButton&gt; buttons = grupoEstado.getElements(); buttons.hasMoreElements();) {</span>
+<span class="nc" id="L144">			button = buttons.nextElement();</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">			if (button.isSelected()) {</span>
+<span class="nc" id="L146">				return button.getText();</span>
+			}
+		}
+<span class="nc" id="L149">		return button.getText();</span>
+		
+	}
+	
+	public void success(String msg) {
+<span class="nc" id="L154">		JOptionPane.showMessageDialog(null, msg, &quot;Informacion&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L155">	}</span>
+
+
+	public void failure(String msg) {
+<span class="nc" id="L159">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L160">	}</span>
+
+    public void setActionListener(ActionListener actionListener) {
+<span class="nc" id="L163">		this.btnAceptar.addActionListener(actionListener);</span>
+<span class="nc" id="L164">		this.btnVolver.addActionListener(actionListener);</span>
+<span class="nc" id="L165">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

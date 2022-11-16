@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GestionDeOperariosTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">testCajaNegra</a> &gt; <span class="el_source">GestionDeOperariosTest.java</span></div><h1>GestionDeOperariosTest.java</h1><pre class="source lang-java linenums">package testCajaNegra;
+
+import excepciones.PermisoDenegadoException;
+import modelo.Operario;
+import negocio.GestionDeOperarios;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import persistencia.IPersistencia;
+import persistencia.PersistenciaXML;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.Set;
+
+import static org.junit.Assert.*;
+
+<span class="fc" id="L20">public class GestionDeOperariosTest {</span>
+
+    private EscenarioConAdminLogueado escenario;
+    private GestionDeOperarios gestionDeOperarios;
+
+    @Before
+    public void setUp() throws Exception {
+<span class="fc" id="L27">        this.gestionDeOperarios = GestionDeOperarios.get();</span>
+<span class="fc" id="L28">        escenario = new EscenarioConAdminLogueado();</span>
+<span class="fc" id="L29">        escenario.aplicaEscenarioConAdminLogueado();</span>
+<span class="fc" id="L30">    }</span>
+
+    @After
+    public void tearDown() throws Exception {
+<span class="fc" id="L34">        escenario.borrarEscenario();</span>
+<span class="fc" id="L35">    }</span>
+
+    @Test
+    public void bajaOperario() {
+
+<span class="fc" id="L40">        Operario operarioEscenario = this.escenario.getOperario();</span>
+
+        try {
+<span class="fc" id="L43">            gestionDeOperarios.bajaOperario(operarioEscenario.getNombreCompleto());</span>
+<span class="pc" id="L44">        } catch (PermisoDenegadoException e) {</span>
+<span class="nc" id="L45">            fail(&quot;No deberia lanzar excepcion&quot; + e.getMessage());</span>
+        }
+
+<span class="fc" id="L48">        Optional&lt;Operario&gt; operarioEncontrado = gestionDeOperarios.getOperarios().stream().filter(op -&gt; op.getNombreCompleto().equals(operarioEscenario.getNombreCompleto())).findFirst();</span>
+
+<span class="fc" id="L50">        assertEquals(&quot;El operario no ha sido eliminado&quot;, operarioEncontrado.isPresent(), false );</span>
+
+<span class="fc" id="L52">    }</span>
+
+    @Test
+    public void persistirOperarios() {
+
+<span class="fc" id="L57">        IPersistencia&lt;Set&lt;Operario&gt;&gt; persistencia = new PersistenciaXML();</span>
+        try {
+<span class="fc" id="L59">            persistencia.abrirOutput(&quot;operariosTest.xml&quot;);</span>
+<span class="fc" id="L60">            persistencia.escribir(this.gestionDeOperarios.getOperarios());</span>
+<span class="fc" id="L61">            persistencia.cerrarOutput();</span>
+<span class="fc" id="L62">            File archivo = new File(&quot;operariosTest.xml&quot;);</span>
+<span class="fc" id="L63">            assertTrue(&quot;Deberia existir el archivo operariosTest.xml&quot;,  archivo.exists());</span>
+<span class="pc" id="L64">        } catch (IOException e) {</span>
+<span class="nc" id="L65">            fail(&quot;No deberia lanzar excepcion&quot; + e.getMessage());</span>
+        }
+
+<span class="fc" id="L68">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

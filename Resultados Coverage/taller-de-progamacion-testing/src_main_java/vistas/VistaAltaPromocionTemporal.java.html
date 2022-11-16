@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaAltaPromocionTemporal.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaAltaPromocionTemporal.java</span></div><h1>VistaAltaPromocionTemporal.java</h1><pre class="source lang-java linenums">package vistas;
+
+import java.awt.EventQueue;
+
+import javax.swing.*;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Enumeration;
+
+public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, KeyListener, MouseListener{
+
+	private JFrame frmAltaPromocionTemporal;
+	private JTextField txtNombrePromocion,txtPorcentajeDesc;
+	private JButton btnAceptar;
+	private JButton btnVolver;
+	private JLabel lblFormaDePago;
+	private JCheckBox chckbxEfectivo;
+	private JCheckBox chckbxTarjeta;
+	private JCheckBox chckbxMercadoPago;
+	private JCheckBox chckbxCuentaDNI;
+	private JCheckBox chckbxLunes;
+	private JCheckBox chckbxMartes;
+	private JCheckBox chckbxMiercoles;
+	private JCheckBox chckbxJueves;
+	private JCheckBox chckbxViernes;
+	private JCheckBox chckbxSabado;
+	private JCheckBox chckbxDomingo;
+	private JCheckBox chckbxPromoActiva;
+	private JCheckBox chckbxPromoAcumulable;
+	
+	
+	private String nombre;
+<span class="nc" id="L37">	private float porcentajeDesc=0;</span>
+	private ButtonGroup formaDePago;
+
+	public static void main(String[] args) {
+<span class="nc" id="L41">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L44">					VistaAltaPromocionTemporal window = new VistaAltaPromocionTemporal();</span>
+<span class="nc" id="L45">					window.frmAltaPromocionTemporal.setVisible(true);</span>
+<span class="nc" id="L46">				} catch (Exception e) {</span>
+<span class="nc" id="L47">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L49">			}</span>
+		});
+<span class="nc" id="L51">	}</span>
+
+<span class="nc" id="L53">	public VistaAltaPromocionTemporal() {</span>
+<span class="nc" id="L54">		initialize();</span>
+<span class="nc" id="L55">	}</span>
+
+	private void initialize() {
+<span class="nc" id="L58">		frmAltaPromocionTemporal = new JFrame();</span>
+<span class="nc" id="L59">		frmAltaPromocionTemporal.setTitle(&quot;Promocion temporal&quot;);</span>
+<span class="nc" id="L60">		frmAltaPromocionTemporal.setBounds(100, 100, 507, 343);</span>
+<span class="nc" id="L61">		frmAltaPromocionTemporal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L62">		frmAltaPromocionTemporal.getContentPane().setLayout(null);</span>
+		
+<span class="nc" id="L64">		JLabel lblNombrePromocion = new JLabel(&quot;Nombre promocion&quot;);</span>
+<span class="nc" id="L65">		lblNombrePromocion.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L66">		lblNombrePromocion.setBounds(23, 15, 126, 21);</span>
+<span class="nc" id="L67">		frmAltaPromocionTemporal.getContentPane().add(lblNombrePromocion);</span>
+		
+<span class="nc" id="L69">		txtNombrePromocion = new JTextField();</span>
+<span class="nc" id="L70">		txtNombrePromocion.setBounds(197, 11, 192, 32);</span>
+<span class="nc" id="L71">		frmAltaPromocionTemporal.getContentPane().add(txtNombrePromocion);</span>
+<span class="nc" id="L72">		txtNombrePromocion.setColumns(10);</span>
+<span class="nc" id="L73">		txtNombrePromocion.addKeyListener(this);</span>
+		
+<span class="nc" id="L75">		btnAceptar = new JButton(&quot;Aceptar&quot;);</span>
+
+<span class="nc" id="L77">		btnAceptar.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L78">		btnAceptar.setBounds(373, 263, 110, 32);</span>
+<span class="nc" id="L79">		frmAltaPromocionTemporal.getContentPane().add(btnAceptar);</span>
+		
+<span class="nc" id="L81">		btnVolver = new JButton(&quot;Volver&quot;);</span>
+<span class="nc" id="L82">		btnVolver.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L83">		btnVolver.setBounds(10, 263, 110, 32);</span>
+<span class="nc" id="L84">		frmAltaPromocionTemporal.getContentPane().add(btnVolver);</span>
+		
+<span class="nc" id="L86">		lblFormaDePago = new JLabel(&quot;Formas de pago&quot;);</span>
+<span class="nc" id="L87">		lblFormaDePago.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L88">		lblFormaDePago.setBounds(23, 76, 126, 21);</span>
+<span class="nc" id="L89">		frmAltaPromocionTemporal.getContentPane().add(lblFormaDePago);</span>
+
+<span class="nc" id="L91">		chckbxEfectivo = new JCheckBox(&quot;Efectivo&quot;);</span>
+<span class="nc" id="L92">		chckbxEfectivo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L93">		chckbxEfectivo.setBounds(197, 56, 88, 23);</span>
+<span class="nc" id="L94">		chckbxEfectivo.addMouseListener(this);</span>
+<span class="nc" id="L95">		frmAltaPromocionTemporal.getContentPane().add(chckbxEfectivo);</span>
+
+<span class="nc" id="L97">		chckbxTarjeta = new JCheckBox(&quot;Tarjeta&quot;);</span>
+<span class="nc" id="L98">		chckbxTarjeta.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L99">		chckbxTarjeta.setBounds(197, 82, 72, 23);</span>
+<span class="nc" id="L100">		chckbxTarjeta.addMouseListener(this);</span>
+<span class="nc" id="L101">		frmAltaPromocionTemporal.getContentPane().add(chckbxTarjeta);</span>
+		
+<span class="nc" id="L103">		chckbxMercadoPago = new JCheckBox(&quot;Mercado Pago&quot;);</span>
+<span class="nc" id="L104">		chckbxMercadoPago.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L105">		chckbxMercadoPago.setBounds(298, 56, 133, 23);</span>
+<span class="nc" id="L106">		chckbxMercadoPago.addMouseListener(this);</span>
+<span class="nc" id="L107">		frmAltaPromocionTemporal.getContentPane().add(chckbxMercadoPago);</span>
+		
+<span class="nc" id="L109">		chckbxCuentaDNI = new JCheckBox(&quot;Cuenta DNI&quot;);</span>
+<span class="nc" id="L110">		chckbxCuentaDNI.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L111">		chckbxCuentaDNI.setBounds(298, 82, 110, 23);</span>
+<span class="nc" id="L112">		chckbxCuentaDNI.addMouseListener(this);</span>
+<span class="nc" id="L113">		frmAltaPromocionTemporal.getContentPane().add(chckbxCuentaDNI);</span>
+		
+<span class="nc" id="L115">		JLabel lblFormaDePago_1 = new JLabel(&quot;Dias Promo&quot;);</span>
+<span class="nc" id="L116">		lblFormaDePago_1.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L117">		lblFormaDePago_1.setBounds(23, 124, 97, 24);</span>
+<span class="nc" id="L118">		frmAltaPromocionTemporal.getContentPane().add(lblFormaDePago_1);</span>
+		
+<span class="nc" id="L120">		formaDePago = new ButtonGroup();</span>
+<span class="nc" id="L121">		formaDePago.add(chckbxEfectivo);</span>
+<span class="nc" id="L122">		formaDePago.add(chckbxTarjeta);</span>
+<span class="nc" id="L123">		formaDePago.add(chckbxMercadoPago);</span>
+<span class="nc" id="L124">		formaDePago.add(chckbxCuentaDNI);</span>
+<span class="nc" id="L125">		chckbxEfectivo.addMouseListener(this);</span>
+<span class="nc" id="L126">		chckbxTarjeta.addMouseListener(this);</span>
+<span class="nc" id="L127">		chckbxMercadoPago.addMouseListener(this);</span>
+<span class="nc" id="L128">		chckbxCuentaDNI.addMouseListener(this);</span>
+		
+		
+<span class="nc" id="L131">		chckbxLunes = new JCheckBox(&quot;Lunes&quot;);</span>
+<span class="nc" id="L132">		chckbxLunes.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L133">		chckbxLunes.setBounds(117, 111, 70, 23);</span>
+<span class="nc" id="L134">		chckbxLunes.addMouseListener(this);</span>
+<span class="nc" id="L135">		frmAltaPromocionTemporal.getContentPane().add(chckbxLunes);</span>
+		
+<span class="nc" id="L137">		chckbxJueves = new JCheckBox(&quot;Jueves&quot;);</span>
+<span class="nc" id="L138">		chckbxJueves.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L139">		chckbxJueves.setBounds(117, 137, 70, 23);</span>
+<span class="nc" id="L140">		chckbxJueves.addMouseListener(this);</span>
+<span class="nc" id="L141">		frmAltaPromocionTemporal.getContentPane().add(chckbxJueves);</span>
+		
+<span class="nc" id="L143">		chckbxMartes = new JCheckBox(&quot;Martes&quot;);</span>
+<span class="nc" id="L144">		chckbxMartes.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L145">		chckbxMartes.setBounds(197, 111, 83, 23);</span>
+<span class="nc" id="L146">		chckbxMartes.addMouseListener(this);</span>
+<span class="nc" id="L147">		frmAltaPromocionTemporal.getContentPane().add(chckbxMartes);</span>
+		
+<span class="nc" id="L149">		chckbxViernes = new JCheckBox(&quot;Viernes&quot;);</span>
+<span class="nc" id="L150">		chckbxViernes.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L151">		chckbxViernes.setBounds(197, 135, 72, 23);</span>
+<span class="nc" id="L152">		chckbxViernes.addMouseListener(this);</span>
+<span class="nc" id="L153">		frmAltaPromocionTemporal.getContentPane().add(chckbxViernes);</span>
+		
+<span class="nc" id="L155">		chckbxMiercoles = new JCheckBox(&quot;Miercoles&quot;);</span>
+<span class="nc" id="L156">		chckbxMiercoles.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L157">		chckbxMiercoles.setBounds(298, 108, 83, 23);</span>
+<span class="nc" id="L158">		chckbxMiercoles.addMouseListener(this);</span>
+<span class="nc" id="L159">		frmAltaPromocionTemporal.getContentPane().add(chckbxMiercoles);</span>
+		
+<span class="nc" id="L161">		chckbxSabado = new JCheckBox(&quot;Sabado&quot;);</span>
+<span class="nc" id="L162">		chckbxSabado.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L163">		chckbxSabado.setBounds(298, 137, 81, 23);</span>
+<span class="nc" id="L164">		chckbxSabado.addMouseListener(this);</span>
+<span class="nc" id="L165">		frmAltaPromocionTemporal.getContentPane().add(chckbxSabado);</span>
+		
+<span class="nc" id="L167">		chckbxDomingo = new JCheckBox(&quot;Domingo&quot;);</span>
+<span class="nc" id="L168">		chckbxDomingo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L169">		chckbxDomingo.setBounds(390, 125, 97, 23);</span>
+<span class="nc" id="L170">		chckbxDomingo.addMouseListener(this);</span>
+<span class="nc" id="L171">		frmAltaPromocionTemporal.getContentPane().add(chckbxDomingo);</span>
+		
+<span class="nc" id="L173">		chckbxPromoActiva = new JCheckBox(&quot;&quot;);</span>
+<span class="nc" id="L174">		chckbxPromoActiva.setBounds(117, 219, 27, 23);</span>
+<span class="nc" id="L175">		chckbxPromoActiva.addMouseListener(this);</span>
+<span class="nc" id="L176">		frmAltaPromocionTemporal.getContentPane().add(chckbxPromoActiva);</span>
+		
+<span class="nc" id="L178">		JLabel lblFormaDePago_1_1 = new JLabel(&quot;Activa&quot;);</span>
+<span class="nc" id="L179">		lblFormaDePago_1_1.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L180">		lblFormaDePago_1_1.setBounds(56, 221, 45, 21);</span>
+<span class="nc" id="L181">		frmAltaPromocionTemporal.getContentPane().add(lblFormaDePago_1_1);</span>
+		
+<span class="nc" id="L183">		chckbxPromoAcumulable = new JCheckBox(&quot;&quot;);</span>
+<span class="nc" id="L184">		chckbxPromoAcumulable.setBounds(439, 219, 27, 23);</span>
+<span class="nc" id="L185">		chckbxPromoAcumulable.addMouseListener(this);</span>
+<span class="nc" id="L186">		frmAltaPromocionTemporal.getContentPane().add(chckbxPromoAcumulable);</span>
+		
+<span class="nc" id="L188">		JLabel lblFormaDePago_1_1_1 = new JLabel(&quot;Acumulable&quot;);</span>
+<span class="nc" id="L189">		lblFormaDePago_1_1_1.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L190">		lblFormaDePago_1_1_1.setBounds(355, 220, 105, 23);</span>
+<span class="nc" id="L191">		frmAltaPromocionTemporal.getContentPane().add(lblFormaDePago_1_1_1);</span>
+		
+<span class="nc" id="L193">		JLabel lblNewLabel = new JLabel(&quot;Porcentaje de descuento:&quot;);</span>
+<span class="nc" id="L194">		lblNewLabel.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L195">		lblNewLabel.setBounds(23, 177, 164, 32);</span>
+<span class="nc" id="L196">		frmAltaPromocionTemporal.getContentPane().add(lblNewLabel);</span>
+		
+<span class="nc" id="L198">		txtPorcentajeDesc = new JTextField();</span>
+<span class="nc" id="L199">		txtPorcentajeDesc.setBounds(197, 177, 192, 32);</span>
+<span class="nc" id="L200">		frmAltaPromocionTemporal.getContentPane().add(txtPorcentajeDesc);</span>
+<span class="nc" id="L201">		txtPorcentajeDesc.addKeyListener(this);</span>
+<span class="nc" id="L202">		txtPorcentajeDesc.setColumns(10);</span>
+		
+<span class="nc" id="L204">		limpia();</span>
+<span class="nc" id="L205">	}</span>
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L210">	}</span>
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L216">	}</span>
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+<span class="nc" id="L220">		this.nombre = this.txtNombrePromocion.getText();</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">		this.btnAceptar.setEnabled(formaDePago.getSelection()!=null</span>
+				&amp;&amp;
+<span class="nc bnc" id="L223" title="All 2 branches missed.">				( this.chckbxLunes.isSelected()       ||</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">						this.chckbxMartes.isSelected()      ||</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">						this.chckbxMiercoles.isSelected()   ||</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">						this.chckbxJueves.isSelected()      ||</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">						this.chckbxViernes.isSelected()     ||</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">						this.chckbxSabado.isSelected()      ||</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">						this.chckbxDomingo.isSelected() )</span>
+				&amp;&amp;
+<span class="nc bnc" id="L231" title="All 2 branches missed.">				this.nombre.length() &gt; 0</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">				&amp;&amp; this.txtPorcentajeDesc.getText().length() &gt; 0);</span>
+<span class="nc" id="L233">	}</span>
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L239">	}</span>
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L245">	}</span>
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L251">	}</span>
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+		
+<span class="nc" id="L257">	}</span>
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+<span class="nc" id="L261">		this.nombre = this.txtNombrePromocion.getText();</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">		this.btnAceptar.setEnabled(formaDePago.getSelection()!=null</span>
+									 &amp;&amp;
+<span class="nc bnc" id="L264" title="All 2 branches missed.">								   ( this.chckbxLunes.isSelected()       || </span>
+<span class="nc bnc" id="L265" title="All 2 branches missed.">									 this.chckbxMartes.isSelected()      || </span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">									 this.chckbxMiercoles.isSelected()   || </span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">									 this.chckbxJueves.isSelected()      || </span>
+<span class="nc bnc" id="L268" title="All 2 branches missed.">									 this.chckbxViernes.isSelected()     || </span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">									 this.chckbxSabado.isSelected()      || </span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">									 this.chckbxDomingo.isSelected() )</span>
+									 &amp;&amp; 
+<span class="nc bnc" id="L272" title="All 2 branches missed.">									 this.nombre.length() &gt; 0 </span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">									 &amp;&amp; this.txtPorcentajeDesc.getText().length() &gt; 0);</span>
+<span class="nc" id="L274">	}</span>
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+<span class="nc" id="L278">		this.btnAceptar.addActionListener(actionListener);	</span>
+<span class="nc" id="L279">		this.btnVolver.addActionListener(actionListener);</span>
+<span class="nc" id="L280">	}</span>
+
+	@Override
+	public void mostrar() {
+<span class="nc" id="L284">		this.frmAltaPromocionTemporal.setVisible(true);</span>
+<span class="nc" id="L285">	}</span>
+
+	@Override
+	public void esconder() {
+<span class="nc" id="L289">		this.frmAltaPromocionTemporal.setVisible(false);</span>
+<span class="nc" id="L290">		limpia();</span>
+<span class="nc" id="L291">	}</span>
+
+	@Override
+	public void limpia() {
+<span class="nc" id="L295">		this.txtNombrePromocion.setText(&quot;&quot;);</span>
+<span class="nc" id="L296">		this.txtPorcentajeDesc.setText(&quot;&quot;);</span>
+<span class="nc" id="L297">		this.btnAceptar.setEnabled(false);</span>
+		
+<span class="nc" id="L299">		this.chckbxEfectivo.setSelected(false);</span>
+<span class="nc" id="L300">		this.chckbxTarjeta.setSelected(false);</span>
+<span class="nc" id="L301">		this.chckbxMercadoPago.setSelected(false);</span>
+<span class="nc" id="L302">		this.chckbxCuentaDNI.setSelected(false);</span>
+		
+<span class="nc" id="L304">		this.chckbxLunes.setSelected(false);</span>
+<span class="nc" id="L305">		this.chckbxMartes.setSelected(false);</span>
+<span class="nc" id="L306">		this.chckbxMiercoles.setSelected(false);</span>
+<span class="nc" id="L307">		this.chckbxJueves.setSelected(false);</span>
+<span class="nc" id="L308">		this.chckbxViernes.setSelected(false);</span>
+<span class="nc" id="L309">		this.chckbxSabado.setSelected(false);</span>
+<span class="nc" id="L310">		this.chckbxDomingo.setSelected(false);</span>
+		
+<span class="nc" id="L312">		this.chckbxPromoActiva.setSelected(false);</span>
+<span class="nc" id="L313">		this.chckbxPromoAcumulable.setSelected(false);</span>
+<span class="nc" id="L314">	}</span>
+
+	@Override
+	public void success(String msg) {
+<span class="nc" id="L318">		JOptionPane.showMessageDialog(this, msg, &quot;Resultado exitoso&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L319">	}</span>
+
+	@Override
+	public void failure(String msg) {
+<span class="nc" id="L323">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L324">	}</span>
+
+	public String getNombre() {
+<span class="nc" id="L327">		return nombre;</span>
+	}
+
+	public JCheckBox getChckbxEfectivo() {
+<span class="nc" id="L331">		return chckbxEfectivo;</span>
+	}
+
+	public void setChckbxEfectivo(JCheckBox chckbxEfectivo) {
+<span class="nc" id="L335">		this.chckbxEfectivo = chckbxEfectivo;</span>
+<span class="nc" id="L336">	}</span>
+
+	public JCheckBox getChckbxTarjeta() {
+<span class="nc" id="L339">		return chckbxTarjeta;</span>
+	}
+
+	public void setChckbxTarjeta(JCheckBox chckbxTarjeta) {
+<span class="nc" id="L343">		this.chckbxTarjeta = chckbxTarjeta;</span>
+<span class="nc" id="L344">	}</span>
+
+	public JCheckBox getChckbxMercadoPago() {
+<span class="nc" id="L347">		return chckbxMercadoPago;</span>
+	}
+
+	public void setChckbxMercadoPago(JCheckBox chckbxMercadoPago) {
+<span class="nc" id="L351">		this.chckbxMercadoPago = chckbxMercadoPago;</span>
+<span class="nc" id="L352">	}</span>
+
+	public JCheckBox getChckbxCuentaDNI() {
+<span class="nc" id="L355">		return chckbxCuentaDNI;</span>
+	}
+
+	public void setChckbxCuentaDNI(JCheckBox chckbxCuentaDNI) {
+<span class="nc" id="L359">		this.chckbxCuentaDNI = chckbxCuentaDNI;</span>
+<span class="nc" id="L360">	}</span>
+
+	public JCheckBox getChckbxLunes() {
+<span class="nc" id="L363">		return chckbxLunes;</span>
+	}
+
+	public void setChckbxLunes(JCheckBox chckbxLunes) {
+<span class="nc" id="L367">		this.chckbxLunes = chckbxLunes;</span>
+<span class="nc" id="L368">	}</span>
+
+	public JCheckBox getChckbxMartes() {
+<span class="nc" id="L371">		return chckbxMartes;</span>
+	}
+
+	public void setChckbxMartes(JCheckBox chckbxMartes) {
+<span class="nc" id="L375">		this.chckbxMartes = chckbxMartes;</span>
+<span class="nc" id="L376">	}</span>
+
+	public JCheckBox getChckbxMiercoles() {
+<span class="nc" id="L379">		return chckbxMiercoles;</span>
+	}
+
+	public void setChckbxMiercoles(JCheckBox chckbxMiercoles) {
+<span class="nc" id="L383">		this.chckbxMiercoles = chckbxMiercoles;</span>
+<span class="nc" id="L384">	}</span>
+
+	public JCheckBox getChckbxJueves() {
+<span class="nc" id="L387">		return chckbxJueves;</span>
+	}
+
+	public void setChckbxJueves(JCheckBox chckbxJueves) {
+<span class="nc" id="L391">		this.chckbxJueves = chckbxJueves;</span>
+<span class="nc" id="L392">	}</span>
+
+	public JCheckBox getChckbxViernes() {
+<span class="nc" id="L395">		return chckbxViernes;</span>
+	}
+
+	public void setChckbxViernes(JCheckBox chckbxViernes) {
+<span class="nc" id="L399">		this.chckbxViernes = chckbxViernes;</span>
+<span class="nc" id="L400">	}</span>
+
+	public JCheckBox getChckbxSabado() {
+<span class="nc" id="L403">		return chckbxSabado;</span>
+	}
+
+	public void setChckbxSabado(JCheckBox chckbxSabado) {
+<span class="nc" id="L407">		this.chckbxSabado = chckbxSabado;</span>
+<span class="nc" id="L408">	}</span>
+
+	public JCheckBox getChckbxDomingo() {
+<span class="nc" id="L411">		return chckbxDomingo;</span>
+	}
+
+	public void setChckbxDomingo(JCheckBox chckbxDomingo) {
+<span class="nc" id="L415">		this.chckbxDomingo = chckbxDomingo;</span>
+<span class="nc" id="L416">	}</span>
+
+	public JCheckBox getChckbxPromoActiva() {
+<span class="nc" id="L419">		return chckbxPromoActiva;</span>
+	}
+
+	public void setChckbxPromoActiva(JCheckBox chckbxPromoActiva) {
+<span class="nc" id="L423">		this.chckbxPromoActiva = chckbxPromoActiva;</span>
+<span class="nc" id="L424">	}</span>
+
+	public JCheckBox getChckbxPromoAcumulable() {
+<span class="nc" id="L427">		return chckbxPromoAcumulable;</span>
+	}
+
+	public void setChckbxPromoAcumulable(JCheckBox chckbxPromoAcumulable) {
+<span class="nc" id="L431">		this.chckbxPromoAcumulable = chckbxPromoAcumulable;</span>
+<span class="nc" id="L432">	}</span>
+	
+	public String getSelection() {
+<span class="nc" id="L435">		AbstractButton button=null;</span>
+<span class="nc bnc" id="L436" title="All 2 branches missed.">		for (Enumeration&lt;AbstractButton&gt; buttons = formaDePago.getElements(); buttons.hasMoreElements();) {</span>
+<span class="nc" id="L437">			button = buttons.nextElement();</span>
+<span class="nc bnc" id="L438" title="All 2 branches missed.">			if (button.isSelected()) {</span>
+<span class="nc" id="L439">				return button.getText();</span>
+			}
+		}
+<span class="nc" id="L442">		return button.getText();</span>
+	}
+
+	public float getPorcentajeDesc() {
+		try {
+<span class="nc" id="L447">			porcentajeDesc = Float.parseFloat(this.txtPorcentajeDesc.getText());</span>
+<span class="nc" id="L448">		}</span>
+<span class="nc" id="L449">		catch (Exception e){</span>
+<span class="nc" id="L450">			JOptionPane.showMessageDialog(null, &quot;Ingreso mal el Porcentaje de descuento&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L451">			this.txtPorcentajeDesc.setText(&quot;&quot;);</span>
+<span class="nc" id="L452">			return 0;</span>
+		}
+<span class="nc" id="L454">		return porcentajeDesc;</span>
+	}
+
+	public void setPorcentajeDesc(float porcentajeDesc) {
+<span class="nc" id="L458">		this.porcentajeDesc = porcentajeDesc;</span>
+<span class="nc" id="L459">	}</span>
+
+	public JTextField getTxtNombrePromocion() {
+<span class="nc" id="L462">		return txtNombrePromocion;</span>
+	}
+
+	public void setTxtNombrePromocion(JTextField txtNombrePromocion) {
+<span class="nc" id="L466">		this.txtNombrePromocion = txtNombrePromocion;</span>
+<span class="nc" id="L467">	}</span>
+
+	public JTextField getTxtPorcentajeDesc() {
+<span class="nc" id="L470">		return txtPorcentajeDesc;</span>
+	}
+
+	public void setTxtPorcentajeDesc(JTextField txtPorcentajeDesc) {
+<span class="nc" id="L474">		this.txtPorcentajeDesc = txtPorcentajeDesc;</span>
+<span class="nc" id="L475">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

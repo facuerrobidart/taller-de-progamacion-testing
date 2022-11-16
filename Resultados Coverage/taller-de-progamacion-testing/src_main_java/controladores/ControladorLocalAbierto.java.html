@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorLocalAbierto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorLocalAbierto.java</span></div><h1>ControladorLocalAbierto.java</h1><pre class="source lang-java linenums">package controladores;
+
+import dto.MesaDTO;
+import enums.EstadoMesa;
+import excepciones.MesaNoExistenteException;
+import excepciones.StockInsuficienteException;
+import modelo.*;
+import negocio.GestionDeComandas;
+import negocio.GestionDeMesas;
+import negocio.GestionDeMozos;
+import negocio.GestionDeProductos;
+import vistas.VistaLocalAbierto;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.Set;
+
+public class ControladorLocalAbierto implements ActionListener {
+
+<span class="nc" id="L22">    private static ControladorLocalAbierto controladorLocalAbierto = null;</span>
+    private static GestionDeMozos gestionDeMozos;
+    private static GestionDeProductos gestionDeProductos;
+    private static  GestionDeMesas gestionDeMesas;
+    private static GestionDeComandas gestionDeComandas;
+<span class="nc" id="L27">    private static VistaLocalAbierto vistaLocalAbierto;</span>
+
+
+<span class="nc" id="L30">    private ControladorLocalAbierto() {</span>
+<span class="nc" id="L31">        vistaLocalAbierto = new VistaLocalAbierto();</span>
+<span class="nc" id="L32">        vistaLocalAbierto.setActionListener(this);</span>
+<span class="nc" id="L33">        gestionDeMesas = GestionDeMesas.get();</span>
+<span class="nc" id="L34">        gestionDeMozos = GestionDeMozos.get();</span>
+<span class="nc" id="L35">        gestionDeProductos = GestionDeProductos.get();</span>
+<span class="nc" id="L36">        gestionDeComandas = GestionDeComandas.get();</span>
+<span class="nc" id="L37">    }</span>
+
+    public static ControladorLocalAbierto getControladorLocalAbierto() {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (controladorLocalAbierto == null) {</span>
+<span class="nc" id="L41">            controladorLocalAbierto = new ControladorLocalAbierto();</span>
+        }
+
+        //Carga de Combo Boxes
+<span class="nc" id="L45">        Set&lt;Mesa&gt; mesas = gestionDeMesas.getMesas();</span>
+<span class="nc" id="L46">        JComboBox&lt;Mesa&gt; comboM = vistaLocalAbierto.getComboBoxAbrir();</span>
+<span class="nc" id="L47">        comboM.removeAllItems();</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for(Mesa mesa : mesas){</span>
+<span class="nc" id="L49">            comboM.addItem(mesa);</span>
+        }
+<span class="nc" id="L51">        vistaLocalAbierto.setComboBoxAbrir(comboM);</span>
+
+<span class="nc" id="L53">       comboM = vistaLocalAbierto.getComboBoxCerrar();</span>
+<span class="nc" id="L54">       comboM.removeAllItems();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        for(Mesa mesa : mesas){</span>
+<span class="nc" id="L56">            comboM.addItem(mesa);</span>
+        }
+<span class="nc" id="L58">        vistaLocalAbierto.setComboBoxCerrar(comboM);</span>
+
+<span class="nc" id="L60">       comboM = vistaLocalAbierto.getComboBoxMesa();</span>
+<span class="nc" id="L61">       comboM.removeAllItems();</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        for(Mesa mesa : mesas){</span>
+<span class="nc" id="L63">            comboM.addItem(mesa);</span>
+        }
+<span class="nc" id="L65">        vistaLocalAbierto.setComboBoxMesa(comboM);</span>
+
+<span class="nc" id="L67">        Set&lt;Producto&gt; productos = gestionDeProductos.getProductos();</span>
+<span class="nc" id="L68">        JComboBox&lt;Producto&gt; comboP = vistaLocalAbierto.getComboBoxProducto();</span>
+<span class="nc" id="L69">        comboP.removeAllItems();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        for(Producto prod : productos){</span>
+<span class="nc" id="L71">            comboP.addItem(prod);</span>
+        }
+<span class="nc" id="L73">        vistaLocalAbierto.setComboBoxProducto(comboP);</span>
+
+<span class="nc" id="L75">        int[] intArr = {1,2,3,4,5};</span>
+<span class="nc" id="L76">        JComboBox&lt;Integer&gt; comboI = vistaLocalAbierto.getComboBoxCantidad();</span>
+<span class="nc" id="L77">        comboI.removeAllItems();</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        for(int i : intArr) {</span>
+<span class="nc" id="L79">            comboI.addItem(i);</span>
+        }
+<span class="nc" id="L81">        vistaLocalAbierto.setComboBoxCantidad(comboI);</span>
+
+<span class="nc" id="L83">        String[] medios = {&quot;Efectivo&quot;,&quot;Cuenta DNI&quot;,&quot;Mercado Pago&quot;,&quot;Tarjeta&quot;};</span>
+<span class="nc" id="L84">        JComboBox&lt;String&gt; comboMedios = vistaLocalAbierto.getComboBoxMedioDePago();</span>
+<span class="nc" id="L85">        comboMedios.removeAllItems();</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        for(String medio : medios) {</span>
+<span class="nc" id="L87">            comboMedios.addItem(medio);</span>
+        }
+<span class="nc" id="L89">        vistaLocalAbierto.setComboBoxMedioDePago(comboMedios);</span>
+
+<span class="nc" id="L91">        vistaLocalAbierto.limpia();</span>
+
+<span class="nc" id="L93">        vistaLocalAbierto.mostrar();</span>
+
+<span class="nc" id="L95">        return controladorLocalAbierto;</span>
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L100">        String comando = e.getActionCommand();</span>
+
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if(comando.equalsIgnoreCase(&quot;Consumo promedio por mesa&quot;)){</span>
+<span class="nc" id="L103">            Set&lt;Mesa&gt; mesas = gestionDeMesas.getMesas();</span>
+<span class="nc" id="L104">            Iterator&lt;Mesa&gt; it = mesas.iterator();</span>
+<span class="nc" id="L105">            String txt =&quot;&quot;;</span>
+            Mesa mesa;
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            while (it.hasNext()){</span>
+<span class="nc" id="L108">                mesa = it.next();</span>
+                try {
+<span class="nc" id="L110">                    txt += &quot;La mesa &quot;+ mesa.getNroMesa() + &quot; tiene un consumo promedio de: &quot; + gestionDeMesas.calculaConsumoPromedio(mesa.getNroMesa())+&quot;\n&quot;;</span>
+<span class="nc" id="L111">                } catch (MesaNoExistenteException ex) {</span>
+<span class="nc" id="L112">                    throw new RuntimeException(ex);</span>
+                }
+            }
+<span class="nc" id="L115">            vistaLocalAbierto.success(txt);</span>
+<span class="nc" id="L116">        }</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        else if(comando.equalsIgnoreCase(&quot;Mozo con menos ventas&quot;)){</span>
+<span class="nc" id="L118">            String msg = &quot;El mozo con menos ventas es &quot; + gestionDeMozos.mozoMinVentas();</span>
+<span class="nc" id="L119">            vistaLocalAbierto.success(msg);</span>
+<span class="nc" id="L120">        }</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        else if(comando.equalsIgnoreCase(&quot;Mozo con mas Ventas&quot;)){</span>
+<span class="nc" id="L122">            String msg = &quot;El mozo con mas ventas es &quot; + gestionDeMozos.mozoMaxVentas();</span>
+<span class="nc" id="L123">            vistaLocalAbierto.success(msg);</span>
+<span class="nc" id="L124">        }</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        else if(comando.equalsIgnoreCase(&quot;Cerrar Mesa&quot;)) {</span>
+<span class="nc" id="L126">            Mesa mesa = vistaLocalAbierto.getMesaApertura();</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if ( mesa.getEstadoMesa() == EstadoMesa.LIBRE) {</span>
+<span class="nc" id="L128">                vistaLocalAbierto.failure(&quot;La mesa nunca fue abierta&quot;);</span>
+<span class="nc" id="L129">                vistaLocalAbierto.limpia();</span>
+<span class="nc" id="L130">                ControladorLocalAbierto con = ControladorLocalAbierto.getControladorLocalAbierto();</span>
+<span class="nc" id="L131">            } else {</span>
+<span class="nc" id="L132">                MesaDTO mesaDTO = new MesaDTO( mesa.getNroMesa(), mesa.getCantSillas());</span>
+<span class="nc" id="L133">                mesaDTO.setCantCuentasCerradas( mesa.getCantCuentasCerradas()  );</span>
+<span class="nc" id="L134">                mesaDTO.setComanda(mesa.getComanda());</span>
+<span class="nc" id="L135">                mesaDTO.setMozoAsignado(mesa.getMozoAsignado());</span>
+<span class="nc" id="L136">                mesaDTO.setVentas( mesa.getVentas() );</span>
+<span class="nc" id="L137">                String medioDePago = vistaLocalAbierto.getMedioDePago();</span>
+<span class="nc" id="L138">                double total = gestionDeMesas.cerrarMesa( mesaDTO, medioDePago);</span>
+<span class="nc" id="L139">                vistaLocalAbierto.success(&quot;Mesa cerrada con exito con un total de: &quot; + total);</span>
+            }
+<span class="nc" id="L141">        }</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        else if(comando.equalsIgnoreCase(&quot;Cargar Pedido&quot;)){</span>
+<span class="nc" id="L143">            Producto prod = vistaLocalAbierto.getProductoElegido();</span>
+<span class="nc" id="L144">            Mesa mesa = vistaLocalAbierto.getMesaPedido();</span>
+<span class="nc" id="L145">            int cantidad = vistaLocalAbierto.getCantidad();</span>
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            if( mesa.getEstadoMesa() == EstadoMesa.OCUPADA ){</span>
+<span class="nc" id="L148">                Pedido pedido = new Pedido(prod, cantidad);</span>
+                try {
+<span class="nc" id="L150">                    gestionDeComandas.cargarPedido( mesa , pedido );</span>
+<span class="nc" id="L151">                } catch (StockInsuficienteException ex) {</span>
+<span class="nc" id="L152">                    vistaLocalAbierto.failure(&quot;Stock insuficiente del producto &quot; + pedido.getProducto().getNombre());</span>
+                }
+<span class="nc" id="L154">                vistaLocalAbierto.success(&quot;Pedido agregado con exito a la mesa &quot; + mesa.getNroMesa());</span>
+<span class="nc" id="L155">            }else{</span>
+<span class="nc" id="L156">                vistaLocalAbierto.failure(&quot;La mesa &quot; + mesa.getNroMesa() + &quot; no se encuentra ocupada. Presione Abrir Mesa&quot;);</span>
+            }
+<span class="nc" id="L158">        }</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        else if(comando.equalsIgnoreCase(&quot;Abrir Mesa&quot;)){</span>
+<span class="nc" id="L160">            Mesa mesa = vistaLocalAbierto.getMesaApertura();</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            if( mesa.getMozoAsignado() == null ) {</span>
+<span class="nc" id="L162">                vistaLocalAbierto.failure(&quot;Esta mesa no tiene mozo asignado&quot;);</span>
+<span class="nc" id="L163">                vistaLocalAbierto.limpia();</span>
+<span class="nc" id="L164">            }else{</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">                if( mesa.getEstadoMesa() == EstadoMesa.OCUPADA) {</span>
+<span class="nc" id="L166">                    vistaLocalAbierto.failure(&quot;La mesa esta ocupada&quot;);</span>
+<span class="nc" id="L167">                    vistaLocalAbierto.limpia();</span>
+<span class="nc" id="L168">                }</span>
+                else {
+<span class="nc" id="L170">                    gestionDeComandas.abrirComanda( mesa );</span>
+<span class="nc" id="L171">                    vistaLocalAbierto.success(&quot;Mesa abierta con exito&quot;);</span>
+                }
+            }
+<span class="nc" id="L174">        }</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        else if(comando.equalsIgnoreCase(&quot;Cerrar Local&quot;)){</span>
+<span class="nc" id="L176">            vistaLocalAbierto.esconder();</span>
+<span class="nc" id="L177">            ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);</span>
+        }
+<span class="nc" id="L179">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

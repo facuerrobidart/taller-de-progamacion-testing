@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Cuenta.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">Cuenta.java</span></div><h1>Cuenta.java</h1><pre class="source lang-java linenums">package modelo;
+
+import enums.EstadoComanda;
+import modelo.promociones.Promocion;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cuenta {
+
+    private List&lt;Pedido&gt; pedidos;
+    private Mesa mesa;
+    private String formaDePago;
+    private List&lt;Promocion&gt; promociones;
+    private Float total;
+    private Instant fecha;
+
+<span class="nc" id="L19">    public Cuenta(Mesa mesa, String formaDePago, Float total, List&lt;Promocion&gt; promociones) {</span>
+<span class="nc" id="L20">        pedidos = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L21">        this.mesa = mesa;</span>
+<span class="nc" id="L22">        this.formaDePago = formaDePago;</span>
+<span class="nc" id="L23">        this.promociones = promociones;</span>
+<span class="nc" id="L24">    }</span>
+
+    public List&lt;Pedido&gt; getPedidos() {
+<span class="nc" id="L27">        return pedidos;</span>
+    }
+
+    public void setPedidos(List&lt;Pedido&gt; pedidos) {
+<span class="nc" id="L31">        this.pedidos = pedidos;</span>
+<span class="nc" id="L32">    }</span>
+
+    public Mesa getMesa() {
+<span class="nc" id="L35">        return mesa;</span>
+    }
+
+    public void setMesa(Mesa mesa) {
+<span class="nc" id="L39">        this.mesa = mesa;</span>
+<span class="nc" id="L40">    }</span>
+
+    public String getFormaDePago() {
+<span class="nc" id="L43">        return formaDePago;</span>
+    }
+
+    public void setFormaDePago(String formaDePago) {
+<span class="nc" id="L47">        this.formaDePago = formaDePago;</span>
+<span class="nc" id="L48">    }</span>
+
+    public List&lt;Promocion&gt; getPromociones() {
+<span class="nc" id="L51">        return promociones;</span>
+    }
+
+    public void setPromociones(List&lt;Promocion&gt; promociones) {
+<span class="nc" id="L55">        this.promociones = promociones;</span>
+<span class="nc" id="L56">    }</span>
+
+    public Float getTotal() {
+<span class="nc" id="L59">        return total;</span>
+    }
+
+    public void setTotal(Float total) {
+<span class="nc" id="L63">        this.total = total;</span>
+<span class="nc" id="L64">    }</span>
+
+    public Instant getFecha() {
+<span class="nc" id="L67">        return fecha;</span>
+    }
+
+    public void setFecha(Instant fecha) {
+<span class="nc" id="L71">        this.fecha = fecha;</span>
+<span class="nc" id="L72">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

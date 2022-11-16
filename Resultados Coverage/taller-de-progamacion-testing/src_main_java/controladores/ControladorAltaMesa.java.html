@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorAltaMesa.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorAltaMesa.java</span></div><h1>ControladorAltaMesa.java</h1><pre class="source lang-java linenums">package controladores;
+
+import dto.MesaDTO;
+import dto.MozoDTO;
+import excepciones.MesaExistenteException;
+import modelo.Mesa;
+import modelo.Mozo;
+import modelo.Operario;
+import negocio.GestionDeMesas;
+import vistas.VistaAltaMesa;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ControladorAltaMesa implements ActionListener {
+
+<span class="nc" id="L16">    private static ControladorAltaMesa controladorAltaMesa = null;</span>
+    private final GestionDeMesas gestionDeMesas;
+    private final VistaAltaMesa vistaAltaMesa;
+    private String op;
+    private Mesa mesa;
+
+<span class="nc" id="L22">    private ControladorAltaMesa() {</span>
+<span class="nc" id="L23">        this.vistaAltaMesa = new VistaAltaMesa();</span>
+<span class="nc" id="L24">        this.vistaAltaMesa.setActionListener(this);</span>
+<span class="nc" id="L25">        this.gestionDeMesas = GestionDeMesas.get();</span>
+<span class="nc" id="L26">    }</span>
+
+    public static ControladorAltaMesa getControladorAltaMesa(String op) {
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (controladorAltaMesa == null) {</span>
+<span class="nc" id="L30">            controladorAltaMesa = new ControladorAltaMesa();</span>
+        }
+<span class="nc" id="L32">        controladorAltaMesa.op = op;</span>
+<span class="nc" id="L33">        controladorAltaMesa.vistaAltaMesa.mostrar();</span>
+
+<span class="nc" id="L35">        return controladorAltaMesa;</span>
+    }
+
+    public static ControladorAltaMesa getControladorAltaMesa(String op, Mesa mesa) {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (controladorAltaMesa == null) {</span>
+<span class="nc" id="L40">            controladorAltaMesa = new ControladorAltaMesa();</span>
+        }
+<span class="nc" id="L42">        controladorAltaMesa.op = op;</span>
+<span class="nc" id="L43">        controladorAltaMesa.mesa = mesa;</span>
+<span class="nc" id="L44">        controladorAltaMesa.vistaAltaMesa.mostrar();</span>
+
+<span class="nc" id="L46">        return controladorAltaMesa;</span>
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L51">        String comando = e.getActionCommand();</span>
+
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if( comando.equalsIgnoreCase(&quot;Aceptar&quot;) ){</span>
+<span class="nc" id="L54">            int nroMesa = vistaAltaMesa.getNumeroMesa();</span>
+<span class="nc" id="L55">            int cantSilla = vistaAltaMesa.getCantSillas();</span>
+<span class="nc bnc" id="L56" title="All 4 branches missed.">            if( nroMesa &lt; 0 || cantSilla &lt;= 0 )</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                if(op.equalsIgnoreCase(&quot;Alta&quot;)){</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                    if( nroMesa &lt;  0 ){</span>
+<span class="nc" id="L59">                        vistaAltaMesa.failure(&quot;El NUMERO DE MESA debe ser mayor o igual a cero&quot;);</span>
+<span class="nc" id="L60">                        this.vistaAltaMesa.getTxtNumeroMesa().setText(&quot;&quot;);</span>
+                    }
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                    if( cantSilla &lt;= 0 ){</span>
+<span class="nc" id="L63">                        vistaAltaMesa.failure(&quot;La CANTIDAD DE SILLAS debe ser mayor a cero&quot;);</span>
+<span class="nc" id="L64">                        this.vistaAltaMesa.getTxtCantSillas().setText(&quot;&quot;);</span>
+                    }
+<span class="nc" id="L66">                }</span>
+                else
+<span class="nc" id="L68">                    ControladorGestionMesas.getControladorGestionMesas();</span>
+            else {
+                try {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                    if (op.equalsIgnoreCase(&quot;Alta&quot;)) {</span>
+<span class="nc" id="L72">                        MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);</span>
+<span class="nc" id="L73">                        gestionDeMesas.altaMesa(mesaDTO);</span>
+<span class="nc" id="L74">                        this.vistaAltaMesa.success(&quot;La mesa: &quot; + mesaDTO.getNroMesa() + &quot; fue dada de alta con exito&quot;);</span>
+<span class="nc" id="L75">                        this.vistaAltaMesa.esconder();</span>
+<span class="nc" id="L76">                        ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas();</span>
+<span class="nc" id="L77">                    } else {</span>
+<span class="nc" id="L78">                        MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);</span>
+<span class="nc" id="L79">                        Mozo mozoA = mesa.getMozoAsignado();</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                        boolean existeMesa = gestionDeMesas.getMesas().stream().anyMatch(m -&gt; m.getNroMesa() == mesaDTO.getNroMesa());</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                        if (!existeMesa) {</span>
+<span class="nc" id="L82">                            gestionDeMesas.bajaMesa(mesa.getNroMesa());</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">                            if (mozoA != null)</span>
+<span class="nc" id="L84">                                gestionDeMesas.asignarMozoMesa(new MozoDTO(mozoA.getNombreCompleto(), mozoA.getFechaNacimiento(), mozoA.getCantidadHijos()), mesaDTO);</span>
+<span class="nc" id="L85">                            gestionDeMesas.altaMesa(mesaDTO);</span>
+<span class="nc" id="L86">                            this.vistaAltaMesa.success(&quot;La mesa: &quot; + mesaDTO.getNroMesa() + &quot; fue modificada con exito&quot;);</span>
+<span class="nc" id="L87">                            this.vistaAltaMesa.esconder();</span>
+<span class="nc" id="L88">                            ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas();</span>
+<span class="nc" id="L89">                        } else</span>
+<span class="nc" id="L90">                            throw new MesaExistenteException();</span>
+                    }
+<span class="nc" id="L92">                } catch (MesaExistenteException ex) {</span>
+<span class="nc" id="L93">                    this.vistaAltaMesa.failure(&quot;La mesa: &quot; + nroMesa + &quot; ya se encuentra en el sistema&quot;);</span>
+<span class="nc" id="L94">                    ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas();</span>
+                }
+            }
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        }else if( comando.equalsIgnoreCase(&quot;Volver&quot;) ){</span>
+<span class="nc" id="L98">            this.vistaAltaMesa.esconder();</span>
+<span class="nc" id="L99">            ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas();</span>
+        }
+<span class="nc" id="L101">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GestionDeProductos.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">negocio</a> &gt; <span class="el_source">GestionDeProductos.java</span></div><h1>GestionDeProductos.java</h1><pre class="source lang-java linenums">package negocio;
+
+import dto.ProductoDTO;
+import excepciones.CambioNombreException;
+import excepciones.ProductoExistenteException;
+import modelo.Empresa;
+import modelo.Pedido;
+import modelo.Producto;
+import persistencia.IPersistencia;
+import persistencia.PersistenciaXML;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
+
+public class GestionDeProductos {
+
+    private final Empresa empresa;
+<span class="fc" id="L19">    private static GestionDeProductos gestionDeProductos = null;</span>
+
+<span class="fc" id="L21">    private GestionDeProductos() {</span>
+<span class="fc" id="L22">        this.empresa = Empresa.getEmpresa();</span>
+<span class="fc" id="L23">    }</span>
+
+    public static GestionDeProductos get() {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if( gestionDeProductos == null )</span>
+<span class="fc" id="L27">            gestionDeProductos = new GestionDeProductos();</span>
+<span class="fc" id="L28">        return gestionDeProductos;</span>
+    }
+
+    public void persistirProductos(){
+<span class="nc" id="L32">        IPersistencia&lt;Set&lt;Producto&gt;&gt; persistencia = new PersistenciaXML();</span>
+        try {
+<span class="nc" id="L34">            persistencia.abrirOutput(&quot;productos.xml&quot;);</span>
+<span class="nc" id="L35">            persistencia.escribir(this.empresa.getProductos());</span>
+<span class="nc" id="L36">            persistencia.cerrarOutput();</span>
+<span class="nc" id="L37">        } catch (IOException e) {</span>
+
+        }
+<span class="nc" id="L40">    }</span>
+
+    /**
+     * precondition: productoDTO!=null
+     * @param producto
+     * @throws ProductoExistenteException
+     */
+    public void altaProducto(ProductoDTO producto) throws ProductoExistenteException {
+<span class="nc" id="L48">        Set&lt;Producto&gt; productos = this.empresa.getProductos();</span>
+<span class="nc" id="L49">        Producto productoNuevo = new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());</span>
+<span class="nc" id="L50">        boolean existeProducto = productos.stream().anyMatch(p -&gt; p.getNombre().equalsIgnoreCase(productoNuevo.getNombre()));</span>
+
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(!existeProducto){</span>
+<span class="nc" id="L53">            productos.add(productoNuevo);</span>
+<span class="nc" id="L54">            this.empresa.setProductos(productos);</span>
+<span class="nc" id="L55">            persistirProductos();</span>
+<span class="nc" id="L56">        }</span>
+        else
+<span class="nc" id="L58">            throw new ProductoExistenteException();</span>
+<span class="nc" id="L59">    }</span>
+
+    /**
+     * precondition:Producto!=null
+     * @param producto
+     * @throws CambioNombreException
+     */
+    public void modificaProducto(ProductoDTO producto) throws CambioNombreException {
+<span class="nc" id="L67">        Set&lt;Producto&gt; productos = this.empresa.getProductos();</span>
+<span class="nc" id="L68">        Iterator&lt;Producto&gt; it = productos.iterator();</span>
+<span class="nc" id="L69">        Producto productoMod= new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());</span>
+
+<span class="nc" id="L71">        boolean encontreProducto = false;</span>
+<span class="nc" id="L72">        Producto prod = null;</span>
+
+<span class="nc bnc" id="L74" title="All 4 branches missed.">        while(it.hasNext() &amp;&amp; !encontreProducto) {</span>
+<span class="nc" id="L75">            prod = it.next();</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if(prod.getNombre().equalsIgnoreCase(productoMod.getNombre())){</span>
+<span class="nc" id="L77">                encontreProducto = true;</span>
+            }
+        }
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if(encontreProducto) {</span>
+<span class="nc" id="L81">            productos.remove(prod);</span>
+<span class="nc" id="L82">            productos.add(productoMod);</span>
+<span class="nc" id="L83">            this.empresa.setProductos(productos);</span>
+<span class="nc" id="L84">            persistirProductos();</span>
+<span class="nc" id="L85">        }</span>
+        else
+<span class="nc" id="L87">            throw new CambioNombreException();</span>
+
+<span class="nc" id="L89">    }</span>
+
+    /**
+     * precondition: id!=null
+     * @param id
+     */
+    public void bajaProducto(String id) {
+<span class="nc" id="L96">        Set&lt;Producto&gt; productos = this.empresa.getProductos();</span>
+<span class="nc" id="L97">        Iterator&lt;Producto&gt; it = productos.iterator();</span>
+<span class="nc" id="L98">        boolean encontreProducto = false;</span>
+<span class="nc" id="L99">        Producto prod = null;</span>
+
+<span class="nc bnc" id="L101" title="All 4 branches missed.">        while(it.hasNext() &amp;&amp; !encontreProducto) {</span>
+<span class="nc" id="L102">            prod = it.next();</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            if(prod.getId().equals(id)){</span>
+<span class="nc" id="L104">                encontreProducto = true;</span>
+            }
+        }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if(encontreProducto){</span>
+<span class="nc" id="L108">            productos.remove(prod);</span>
+<span class="nc" id="L109">            this.empresa.setProductos(productos);</span>
+<span class="nc" id="L110">            persistirProductos();</span>
+        }
+<span class="nc" id="L112">    }</span>
+
+    public Set&lt;Producto&gt; getProductos(){
+<span class="nc" id="L115">        return this.empresa.getProductos();</span>
+    }
+
+    public boolean descontarStock(Pedido pedido) {
+<span class="fc" id="L119">        Set&lt;Producto&gt; productos = this.empresa.getProductos();</span>
+<span class="fc" id="L120">        Iterator&lt;Producto&gt; it = productos.iterator();</span>
+
+<span class="fc" id="L122">        boolean encontreProducto = false;</span>
+<span class="fc" id="L123">        Producto prod = null;</span>
+
+<span class="pc bpc" id="L125" title="1 of 4 branches missed.">        while (it.hasNext() &amp;&amp; !encontreProducto) {</span>
+<span class="fc" id="L126">            prod = it.next();</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">            if (prod.getNombre().equals(pedido.getProducto().getNombre())) {</span>
+<span class="nc" id="L128">                encontreProducto = true;</span>
+            }
+        }
+<span class="fc" id="L131">        boolean puedeActualizar = false;</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        if (encontreProducto)</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">            if (prod.getStock() - pedido.getCantidad() &gt;= 0) {</span>
+<span class="nc" id="L134">                productos.remove(prod);</span>
+<span class="nc" id="L135">                prod.setStock(prod.getStock() - pedido.getCantidad());</span>
+<span class="nc" id="L136">                productos.add(prod);</span>
+<span class="nc" id="L137">                this.empresa.setProductos(productos);</span>
+<span class="nc" id="L138">                puedeActualizar = true;</span>
+            }
+
+<span class="fc" id="L141">        return puedeActualizar;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>
