@@ -222,18 +222,21 @@ public class GestionDePromociones {
      * @param dia
      * @return
      */
-    public boolean isDiaIncluido(Promocion promocion,String dia){
+    public boolean isDiaIncluido(Promocion promocion,String dia) {
 
         List<Dias> dias = promocion.getDiasPromo();
-        Iterator<Dias> it = dias.iterator();
         boolean res = false;
 
-        while (it.hasNext() && res==false){
-            String diaLista = it.next().toString();
-            if(dia.startsWith("s") && diaLista.startsWith("S"))
-                res = true;
-            else
-                res = diaLista.equalsIgnoreCase(dia);
+        if (dias != null){
+            Iterator<Dias> it = dias.iterator();
+
+            while (it.hasNext() && res == false) {
+                String diaLista = it.next().toString();
+                if (dia.startsWith("s") && diaLista.startsWith("S"))
+                    res = true;
+                else
+                    res = diaLista.equalsIgnoreCase(dia);
+            }
         }
 
         return res;
