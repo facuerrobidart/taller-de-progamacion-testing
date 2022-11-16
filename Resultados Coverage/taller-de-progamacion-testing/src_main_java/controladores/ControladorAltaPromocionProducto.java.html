@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorAltaPromocionProducto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorAltaPromocionProducto.java</span></div><h1>ControladorAltaPromocionProducto.java</h1><pre class="source lang-java linenums">package controladores;
+
+import dto.PromocionProductoDTO;
+import enums.Dias;
+import excepciones.PromocionExistenteException;
+import modelo.Mesa;
+import modelo.Producto;
+import modelo.promociones.Promocion;
+import modelo.promociones.PromocionFija;
+import negocio.GestionDeProductos;
+import negocio.GestionDePromociones;
+import vistas.VistaAltaPromocionProducto;
+
+import javax.swing.*;
+import javax.swing.event.ListDataListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+public class ControladorAltaPromocionProducto implements ActionListener {
+
+    private GestionDePromociones gestionDePromociones;
+    private static GestionDeProductos gestionDeProductos;
+<span class="nc" id="L26">    private static ControladorAltaPromocionProducto controladorAltaPromocionProducto = null;</span>
+<span class="nc" id="L27">    private static VistaAltaPromocionProducto vistaAltaPromocionProducto;</span>
+    private String op;
+    private PromocionProductoDTO promocionFija;
+
+<span class="nc" id="L31">    private ControladorAltaPromocionProducto(){</span>
+<span class="nc" id="L32">        this.gestionDePromociones = GestionDePromociones.get();</span>
+<span class="nc" id="L33">        this.gestionDeProductos = GestionDeProductos.get();</span>
+<span class="nc" id="L34">        vistaAltaPromocionProducto = new VistaAltaPromocionProducto();</span>
+<span class="nc" id="L35">        vistaAltaPromocionProducto.setActionListener(this);</span>
+<span class="nc" id="L36">    }</span>
+
+    public static ControladorAltaPromocionProducto getControladorAltaPromocionProducto(String op) {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (controladorAltaPromocionProducto == null) {</span>
+<span class="nc" id="L40">            controladorAltaPromocionProducto = new ControladorAltaPromocionProducto();</span>
+        }
+<span class="nc" id="L42">        Set&lt;Producto&gt; productos = gestionDeProductos.getProductos();</span>
+<span class="nc" id="L43">        JComboBox&lt;Producto&gt; comboP = vistaAltaPromocionProducto.getComboBox();</span>
+<span class="nc" id="L44">        comboP.removeAllItems();</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        for(Producto prod : productos){</span>
+<span class="nc" id="L46">            comboP.addItem(prod);</span>
+        }
+<span class="nc" id="L48">        vistaAltaPromocionProducto.setComboBox(comboP);</span>
+
+<span class="nc" id="L50">        controladorAltaPromocionProducto.op = op;</span>
+<span class="nc" id="L51">        vistaAltaPromocionProducto.mostrar();</span>
+
+<span class="nc" id="L53">        return controladorAltaPromocionProducto;</span>
+    }
+
+    public static ControladorAltaPromocionProducto getControladorAltaPromocionProducto(String op, PromocionProductoDTO promocionFija) {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (controladorAltaPromocionProducto == null) {</span>
+<span class="nc" id="L58">            controladorAltaPromocionProducto = new ControladorAltaPromocionProducto();</span>
+        }
+<span class="nc" id="L60">        Set&lt;Producto&gt; productos = gestionDeProductos.getProductos();</span>
+<span class="nc" id="L61">        JComboBox&lt;Producto&gt; comboP = vistaAltaPromocionProducto.getComboBox();</span>
+<span class="nc" id="L62">        comboP.removeAllItems();</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        for(Producto prod : productos){</span>
+<span class="nc" id="L64">            comboP.addItem(prod);</span>
+        }
+<span class="nc" id="L66">        vistaAltaPromocionProducto.setComboBox(comboP);</span>
+
+<span class="nc" id="L68">        controladorAltaPromocionProducto.op = op;</span>
+<span class="nc" id="L69">        controladorAltaPromocionProducto.promocionFija = promocionFija;</span>
+<span class="nc" id="L70">        vistaAltaPromocionProducto.limpiaCampos();</span>
+<span class="nc" id="L71">        vistaAltaPromocionProducto.mostrar();</span>
+
+<span class="nc" id="L73">        return controladorAltaPromocionProducto;</span>
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L78">        String comando = e.getActionCommand();</span>
+        ControladorAltaPromocionProducto controladorAltaPromocionProducto1;
+
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if(comando.equalsIgnoreCase(&quot;Finalizar&quot;)){</span>
+            float precioPromo;
+            int cantMinima;
+<span class="nc" id="L84">            String nombre = vistaAltaPromocionProducto.getNombre();</span>
+<span class="nc" id="L85">            boolean activa = vistaAltaPromocionProducto.getChckbxActiva().isSelected();</span>
+<span class="nc" id="L86">            List&lt;Dias&gt; dias = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            if(vistaAltaPromocionProducto.getChckbxLunes().isSelected())</span>
+<span class="nc" id="L88">                dias.add(Dias.LUNES);</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if(vistaAltaPromocionProducto.getChckbxMartes().isSelected())</span>
+<span class="nc" id="L90">                dias.add(Dias.MARTES);</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">            if(vistaAltaPromocionProducto.getChckbxMiercoles().isSelected())</span>
+<span class="nc" id="L92">                dias.add(Dias.MIERCOLES);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            if(vistaAltaPromocionProducto.getChckbxJueves().isSelected())</span>
+<span class="nc" id="L94">                dias.add(Dias.JUEVES);</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if(vistaAltaPromocionProducto.getChckbxViernes().isSelected())</span>
+<span class="nc" id="L96">                dias.add(Dias.VIERNES);</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if(vistaAltaPromocionProducto.getChckbxSabado().isSelected())</span>
+<span class="nc" id="L98">                dias.add(Dias.SABADO);</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">            if(vistaAltaPromocionProducto.getChckbxDomingo().isSelected())</span>
+<span class="nc" id="L100">                dias.add(Dias.DOMINGO);</span>
+<span class="nc" id="L101">            Producto prod = (Producto) vistaAltaPromocionProducto.getComboBox().getSelectedItem();</span>
+            PromocionProductoDTO prom;
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            if(vistaAltaPromocionProducto.getChckbxDesc().isSelected()) {</span>
+<span class="nc" id="L104">                precioPromo = vistaAltaPromocionProducto.getPrecioPromo();</span>
+<span class="nc" id="L105">                cantMinima = vistaAltaPromocionProducto.getCantMinima();</span>
+<span class="nc bnc" id="L106" title="All 4 branches missed.">                if (precioPromo &lt;= 0 || cantMinima &lt;= 0){</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">                    if( precioPromo &lt;= 0 ){</span>
+<span class="nc" id="L108">                        vistaAltaPromocionProducto.failure(&quot;El PRECIO DE LA PROMOCION debe ser un numero mayor a cero&quot;);</span>
+<span class="nc" id="L109">                        vistaAltaPromocionProducto.getTextPrecio().setText(&quot;&quot;);</span>
+                    }
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                    if( cantMinima &lt;= 0 ){</span>
+<span class="nc" id="L112">                        vistaAltaPromocionProducto.failure(&quot;La CANTIDAD MINIMA debe ser un numero mayor a cero&quot;);</span>
+<span class="nc" id="L113">                        vistaAltaPromocionProducto.getTxtCantMinima().setText(&quot;&quot;);</span>
+                    }
+<span class="nc" id="L115">                }</span>
+                else {
+<span class="nc" id="L117">                    prom = new PromocionProductoDTO(nombre, activa, dias, prod, false, true, cantMinima, precioPromo);</span>
+                    try {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">                        if(op.equalsIgnoreCase(&quot;Alta&quot;)){</span>
+<span class="nc" id="L120">                            gestionDePromociones.altaPromocionFija(prom);</span>
+<span class="nc" id="L121">                            vistaAltaPromocionProducto.success(&quot;La promocion fija: &quot; + prom.getNombre() + &quot; se ha dado de alta con exito&quot;);</span>
+<span class="nc" id="L122">                        }else{</span>
+<span class="nc" id="L123">                            boolean existePromocion = gestionDePromociones.getPromocionesFijas().stream().anyMatch(p -&gt; p.getNombre().equals(prom.getNombre()));</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                            if( !existePromocion ){</span>
+<span class="nc" id="L125">                                gestionDePromociones.bajaPromocionFija(promocionFija.getId());</span>
+<span class="nc" id="L126">                                gestionDePromociones.altaPromocionFija(prom);</span>
+<span class="nc" id="L127">                                vistaAltaPromocionProducto.success(&quot;La promocion fija: &quot; + prom.getNombre() + &quot; se ha modificado con exito&quot;);</span>
+<span class="nc" id="L128">                            }else</span>
+<span class="nc" id="L129">                                throw new PromocionExistenteException(prom.getNombre());</span>
+                        }
+<span class="nc" id="L131">                    } catch (PromocionExistenteException ex) {</span>
+<span class="nc" id="L132">                        vistaAltaPromocionProducto.failure(&quot;La promocion fija:&quot; + prom.getNombre() + &quot; ya se encuentra en el sistema&quot;);</span>
+                    }
+<span class="nc" id="L134">                    vistaAltaPromocionProducto.esconder();</span>
+                }
+<span class="nc" id="L136">            }</span>
+            else{
+<span class="nc" id="L138">                prom = new PromocionProductoDTO(nombre, activa, dias, prod, true, true, 0, 0);</span>
+                try {
+<span class="nc bnc" id="L140" title="All 2 branches missed.">                    if(op.equalsIgnoreCase(&quot;Alta&quot;)){</span>
+<span class="nc" id="L141">                        gestionDePromociones.altaPromocionFija(prom);</span>
+<span class="nc" id="L142">                        vistaAltaPromocionProducto.success(&quot;La promocion fija: &quot; + prom.getNombre() + &quot; se ha dado de alta con exito&quot;);</span>
+<span class="nc" id="L143">                    }else{</span>
+<span class="nc" id="L144">                        boolean existePromocion = gestionDePromociones.getPromocionesFijas().stream().anyMatch(p -&gt; p.getNombre().equals(prom.getNombre()));</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">                        if( !existePromocion ){</span>
+<span class="nc" id="L146">                            gestionDePromociones.bajaPromocionFija(promocionFija.getId());</span>
+<span class="nc" id="L147">                            gestionDePromociones.altaPromocionFija(prom);</span>
+<span class="nc" id="L148">                            vistaAltaPromocionProducto.success(&quot;La promocion fija: &quot; + prom.getNombre() + &quot; se ha modificado con exito&quot;);</span>
+<span class="nc" id="L149">                        }else</span>
+<span class="nc" id="L150">                            throw new PromocionExistenteException(prom.getNombre());</span>
+                    }
+<span class="nc" id="L152">                } catch (PromocionExistenteException ex) {</span>
+<span class="nc" id="L153">                    vistaAltaPromocionProducto.failure(&quot;La promocion fija:&quot; + prom.getNombre() + &quot; ya se encuentra en el sistema&quot;);</span>
+                }
+<span class="nc" id="L155">                vistaAltaPromocionProducto.esconder();</span>
+            }
+<span class="nc" id="L157">        }</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">        else if( comando.equals(&quot;Volver&quot;) ){</span>
+<span class="nc" id="L159">            vistaAltaPromocionProducto.esconder();</span>
+        }
+<span class="nc" id="L161">            ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones();</span>
+<span class="nc" id="L162">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

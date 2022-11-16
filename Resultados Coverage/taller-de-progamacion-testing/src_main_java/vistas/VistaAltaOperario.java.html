@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaAltaOperario.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaAltaOperario.java</span></div><h1>VistaAltaOperario.java</h1><pre class="source lang-java linenums">package vistas;
+
+import java.awt.EventQueue;
+
+import javax.swing.*;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Enumeration;
+
+public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListener, MouseListener{
+
+	private JFrame frmAltaDeOperario;
+	private JTextField txtNombre;
+	private JButton btnAceptar;
+	private JButton btnVolver;
+	private JTextField txtNombreUsuario;
+	private JRadioButton rdbtnOperarioNoActivo;
+	private JLabel lblPassword;
+	private JPasswordField txtPassword;
+	private ButtonGroup grupoEstado;
+	
+	private String nombre;
+	private String username;
+	private String password;
+	private String estado;
+
+	public static void main(String[] args) {
+<span class="nc" id="L32">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L35">					VistaAltaOperario window = new VistaAltaOperario();</span>
+<span class="nc" id="L36">					window.frmAltaDeOperario.setVisible(true);</span>
+<span class="nc" id="L37">				} catch (Exception e) {</span>
+<span class="nc" id="L38">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L40">			}</span>
+		});
+<span class="nc" id="L42">	}</span>
+
+<span class="nc" id="L44">	public VistaAltaOperario() {</span>
+<span class="nc" id="L45">		initialize();</span>
+<span class="nc" id="L46">	}</span>
+
+	private void initialize() {
+<span class="nc" id="L49">		frmAltaDeOperario = new JFrame();</span>
+<span class="nc" id="L50">		frmAltaDeOperario.setTitle(&quot;Nuevo Operario&quot;);</span>
+<span class="nc" id="L51">		frmAltaDeOperario.setBounds(100, 100, 450, 300);</span>
+<span class="nc" id="L52">		frmAltaDeOperario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L53">		frmAltaDeOperario.getContentPane().setLayout(null);</span>
+		
+<span class="nc" id="L55">		JLabel lblNombre = new JLabel(&quot;Nombre completo&quot;);</span>
+<span class="nc" id="L56">		lblNombre.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L57">		lblNombre.setBounds(39, 24, 110, 21);</span>
+<span class="nc" id="L58">		frmAltaDeOperario.getContentPane().add(lblNombre);</span>
+		
+<span class="nc" id="L60">		JLabel lblNombreUsuario = new JLabel(&quot;Nombre de usuario&quot;);</span>
+<span class="nc" id="L61">		lblNombreUsuario.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L62">		lblNombreUsuario.setBounds(39, 68, 126, 20);</span>
+<span class="nc" id="L63">		frmAltaDeOperario.getContentPane().add(lblNombreUsuario);</span>
+		
+<span class="nc" id="L65">		JLabel lblEstado = new JLabel(&quot;Estado&quot;);</span>
+<span class="nc" id="L66">		lblEstado.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L67">		lblEstado.setBounds(39, 149, 126, 32);</span>
+<span class="nc" id="L68">		frmAltaDeOperario.getContentPane().add(lblEstado);</span>
+		
+<span class="nc" id="L70">		txtNombre = new JTextField();</span>
+<span class="nc" id="L71">		txtNombre.setBounds(200, 20, 184, 32);</span>
+<span class="nc" id="L72">		frmAltaDeOperario.getContentPane().add(txtNombre);</span>
+<span class="nc" id="L73">		txtNombre.setColumns(10);</span>
+<span class="nc" id="L74">		txtNombre.addKeyListener(this);</span>
+		
+<span class="nc" id="L76">		btnAceptar = new JButton(&quot;Aceptar&quot;);</span>
+<span class="nc" id="L77">		btnAceptar.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L78">		btnAceptar.setBounds(274, 205, 110, 32);</span>
+<span class="nc" id="L79">		frmAltaDeOperario.getContentPane().add(btnAceptar);</span>
+		
+<span class="nc" id="L81">		btnVolver = new JButton(&quot;Volver&quot;);</span>
+<span class="nc" id="L82">		btnVolver.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L83">		btnVolver.setBounds(39, 205, 110, 32);</span>
+<span class="nc" id="L84">		frmAltaDeOperario.getContentPane().add(btnVolver);</span>
+		
+<span class="nc" id="L86">		txtNombreUsuario = new JTextField();</span>
+<span class="nc" id="L87">		txtNombreUsuario.setColumns(10);</span>
+<span class="nc" id="L88">		txtNombreUsuario.setBounds(200, 64, 184, 32);</span>
+<span class="nc" id="L89">		txtNombreUsuario.addKeyListener(this);</span>
+<span class="nc" id="L90">		frmAltaDeOperario.getContentPane().add(txtNombreUsuario);</span>
+		
+<span class="nc" id="L92">		this.grupoEstado = new ButtonGroup();</span>
+		
+<span class="nc" id="L94">		JRadioButton rdbtnOperarioActivo = new JRadioButton(&quot;Activo&quot;);</span>
+<span class="nc" id="L95">		rdbtnOperarioActivo.setSelected(true);</span>
+<span class="nc" id="L96">		rdbtnOperarioActivo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L97">		rdbtnOperarioActivo.setBounds(201, 154, 72, 23);</span>
+<span class="nc" id="L98">		grupoEstado.add(rdbtnOperarioActivo);</span>
+<span class="nc" id="L99">		frmAltaDeOperario.getContentPane().add(rdbtnOperarioActivo);</span>
+<span class="nc" id="L100">		rdbtnOperarioActivo.addMouseListener(this);</span>
+		
+<span class="nc" id="L102">		rdbtnOperarioNoActivo = new JRadioButton(&quot;No Activo&quot;);</span>
+<span class="nc" id="L103">		rdbtnOperarioNoActivo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L104">		rdbtnOperarioNoActivo.setBounds(299, 154, 85, 23);</span>
+<span class="nc" id="L105">		grupoEstado.add(rdbtnOperarioNoActivo);</span>
+<span class="nc" id="L106">		frmAltaDeOperario.getContentPane().add(rdbtnOperarioNoActivo);</span>
+<span class="nc" id="L107">		rdbtnOperarioNoActivo.addMouseListener(this);</span>
+		
+<span class="nc" id="L109">		lblPassword = new JLabel(&quot;Contrase\u00F1a&quot;);</span>
+<span class="nc" id="L110">		lblPassword.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L111">		lblPassword.setBounds(39, 111, 126, 20);</span>
+<span class="nc" id="L112">		frmAltaDeOperario.getContentPane().add(lblPassword);</span>
+		
+<span class="nc" id="L114">		txtPassword = new JPasswordField();</span>
+<span class="nc" id="L115">		txtPassword.setBounds(200, 107, 184, 32);</span>
+<span class="nc" id="L116">		txtPassword.addKeyListener(this);</span>
+<span class="nc" id="L117">		frmAltaDeOperario.getContentPane().add(txtPassword);</span>
+		
+<span class="nc" id="L119">		limpia();</span>
+<span class="nc" id="L120">	}</span>
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L126">	}</span>
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L132">	}</span>
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		if( nombre.length() &gt; 0 &amp;&amp;</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">				username.length() &gt; 0 &amp;&amp;</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">				password.length() &gt; 0</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">				&amp;&amp; this.grupoEstado.getSelection()!=null){</span>
+<span class="nc" id="L141">			this.btnAceptar.setEnabled(true);</span>
+		}
+<span class="nc" id="L143">	}</span>
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+<span class="nc" id="L148">	}</span>
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L154">	}</span>
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L160">	}</span>
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L166">	}</span>
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+<span class="nc" id="L170">		this.nombre = this.txtNombre.getText();</span>
+<span class="nc" id="L171">		this.username = this.txtNombreUsuario.getText();</span>
+<span class="nc" id="L172">		this.password = new String(this.txtPassword.getPassword());</span>
+		
+<span class="nc bnc" id="L174" title="All 2 branches missed.">		if( nombre.length() &gt; 0 &amp;&amp; </span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">			username.length() &gt; 0 &amp;&amp; </span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">			password.length() &gt; 0) {</span>
+			
+<span class="nc" id="L178">			this.btnAceptar.setEnabled(true);</span>
+		}
+<span class="nc" id="L180">	}</span>
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+<span class="nc" id="L184">		this.btnAceptar.addActionListener(actionListener);</span>
+<span class="nc" id="L185">		this.btnVolver.addActionListener(actionListener);</span>
+<span class="nc" id="L186">	}</span>
+
+	@Override
+	public void mostrar() {
+<span class="nc" id="L190">		this.frmAltaDeOperario.setVisible(true);</span>
+<span class="nc" id="L191">	}</span>
+
+	@Override
+	public void esconder() {
+<span class="nc" id="L195">		this.frmAltaDeOperario.setVisible(false);</span>
+<span class="nc" id="L196">		limpia();</span>
+<span class="nc" id="L197">	}</span>
+
+	@Override
+	public void limpia() {
+
+<span class="nc" id="L202">		this.btnAceptar.setEnabled(false);</span>
+<span class="nc" id="L203">		this.txtNombre.setText(&quot;&quot;);</span>
+<span class="nc" id="L204">		this.txtNombreUsuario.setText(&quot;&quot;);</span>
+<span class="nc" id="L205">		this.txtPassword.setText(&quot;&quot;);</span>
+<span class="nc" id="L206">		this.grupoEstado.clearSelection();</span>
+
+<span class="nc" id="L208">	}</span>
+
+	@Override
+	public void success(String msg) {
+<span class="nc" id="L212">		JOptionPane.showMessageDialog(this, msg, &quot;Resultado exitoso&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L213">	}</span>
+
+	@Override
+	public void failure(String msg) {
+<span class="nc" id="L217">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L218">	}</span>
+
+	public String getNombre() {
+<span class="nc" id="L221">		return nombre;</span>
+	}
+
+	public String getUsername() {
+<span class="nc" id="L225">		return username;</span>
+	}
+
+	public String getPassword() {
+<span class="nc" id="L229">		return password;</span>
+	}
+
+	public String getEstado() {
+<span class="nc" id="L233">		AbstractButton button=null;</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">		for (Enumeration&lt;AbstractButton&gt; buttons = grupoEstado.getElements(); buttons.hasMoreElements();) {</span>
+<span class="nc" id="L235">			button = buttons.nextElement();</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">			if (button.isSelected()) {</span>
+<span class="nc" id="L237">				return button.getText();</span>
+			}
+		}
+<span class="nc" id="L240">		return button.getText();</span>
+	}
+
+	public JTextField getTxtNombre() {
+<span class="nc" id="L244">		return txtNombre;</span>
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+<span class="nc" id="L248">		this.txtNombre = txtNombre;</span>
+<span class="nc" id="L249">	}</span>
+
+	public JTextField getTxtNombreUsuario() {
+<span class="nc" id="L252">		return txtNombreUsuario;</span>
+	}
+
+	public void setTxtNombreUsuario(JTextField txtNombreUsuario) {
+<span class="nc" id="L256">		this.txtNombreUsuario = txtNombreUsuario;</span>
+<span class="nc" id="L257">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

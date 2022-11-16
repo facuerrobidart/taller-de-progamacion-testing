@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorInicio.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorInicio.java</span></div><h1>ControladorInicio.java</h1><pre class="source lang-java linenums">package controladores;
+
+import modelo.Empresa;
+import negocio.GestionDeMozos;
+import negocio.GestionDePromociones;
+import vistas.IGenerica;
+import vistas.VistaInicio;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ControladorInicio implements ActionListener {
+
+    private VistaInicio vistaInicio;
+    private Empresa empresa;
+
+<span class="nc" id="L17">    private static ControladorInicio controladorInicio = null;</span>
+
+<span class="nc" id="L19">    private ControladorInicio() {</span>
+<span class="nc" id="L20">        this.vistaInicio = new VistaInicio();</span>
+<span class="nc" id="L21">        this.vistaInicio.setActionListener(this);</span>
+<span class="nc" id="L22">        this.empresa = Empresa.getEmpresa();</span>
+<span class="nc" id="L23">    }</span>
+
+    public Empresa getEmpresa() {
+<span class="nc" id="L26">        return empresa;</span>
+    }
+
+    public static ControladorInicio getControladorInicio(boolean mostrar) {
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (controladorInicio == null) {</span>
+<span class="nc" id="L31">            controladorInicio = new ControladorInicio();</span>
+        }
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if( mostrar )</span>
+<span class="nc" id="L34">            controladorInicio.vistaInicio.mostrar();</span>
+
+<span class="nc" id="L36">        return controladorInicio;</span>
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L41">        String comando = e.getActionCommand();</span>
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if(comando.equals(&quot;Gestionar Mozos&quot;)){</span>
+<span class="nc" id="L44">            this.vistaInicio.esconder();</span>
+<span class="nc" id="L45">            ControladorGestionMozos controladorGestionMozos = ControladorGestionMozos.getControladorGestionMozos();</span>
+<span class="nc" id="L46">        }</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        else if(comando.equals(&quot;Gestionar Operarios&quot;)){</span>
+<span class="nc" id="L48">            this.vistaInicio.esconder();</span>
+<span class="nc" id="L49">            ControladorGestionOperario controladorGestionOperario = ControladorGestionOperario.getControladorGestionOperario();</span>
+<span class="nc" id="L50">        }</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        else if(comando.equals(&quot;Gestionar Mesas&quot;)){</span>
+<span class="nc" id="L52">            this.vistaInicio.esconder();</span>
+<span class="nc" id="L53">            ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas();</span>
+<span class="nc" id="L54">        }</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        else if(comando.equals(&quot;Gestionar Productos&quot;)){</span>
+<span class="nc" id="L56">            this.vistaInicio.esconder();</span>
+<span class="nc" id="L57">            ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos();</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        else if(comando.equals(&quot;Gestionar Promociones&quot;)){</span>
+<span class="nc" id="L60">            this.vistaInicio.esconder();</span>
+<span class="nc" id="L61">            ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones();</span>
+<span class="nc" id="L62">        }</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        else if(comando.equals(&quot;Abrir Local&quot;)){</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if(GestionDePromociones.get().hayPromocionesHoy()) {</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">                if (GestionDeMozos.get().hayMozosActivos()) {</span>
+<span class="nc" id="L66">                    this.vistaInicio.esconder();</span>
+<span class="nc" id="L67">                    ControladorLocalAbierto controladorLocalAbierto = ControladorLocalAbierto.getControladorLocalAbierto();</span>
+<span class="nc" id="L68">                } else</span>
+<span class="nc" id="L69">                    this.vistaInicio.failure(&quot;No hay mozos activos en el sistema&quot;);</span>
+<span class="nc" id="L70">            }</span>
+            else
+<span class="nc" id="L72">                this.vistaInicio.failure(&quot;No hay suficientes promociones por producto para abrir el local&quot;);</span>
+<span class="nc" id="L73">        }</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        else if(comando.equals(&quot;Cerrar Sesion&quot;)){</span>
+<span class="nc" id="L75">            this.vistaInicio.esconder();</span>
+<span class="nc" id="L76">            ControladorLogin controladorLogin = ControladorLogin.getControladorLogin();</span>
+        }
+
+
+<span class="nc" id="L80">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

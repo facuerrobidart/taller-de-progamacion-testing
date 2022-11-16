@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaGestionMozos.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaGestionMozos.java</span></div><h1>VistaGestionMozos.java</h1><pre class="source lang-java linenums">package vistas;
+
+import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.Font;
+
+import modelo.Mozo;
+import java.awt.event.ActionEvent;
+
+public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseListener{
+
+	private JFrame frmGestionDeMozos;
+	private JButton btnVolver,btnModificarMozo,btnBajaMozo,btnAltaMozo,btnCalculoSueldo;
+	private JList&lt;Mozo&gt; listaMozos;
+	private ActionListener actionListener;
+	private JButton btnCambioEstado;
+
+	public static void main(String[] args) {
+<span class="nc" id="L22">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L25">					VistaGestionMozos window = new VistaGestionMozos();</span>
+<span class="nc" id="L26">					window.frmGestionDeMozos.setVisible(true);</span>
+<span class="nc" id="L27">				} catch (Exception e) {</span>
+<span class="nc" id="L28">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L30">			}</span>
+		});
+<span class="nc" id="L32">	}</span>
+
+<span class="nc" id="L34">	public VistaGestionMozos() {</span>
+<span class="nc" id="L35">		initialize();</span>
+<span class="nc" id="L36">	}</span>
+
+	private void initialize() {
+<span class="nc" id="L39">		frmGestionDeMozos = new JFrame();</span>
+<span class="nc" id="L40">		frmGestionDeMozos.setTitle(&quot;Gestion de Mozos&quot;);</span>
+<span class="nc" id="L41">		frmGestionDeMozos.setBounds(100, 100, 450, 300);</span>
+<span class="nc" id="L42">		frmGestionDeMozos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L43">		frmGestionDeMozos.getContentPane().setLayout(null);</span>
+		
+<span class="nc" id="L45">		JLabel lblListadoMozos = new JLabel(&quot;Listado de mozos&quot;);</span>
+<span class="nc" id="L46">		lblListadoMozos.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L47">		lblListadoMozos.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L48">		lblListadoMozos.setBounds(83, 21, 111, 14);</span>
+<span class="nc" id="L49">		frmGestionDeMozos.getContentPane().add(lblListadoMozos);</span>
+		
+<span class="nc" id="L51">		JScrollPane scrollPane = new JScrollPane();</span>
+<span class="nc" id="L52">		scrollPane.setBounds(26, 46, 221, 142);</span>
+<span class="nc" id="L53">		frmGestionDeMozos.getContentPane().add(scrollPane);</span>
+		
+<span class="nc" id="L55">		listaMozos = new JList();</span>
+<span class="nc" id="L56">		scrollPane.setViewportView(listaMozos);</span>
+<span class="nc" id="L57">		listaMozos.addMouseListener(this);</span>
+		
+<span class="nc" id="L59">		btnAltaMozo = new JButton(&quot;Alta Mozo&quot;);</span>
+<span class="nc" id="L60">		btnAltaMozo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L61">		btnAltaMozo.setBounds(276, 46, 130, 32);</span>
+<span class="nc" id="L62">		frmGestionDeMozos.getContentPane().add(btnAltaMozo);</span>
+		
+<span class="nc" id="L64">		btnBajaMozo = new JButton(&quot;Baja Mozo&quot;);</span>
+<span class="nc" id="L65">		btnBajaMozo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L66">		btnBajaMozo.setBounds(276, 101, 130, 32);</span>
+<span class="nc" id="L67">		btnBajaMozo.setEnabled(false);</span>
+<span class="nc" id="L68">		frmGestionDeMozos.getContentPane().add(btnBajaMozo);</span>
+		
+<span class="nc" id="L70">		btnModificarMozo = new JButton(&quot;Modificar Mozo&quot;);</span>
+<span class="nc" id="L71">		btnModificarMozo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L72">		btnModificarMozo.setBounds(276, 156, 130, 32);</span>
+<span class="nc" id="L73">		btnModificarMozo.setEnabled(false);</span>
+<span class="nc" id="L74">		frmGestionDeMozos.getContentPane().add(btnModificarMozo);</span>
+		
+<span class="nc" id="L76">		btnVolver = new JButton(&quot;Volver&quot;);</span>
+<span class="nc" id="L77">		btnVolver.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L78">		btnVolver.setBounds(26, 211, 100, 32);</span>
+<span class="nc" id="L79">		frmGestionDeMozos.getContentPane().add(btnVolver);</span>
+		
+<span class="nc" id="L81">		btnCambioEstado = new JButton(&quot;Cambio Estado&quot;);</span>
+<span class="nc" id="L82">		btnCambioEstado.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L83">		btnCambioEstado.setBounds(276, 211, 130, 32);</span>
+<span class="nc" id="L84">		frmGestionDeMozos.getContentPane().add(btnCambioEstado);</span>
+<span class="nc" id="L85">		btnCambioEstado.setEnabled(false);</span>
+		
+<span class="nc" id="L87">		btnCalculoSueldo = new JButton(&quot;Calculo Sueldo&quot;);</span>
+<span class="nc" id="L88">		btnCalculoSueldo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L89">		btnCalculoSueldo.setBounds(136, 213, 130, 32);</span>
+<span class="nc" id="L90">		frmGestionDeMozos.getContentPane().add(btnCalculoSueldo);</span>
+<span class="nc" id="L91">		btnCalculoSueldo.setEnabled(false);</span>
+<span class="nc" id="L92">	}</span>
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+<span class="nc" id="L96">		this.actionListener = actionListener;</span>
+<span class="nc" id="L97">		btnAltaMozo.addActionListener(actionListener);</span>
+<span class="nc" id="L98">		btnModificarMozo.addActionListener(actionListener);</span>
+<span class="nc" id="L99">		btnBajaMozo.addActionListener(actionListener);</span>
+<span class="nc" id="L100">		btnVolver.addActionListener(actionListener);</span>
+<span class="nc" id="L101">		btnCambioEstado.addActionListener(actionListener);</span>
+<span class="nc" id="L102">		btnCalculoSueldo.addActionListener(actionListener);</span>
+<span class="nc" id="L103">	}</span>
+
+	@Override
+	public void mostrar() {
+<span class="nc" id="L107">		this.frmGestionDeMozos.setVisible(true);</span>
+<span class="nc" id="L108">	}</span>
+
+	@Override
+	public void esconder() {
+<span class="nc" id="L112">		this.frmGestionDeMozos.setVisible(false);</span>
+<span class="nc" id="L113">		this.limpia();</span>
+<span class="nc" id="L114">	}</span>
+
+	@Override
+	public void limpia() {
+<span class="nc" id="L118">		this.btnBajaMozo.setEnabled(false);</span>
+<span class="nc" id="L119">		this.btnModificarMozo.setEnabled(false);</span>
+<span class="nc" id="L120">		this.btnCambioEstado.setEnabled(false);</span>
+<span class="nc" id="L121">		this.btnCalculoSueldo.setEnabled(false);</span>
+<span class="nc" id="L122">	}</span>
+
+	@Override
+	public void success(String msg) {
+<span class="nc" id="L126">		JOptionPane.showMessageDialog(this, msg, &quot;Resultado exitoso&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L127">	}</span>
+
+	@Override
+	public void failure(String msg) {
+<span class="nc" id="L131">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L132">	}</span>
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L138">	}</span>
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L144">	}</span>
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+<span class="nc bnc" id="L148" title="All 2 branches missed.">		if(this.listaMozos.getSelectedValue()!=null) {</span>
+<span class="nc" id="L149">			this.btnBajaMozo.setEnabled(true);</span>
+<span class="nc" id="L150">			this.btnModificarMozo.setEnabled(true);</span>
+<span class="nc" id="L151">			this.btnCambioEstado.setEnabled(true);</span>
+<span class="nc" id="L152">			this.btnCalculoSueldo.setEnabled(true);</span>
+		}
+<span class="nc" id="L154">	}</span>
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L160">	}</span>
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L166">	}</span>
+
+	@Override
+	public void setModel(DefaultListModel&lt;?&gt; lista) {
+<span class="nc" id="L170">		this.listaMozos.setModel((ListModel&lt;Mozo&gt;) lista);</span>
+<span class="nc" id="L171">	}</span>
+
+	@Override
+	public Object getSeleccion() {
+<span class="nc" id="L175">		return this.listaMozos.getSelectedValue();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

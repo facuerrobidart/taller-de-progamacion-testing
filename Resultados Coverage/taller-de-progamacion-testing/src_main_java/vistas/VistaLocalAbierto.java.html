@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaLocalAbierto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaLocalAbierto.java</span></div><h1>VistaLocalAbierto.java</h1><pre class="source lang-java linenums">package vistas;
+
+import modelo.Mesa;
+import modelo.Producto;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.event.*;
+
+public class VistaLocalAbierto extends JFrame implements IGenerica, ItemListener {
+
+	private JPanel contentPane;
+	private JButton btnCerrarLocal,btnCerrarMesa,btnCargarPedido,btnAbrirMesa;
+	private JComboBox comboBoxAbrir,comboBoxCantidad,comboBoxMesa,comboBoxProducto,comboBoxCerrar,comboBoxMedioDePago;
+	private ActionListener actionListener;
+	private JPanel panelEstadisticas;
+	private JButton btnMaxVentas;
+	private JButton btnMinVentas;
+	private JButton btnConsumoPromedio;
+	private String medioDePago;
+
+	private Mesa mesaApertura,mesaCierre,mesaPedido;
+	private Producto productoElegido;
+	private int cantidad;
+
+	public static void main(String[] args) {
+<span class="nc" id="L32">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L35">					VistaLocalAbierto frame = new VistaLocalAbierto();</span>
+<span class="nc" id="L36">					frame.setVisible(true);</span>
+<span class="nc" id="L37">				} catch (Exception e) {</span>
+<span class="nc" id="L38">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L40">			}</span>
+		});
+<span class="nc" id="L42">	}</span>
+
+<span class="nc" id="L44">	public VistaLocalAbierto() {</span>
+<span class="nc" id="L45">		setTitle(&quot;Administracion Gastronomica&quot;);</span>
+<span class="nc" id="L46">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L47">		setBounds(100, 100, 743, 532);</span>
+<span class="nc" id="L48">		contentPane = new JPanel();</span>
+<span class="nc" id="L49">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L50">		contentPane.setLayout(new BorderLayout(0, 0));</span>
+<span class="nc" id="L51">		setContentPane(contentPane);</span>
+		
+<span class="nc" id="L53">		JPanel panelGeneral = new JPanel();</span>
+<span class="nc" id="L54">		contentPane.add(panelGeneral, BorderLayout.CENTER);</span>
+<span class="nc" id="L55">		panelGeneral.setLayout(new GridLayout(4, 0, 0, 0));</span>
+		
+<span class="nc" id="L57">		JPanel panelSup = new JPanel();</span>
+<span class="nc" id="L58">		panelGeneral.add(panelSup);</span>
+<span class="nc" id="L59">		panelSup.setLayout(null);</span>
+		
+<span class="nc" id="L61">		comboBoxAbrir = new JComboBox();</span>
+<span class="nc" id="L62">		comboBoxAbrir.setToolTipText(&quot;Seleccione la mesa que desea abrir&quot;);</span>
+<span class="nc" id="L63">		comboBoxAbrir.setBounds(10, 29, 293, 48);</span>
+<span class="nc" id="L64">		comboBoxAbrir.addItemListener(this);</span>
+<span class="nc" id="L65">		panelSup.add(comboBoxAbrir);</span>
+
+<span class="nc" id="L67">		btnAbrirMesa = new JButton(&quot;Abrir Mesa&quot;);</span>
+<span class="nc" id="L68">		btnAbrirMesa.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 15));</span>
+<span class="nc" id="L69">		btnAbrirMesa.setBounds(502, 27, 132, 48);</span>
+<span class="nc" id="L70">		btnAbrirMesa.setEnabled(false);</span>
+<span class="nc" id="L71">		panelSup.add(btnAbrirMesa);</span>
+
+<span class="nc" id="L73">		JPanel panelCentral = new JPanel();</span>
+<span class="nc" id="L74">		panelGeneral.add(panelCentral);</span>
+<span class="nc" id="L75">		panelCentral.setLayout(null);</span>
+		
+<span class="nc" id="L77">		comboBoxCantidad = new JComboBox();</span>
+<span class="nc" id="L78">		comboBoxCantidad.setToolTipText(&quot;Seleccione la cantidad del producto elegido&quot;);</span>
+<span class="nc" id="L79">		comboBoxCantidad.setBounds(313, 11, 111, 62);</span>
+<span class="nc" id="L80">		panelCentral.add(comboBoxCantidad);</span>
+<span class="nc" id="L81">		comboBoxCantidad.addItemListener(this);</span>
+
+
+<span class="nc" id="L84">		comboBoxMesa = new JComboBox();</span>
+<span class="nc" id="L85">		comboBoxMesa.setToolTipText(&quot;Seleccione la mesa que realizo el pedido&quot;);</span>
+<span class="nc" id="L86">		comboBoxMesa.setBounds(10, 11, 125, 62);</span>
+<span class="nc" id="L87">		panelCentral.add(comboBoxMesa);</span>
+<span class="nc" id="L88">		comboBoxMesa.addItemListener(this);</span>
+
+
+<span class="nc" id="L91">		comboBoxProducto = new JComboBox();</span>
+<span class="nc" id="L92">		comboBoxProducto.setToolTipText(&quot;Seleccione el producto a cargar&quot;);</span>
+<span class="nc" id="L93">		comboBoxProducto.setBounds(145, 11, 158, 62);</span>
+<span class="nc" id="L94">		panelCentral.add(comboBoxProducto);</span>
+<span class="nc" id="L95">		comboBoxProducto.addItemListener(this);</span>
+
+
+<span class="nc" id="L98">		btnCargarPedido = new JButton(&quot;Cargar Pedido&quot;);</span>
+<span class="nc" id="L99">		btnCargarPedido.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 15));</span>
+<span class="nc" id="L100">		btnCargarPedido.setBounds(502, 18, 133, 45);</span>
+<span class="nc" id="L101">		btnCargarPedido.setEnabled(false);</span>
+<span class="nc" id="L102">		panelCentral.add(btnCargarPedido);</span>
+		
+<span class="nc" id="L104">		JPanel panelInf = new JPanel();</span>
+<span class="nc" id="L105">		panelGeneral.add(panelInf);</span>
+<span class="nc" id="L106">		panelInf.setLayout(null);</span>
+		
+<span class="nc" id="L108">		comboBoxCerrar = new JComboBox();</span>
+<span class="nc" id="L109">		comboBoxCerrar.setToolTipText(&quot;Seleccione la mesa que desea cerrar&quot;);</span>
+<span class="nc" id="L110">		comboBoxCerrar.setBounds(10, 29, 205, 48);</span>
+<span class="nc" id="L111">		comboBoxCerrar.addItemListener(this);</span>
+<span class="nc" id="L112">		panelInf.add(comboBoxCerrar);</span>
+
+<span class="nc" id="L114">		btnCerrarMesa = new JButton(&quot;Cerrar Mesa&quot;);</span>
+<span class="nc" id="L115">		btnCerrarMesa.setBounds(502, 27, 132, 48);</span>
+<span class="nc" id="L116">		btnCerrarMesa.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 15));</span>
+<span class="nc" id="L117">		btnCerrarMesa.setEnabled(false);</span>
+<span class="nc" id="L118">		panelInf.add(btnCerrarMesa);</span>
+		
+<span class="nc" id="L120">		comboBoxMedioDePago = new JComboBox();</span>
+<span class="nc" id="L121">		comboBoxMedioDePago.setBounds(244, 29, 205, 48);</span>
+<span class="nc" id="L122">		panelInf.add(comboBoxMedioDePago);</span>
+<span class="nc" id="L123">		comboBoxMedioDePago.addItemListener(this);</span>
+		
+<span class="nc" id="L125">		panelEstadisticas = new JPanel();</span>
+<span class="nc" id="L126">		panelGeneral.add(panelEstadisticas);</span>
+<span class="nc" id="L127">		panelEstadisticas.setLayout(null);</span>
+		
+<span class="nc" id="L129">		btnMaxVentas = new JButton(&quot;Mozo con mas Ventas&quot;);</span>
+<span class="nc" id="L130">		btnMaxVentas.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 15));</span>
+<span class="nc" id="L131">		btnMaxVentas.setBounds(10, 11, 213, 79);</span>
+<span class="nc" id="L132">		panelEstadisticas.add(btnMaxVentas);</span>
+		
+<span class="nc" id="L134">		btnMinVentas = new JButton(&quot;Mozo con menos ventas&quot;);</span>
+<span class="nc" id="L135">		btnMinVentas.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 15));</span>
+<span class="nc" id="L136">		btnMinVentas.setBounds(251, 11, 199, 79);</span>
+<span class="nc" id="L137">		panelEstadisticas.add(btnMinVentas);</span>
+		
+<span class="nc" id="L139">		btnConsumoPromedio = new JButton(&quot;Consumo promedio por mesa&quot;);</span>
+<span class="nc" id="L140">		btnConsumoPromedio.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 15));</span>
+<span class="nc" id="L141">		btnConsumoPromedio.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L142">		btnConsumoPromedio.setBounds(475, 11, 234, 79);</span>
+<span class="nc" id="L143">		panelEstadisticas.add(btnConsumoPromedio);</span>
+		
+<span class="nc" id="L145">		btnCerrarLocal = new JButton(&quot;Cerrar Local&quot;);</span>
+<span class="nc" id="L146">		btnCerrarLocal.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 15));</span>
+<span class="nc" id="L147">		contentPane.add(btnCerrarLocal, BorderLayout.SOUTH);</span>
+
+<span class="nc" id="L149">	}</span>
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+<span class="nc" id="L153">		this.actionListener = actionListener;</span>
+<span class="nc" id="L154">		this.btnAbrirMesa.addActionListener(actionListener);</span>
+<span class="nc" id="L155">		this.btnCargarPedido.addActionListener(actionListener);</span>
+<span class="nc" id="L156">		this.btnCerrarLocal.addActionListener(actionListener);</span>
+<span class="nc" id="L157">		this.btnCerrarMesa.addActionListener(actionListener);</span>
+<span class="nc" id="L158">		this.btnConsumoPromedio.addActionListener(actionListener);</span>
+<span class="nc" id="L159">		this.btnMaxVentas.addActionListener(actionListener);</span>
+<span class="nc" id="L160">		this.btnMinVentas.addActionListener(actionListener);</span>
+<span class="nc" id="L161">	}</span>
+
+	@Override
+	public void mostrar() {
+<span class="nc" id="L165">		this.setVisible(true);</span>
+<span class="nc" id="L166">	}</span>
+
+	@Override
+	public void esconder() {
+<span class="nc" id="L170">		this.setVisible(false);</span>
+<span class="nc" id="L171">		this.limpia();</span>
+<span class="nc" id="L172">	}</span>
+
+	@Override
+	public void limpia() {
+<span class="nc" id="L176">		this.btnAbrirMesa.setEnabled(false);</span>
+<span class="nc" id="L177">		this.btnCargarPedido.setEnabled(false);</span>
+<span class="nc" id="L178">		this.btnCerrarMesa.setEnabled(false);</span>
+
+<span class="nc" id="L180">		comboBoxAbrir.setSelectedItem(null);</span>
+<span class="nc" id="L181">		comboBoxMesa.setSelectedItem(null);</span>
+<span class="nc" id="L182">		comboBoxProducto.setSelectedItem(null);</span>
+<span class="nc" id="L183">		comboBoxCantidad.setSelectedItem(null);</span>
+<span class="nc" id="L184">		comboBoxCerrar.setSelectedItem(null);</span>
+<span class="nc" id="L185">		comboBoxMedioDePago.setSelectedItem(null);</span>
+<span class="nc" id="L186">	}</span>
+
+	@Override
+	public void success(String msg) {
+<span class="nc" id="L190">		JOptionPane.showMessageDialog(null, msg, &quot;Estadisticas&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L191">	}</span>
+
+	@Override
+	public void failure(String msg) {
+<span class="nc" id="L195">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L196">	}</span>
+
+	public Mesa getMesaApertura() {
+<span class="nc" id="L199">		return mesaApertura;</span>
+	}
+
+	public void setMesaApertura(Mesa mesaApertura) {
+<span class="nc" id="L203">		this.mesaApertura = mesaApertura;</span>
+<span class="nc" id="L204">	}</span>
+
+	public Mesa getMesaCierre() {
+<span class="nc" id="L207">		return mesaCierre;</span>
+	}
+
+	public void setMesaCierre(Mesa mesaCierre) {
+<span class="nc" id="L211">		this.mesaCierre = mesaCierre;</span>
+<span class="nc" id="L212">	}</span>
+
+	public Mesa getMesaPedido() {
+<span class="nc" id="L215">		return mesaPedido;</span>
+	}
+
+	public void setMesaPedido(Mesa mesaPedido) {
+<span class="nc" id="L219">		this.mesaPedido = mesaPedido;</span>
+<span class="nc" id="L220">	}</span>
+
+	public Producto getProductoElegido() {
+<span class="nc" id="L223">		return productoElegido;</span>
+	}
+
+	public void setProductoElegido(Producto productoElegido) {
+<span class="nc" id="L227">		this.productoElegido = productoElegido;</span>
+<span class="nc" id="L228">	}</span>
+
+	public int getCantidad() {
+<span class="nc" id="L231">		return cantidad;</span>
+	}
+
+	public void setCantidad(int cantidad) {
+<span class="nc" id="L235">		this.cantidad = cantidad;</span>
+<span class="nc" id="L236">	}</span>
+
+	public JComboBox getComboBoxAbrir() {
+<span class="nc" id="L239">		return comboBoxAbrir;</span>
+	}
+
+	public void setComboBoxAbrir(JComboBox comboBoxAbrir) {
+<span class="nc" id="L243">		this.comboBoxAbrir = comboBoxAbrir;</span>
+<span class="nc" id="L244">	}</span>
+
+	public JComboBox getComboBoxCantidad() {
+<span class="nc" id="L247">		return comboBoxCantidad;</span>
+	}
+
+	public void setComboBoxCantidad(JComboBox comboBoxCantidad) {
+<span class="nc" id="L251">		this.comboBoxCantidad = comboBoxCantidad;</span>
+<span class="nc" id="L252">	}</span>
+
+	public JComboBox getComboBoxMesa() {
+<span class="nc" id="L255">		return comboBoxMesa;</span>
+	}
+
+	public void setComboBoxMesa(JComboBox comboBoxMesa) {
+<span class="nc" id="L259">		this.comboBoxMesa = comboBoxMesa;</span>
+<span class="nc" id="L260">	}</span>
+
+	public JComboBox getComboBoxProducto() {
+<span class="nc" id="L263">		return comboBoxProducto;</span>
+	}
+
+	public void setComboBoxProducto(JComboBox comboBoxProducto) {
+<span class="nc" id="L267">		this.comboBoxProducto = comboBoxProducto;</span>
+<span class="nc" id="L268">	}</span>
+
+	public JComboBox getComboBoxCerrar() {
+<span class="nc" id="L271">		return comboBoxCerrar;</span>
+	}
+
+	public void setComboBoxCerrar(JComboBox comboBoxCerrar) {
+<span class="nc" id="L275">		this.comboBoxCerrar = comboBoxCerrar;</span>
+<span class="nc" id="L276">	}</span>
+	
+	
+
+	public JComboBox getComboBoxMedioDePago() {
+<span class="nc" id="L281">		return comboBoxMedioDePago;</span>
+	}
+
+	public void setComboBoxMedioDePago(JComboBox comboBoxMedioDePago) {
+<span class="nc" id="L285">		this.comboBoxMedioDePago = comboBoxMedioDePago;</span>
+<span class="nc" id="L286">	}</span>
+
+	public String getMedioDePago() {
+<span class="nc" id="L289">		return medioDePago;</span>
+	}
+
+	public void setMedioDePago(String medioDePago) {
+<span class="nc" id="L293">		this.medioDePago = medioDePago;</span>
+<span class="nc" id="L294">	}</span>
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+<span class="nc bnc" id="L298" title="All 2 branches missed.">		if (e.getStateChange() == ItemEvent.SELECTED) {</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">			if (e.getSource() == comboBoxAbrir) {</span>
+<span class="nc" id="L300">				this.btnAbrirMesa.setEnabled(true);</span>
+<span class="nc" id="L301">				this.mesaApertura = (Mesa) this.comboBoxAbrir.getSelectedItem();</span>
+<span class="nc" id="L302">			}</span>
+<span class="nc bnc" id="L303" title="All 4 branches missed.">			else if (e.getSource() == comboBoxCerrar || e.getSource() == comboBoxMedioDePago) {</span>
+<span class="nc bnc" id="L304" title="All 4 branches missed.">				if(comboBoxCerrar.getSelectedItem() != null &amp;&amp; comboBoxMedioDePago.getSelectedItem() != null) {</span>
+<span class="nc" id="L305">				this.mesaCierre = (Mesa) this.comboBoxCerrar.getSelectedItem();</span>
+<span class="nc" id="L306">				this.medioDePago = (String) this.comboBoxMedioDePago.getSelectedItem();</span>
+<span class="nc" id="L307">				this.btnCerrarMesa.setEnabled(true);</span>
+				}
+<span class="nc" id="L309">			}</span>
+<span class="nc bnc" id="L310" title="All 6 branches missed.">			else if( (e.getSource() == comboBoxCantidad) || (e.getSource() == comboBoxMesa) || (e.getSource() == comboBoxProducto) ){</span>
+<span class="nc bnc" id="L311" title="All 6 branches missed.">				if( comboBoxMesa.getSelectedItem() != null &amp;&amp; comboBoxCantidad.getSelectedItem() != null &amp;&amp; comboBoxProducto.getSelectedItem() != null){</span>
+<span class="nc" id="L312">					this.mesaPedido = (Mesa) this.comboBoxMesa.getSelectedItem();</span>
+<span class="nc" id="L313">					this.productoElegido = (Producto) this.comboBoxProducto.getSelectedItem();</span>
+<span class="nc" id="L314">					this.cantidad = (int) this.comboBoxCantidad.getSelectedItem();</span>
+<span class="nc" id="L315">					this.btnCargarPedido.setEnabled(true);</span>
+				}
+			}
+		}
+<span class="nc" id="L319">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GestionDePromociones.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">negocio</a> &gt; <span class="el_source">GestionDePromociones.java</span></div><h1>GestionDePromociones.java</h1><pre class="source lang-java linenums">package negocio;
+
+import dto.PromocionProductoDTO;
+import dto.PromocionTemporalDTO;
+import enums.Dias;
+import excepciones.PromocionExistenteException;
+import modelo.Empresa;
+import modelo.promociones.Promocion;
+import modelo.promociones.PromocionFija;
+import modelo.promociones.PromocionTemporal;
+import persistencia.IPersistencia;
+import persistencia.PersistenciaXML;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+public class GestionDePromociones {
+
+    private final Empresa empresa;
+<span class="fc" id="L25">    private static GestionDePromociones gestionDePromociones = null;</span>
+
+<span class="fc" id="L27">    private GestionDePromociones() {</span>
+<span class="fc" id="L28">        this.empresa = Empresa.getEmpresa();</span>
+<span class="fc" id="L29">    }</span>
+
+    public static GestionDePromociones get() {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if( gestionDePromociones == null )</span>
+<span class="fc" id="L33">            gestionDePromociones = new GestionDePromociones();</span>
+<span class="fc" id="L34">        return gestionDePromociones;</span>
+    }
+
+    public Set&lt;PromocionFija&gt; getPromocionesFijas(){
+<span class="fc" id="L38">        return this.empresa.getPromocionesFijas();</span>
+    }
+
+    public Set&lt;PromocionTemporal&gt; getPromocionesTemporales(){
+<span class="nc" id="L42">        return this.empresa.getPromocionesTemporales();</span>
+    }
+
+    public void persistirPromocionesTemporales() {
+<span class="nc" id="L46">        IPersistencia&lt;Set&lt;PromocionTemporal&gt;&gt; persistencia = new PersistenciaXML();</span>
+        try {
+<span class="nc" id="L48">            persistencia.abrirOutput(&quot;promociones-temporales.xml&quot;);</span>
+<span class="nc" id="L49">            persistencia.escribir(this.getPromocionesTemporales());</span>
+<span class="nc" id="L50">            persistencia.cerrarOutput();</span>
+<span class="nc" id="L51">        } catch (IOException e) {</span>
+
+        }
+<span class="nc" id="L54">    }</span>
+
+    public void persistirPromocionesFijas(){
+<span class="fc" id="L57">        IPersistencia&lt;Set&lt;PromocionFija&gt;&gt; persistencia1 = new PersistenciaXML();</span>
+        try {
+<span class="fc" id="L59">            persistencia1.abrirOutput(&quot;promociones-fijas.xml&quot;);</span>
+<span class="fc" id="L60">            persistencia1.escribir(this.getPromocionesFijas());</span>
+<span class="fc" id="L61">            persistencia1.cerrarOutput();</span>
+<span class="pc" id="L62">        } catch (IOException e) {</span>
+
+        }
+
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * precondition: promocion!=null
+     * @param promocion
+     * @throws PromocionExistenteException
+     */
+    public void altaPromocionFija(PromocionProductoDTO promocion) throws PromocionExistenteException {
+        PromocionFija promoFija;
+<span class="nc" id="L75">        Set&lt;PromocionFija&gt; promociones = this.getPromocionesFijas();</span>
+
+<span class="nc" id="L77">        boolean existePromo = promociones.stream().anyMatch(p -&gt; p.getNombre().equalsIgnoreCase(promocion.getNombre()));</span>
+
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if(!existePromo){</span>
+
+<span class="nc" id="L81">            promoFija = new PromocionFija(</span>
+<span class="nc" id="L82">                    promocion.getNombre(),</span>
+<span class="nc" id="L83">                    promocion.getDiasPromo(),</span>
+<span class="nc" id="L84">                    promocion.getProducto(),</span>
+<span class="nc" id="L85">                    promocion.isDosPorUno(),</span>
+<span class="nc" id="L86">                    promocion.isDtoPorCant(),</span>
+<span class="nc" id="L87">                    promocion.getDtoPorCantMin(),</span>
+<span class="nc" id="L88">                    promocion.getDtoPorCantPrecioU()</span>
+            );
+
+<span class="nc" id="L91">            promociones.add(promoFija);</span>
+<span class="nc" id="L92">            this.empresa.setPromocionesFijas(promociones);</span>
+<span class="nc" id="L93">            persistirPromocionesFijas();</span>
+
+<span class="nc" id="L95">        }else</span>
+<span class="nc" id="L96">            throw new PromocionExistenteException(&quot;Ya existe una promocion fija con el nombre &quot; + promocion.getNombre());</span>
+<span class="nc" id="L97">    }</span>
+
+    /**
+     * precondition: promocion!=null
+     * @param promocion
+     * @throws PromocionExistenteException
+     */
+    public void altaPromocionTemporal(PromocionTemporalDTO promocion) throws PromocionExistenteException {
+        PromocionTemporal promoTemporal;
+<span class="nc" id="L106">        Set&lt;PromocionTemporal&gt; promociones = this.getPromocionesTemporales();</span>
+
+<span class="nc" id="L108">        boolean existePromo = promociones.stream().anyMatch(p -&gt; p.getNombre().equalsIgnoreCase(promocion.getNombre()));</span>
+
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if(!existePromo){</span>
+
+<span class="nc" id="L112">            promoTemporal = new PromocionTemporal(promocion.getNombre(),</span>
+<span class="nc" id="L113">                    promocion.getDiasPromo(),</span>
+<span class="nc" id="L114">                    promocion.getFormaPago(),</span>
+<span class="nc" id="L115">                    promocion.getPorcentajeDescuento(),</span>
+<span class="nc" id="L116">                    promocion.isAcumulable()</span>
+            );
+
+<span class="nc" id="L119">            promociones.add(promoTemporal);</span>
+<span class="nc" id="L120">            this.empresa.setPromocionesTemporales(promociones);</span>
+<span class="nc" id="L121">            persistirPromocionesTemporales();</span>
+
+<span class="nc" id="L123">        } else</span>
+<span class="nc" id="L124">            throw new PromocionExistenteException(&quot;Ya existe una promocion temporal con el nombre &quot; + promocion.getNombre());</span>
+<span class="nc" id="L125">    }</span>
+
+        /**
+         * precondition promocion!=null
+         * @param promocion
+         */
+    public void modificaPromocionFija(PromocionProductoDTO promocion) {
+
+<span class="fc" id="L133">        Set&lt;PromocionFija&gt; promociones = this.getPromocionesFijas();</span>
+
+<span class="fc" id="L135">        Iterator&lt;PromocionFija&gt; it = promociones.iterator();</span>
+<span class="fc" id="L136">        boolean encontrePromo = false;</span>
+<span class="fc" id="L137">        Promocion p = null;</span>
+
+<span class="fc bfc" id="L139" title="All 4 branches covered.">        while(it.hasNext() &amp;&amp; !encontrePromo) {</span>
+<span class="fc" id="L140">            p = it.next();</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">            if( p.getNombre().equals(promocion.getNombre()) )</span>
+<span class="fc" id="L142">                encontrePromo = true;</span>
+        }
+
+<span class="fc bfc" id="L145" title="All 2 branches covered.">        if(encontrePromo){</span>
+
+<span class="fc" id="L147">            promociones.remove(p);</span>
+
+<span class="fc" id="L149">            PromocionFija promoFija = new PromocionFija(promocion.getNombre(),</span>
+<span class="fc" id="L150">                                                        promocion.getDiasPromo(),</span>
+<span class="fc" id="L151">                                                        promocion.getProducto(),</span>
+<span class="fc" id="L152">                                                        promocion.isDosPorUno(),</span>
+<span class="fc" id="L153">                                                        promocion.isDtoPorCant(),</span>
+<span class="fc" id="L154">                                                        promocion.getDtoPorCantMin(),</span>
+<span class="fc" id="L155">                                                        promocion.getDtoPorCantPrecioU()</span>
+           );
+
+<span class="fc" id="L158">            promociones.add(promoFija);</span>
+<span class="fc" id="L159">            this.empresa.setPromocionesFijas(promociones);</span>
+<span class="fc" id="L160">            persistirPromocionesFijas();</span>
+
+        }
+
+<span class="fc" id="L164">    }</span>
+
+
+    /**
+     * precondition promocion!=null
+     * @param promocion
+     */
+    public void modificaPromocionTemporal(PromocionTemporalDTO promocion) {
+<span class="nc" id="L172">            Set&lt;PromocionTemporal&gt; promociones = this.getPromocionesTemporales();</span>
+
+<span class="nc" id="L174">            Iterator&lt;PromocionTemporal&gt; it = promociones.iterator();</span>
+<span class="nc" id="L175">            boolean encontrePromo = false;</span>
+<span class="nc" id="L176">            Promocion p = null;</span>
+
+<span class="nc bnc" id="L178" title="All 4 branches missed.">            while(it.hasNext() &amp;&amp; !encontrePromo) {</span>
+<span class="nc" id="L179">                p = it.next();</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">                if( p.getNombre().equals(promocion.getNombre()) )</span>
+<span class="nc" id="L181">                    encontrePromo = true;</span>
+            }
+
+<span class="nc bnc" id="L184" title="All 2 branches missed.">            if(encontrePromo){</span>
+
+<span class="nc" id="L186">                promociones.remove(p);</span>
+
+<span class="nc" id="L188">                PromocionTemporal promoTemporal = new PromocionTemporal(promocion.getNombre(),</span>
+<span class="nc" id="L189">                                                                        promocion.getDiasPromo(),</span>
+<span class="nc" id="L190">                                                                        promocion.getFormaPago(),</span>
+<span class="nc" id="L191">                                                                        promocion.getPorcentajeDescuento(),</span>
+<span class="nc" id="L192">                                                                        promocion.isAcumulable()</span>
+                );
+
+<span class="nc" id="L195">                promociones.add(promoTemporal);</span>
+<span class="nc" id="L196">                this.empresa.setPromocionesTemporales(promociones);</span>
+<span class="nc" id="L197">                persistirPromocionesTemporales();</span>
+            }
+<span class="nc" id="L199">    }</span>
+
+
+    public void bajaPromocionFija( String id ) {
+
+<span class="nc" id="L204">        this.empresa.getPromocionesFijas().removeIf( p -&gt; p.getId().equalsIgnoreCase(id) );</span>
+
+<span class="nc" id="L206">        persistirPromocionesFijas();</span>
+
+<span class="nc" id="L208">    }</span>
+
+    public void bajaPromocionTemporal( String id ) {
+
+<span class="nc" id="L212">        this.empresa.getPromocionesTemporales().removeIf( p -&gt; p.getId().equalsIgnoreCase(id) );</span>
+
+<span class="nc" id="L214">        persistirPromocionesTemporales();</span>
+
+<span class="nc" id="L216">    }</span>
+
+    /**
+     * Devuelve si el dia pasado por parametro se encuentra en la promocion pasada por parametro
+     * precondition: promo!=null &amp;&amp; dia!=null &amp;&amp; dia!=&quot;&quot;
+     * @param promocion
+     * @param dia
+     * @return
+     */
+    public boolean isDiaIncluido(Promocion promocion,String dia){
+
+<span class="nc" id="L227">        List&lt;Dias&gt; dias = promocion.getDiasPromo();</span>
+<span class="nc" id="L228">        Iterator&lt;Dias&gt; it = dias.iterator();</span>
+<span class="nc" id="L229">        boolean res = false;</span>
+
+<span class="nc bnc" id="L231" title="All 4 branches missed.">        while (it.hasNext() &amp;&amp; res==false){</span>
+<span class="nc" id="L232">            String diaLista = it.next().toString();</span>
+<span class="nc bnc" id="L233" title="All 4 branches missed.">            if(dia.startsWith(&quot;s&quot;) &amp;&amp; diaLista.startsWith(&quot;S&quot;))</span>
+<span class="nc" id="L234">                res = true;</span>
+            else
+<span class="nc" id="L236">                res = diaLista.equalsIgnoreCase(dia);</span>
+        }
+
+<span class="nc" id="L239">        return res;</span>
+
+    }
+
+    /**
+     * Devuelve si hay suficientes promociones por prodcuto para abrir el local
+     * preconditions: listaDePromociones!=null
+     * @return
+     */
+    public boolean hayPromocionesHoy(){
+<span class="nc" id="L249">        DateFormat dateFormat = new SimpleDateFormat(&quot;EEEEE&quot;);</span>
+<span class="nc" id="L250">        String dia = dateFormat.format(Calendar.getInstance().getTime());//Dia de hoy en letras</span>
+
+<span class="nc" id="L252">        Set&lt;PromocionFija&gt; promocionesFijas = empresa.getPromocionesFijas();</span>
+<span class="nc" id="L253">        Iterator&lt;PromocionFija&gt; itPF = promocionesFijas.iterator();</span>
+        PromocionFija promoFija;
+<span class="nc" id="L255">        int cont=0;</span>
+<span class="nc bnc" id="L256" title="All 4 branches missed.">        while (itPF.hasNext() &amp;&amp; cont&lt;2) {</span>
+<span class="nc" id="L257">            promoFija = itPF.next();</span>
+<span class="nc bnc" id="L258" title="All 4 branches missed.">            if (promoFija.isActivo() &amp;&amp; gestionDePromociones.isDiaIncluido(promoFija, dia)) {</span>
+<span class="nc" id="L259">                cont++;</span>
+            }
+        }
+<span class="nc bnc" id="L262" title="All 2 branches missed.">        return cont==2;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

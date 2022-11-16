@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaAltaMesa.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaAltaMesa.java</span></div><h1>VistaAltaMesa.java</h1><pre class="source lang-java linenums">package vistas;
+
+import java.awt.EventQueue;
+
+import javax.swing.*;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
+
+	private JFrame frmAltaDeMesa;
+	private JTextField txtNumeroMesa;
+	private JButton btnAceptar;
+	private JButton btnVolver;
+	private JTextField txtCantSillas;
+	
+	private int numeroMesa;
+	private int cantSillas;
+	public static void main(String[] args) {
+<span class="nc" id="L22">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L25">					VistaAltaMesa window = new VistaAltaMesa();</span>
+<span class="nc" id="L26">					window.frmAltaDeMesa.setVisible(true);</span>
+<span class="nc" id="L27">				} catch (Exception e) {</span>
+<span class="nc" id="L28">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L30">			}</span>
+		});
+<span class="nc" id="L32">	}</span>
+
+<span class="nc" id="L34">	public VistaAltaMesa() {</span>
+<span class="nc" id="L35">		initialize();</span>
+<span class="nc" id="L36">	}</span>
+
+	private void initialize() {
+<span class="nc" id="L39">		frmAltaDeMesa = new JFrame();</span>
+<span class="nc" id="L40">		frmAltaDeMesa.setTitle(&quot;Nueva Mesa&quot;);</span>
+<span class="nc" id="L41">		frmAltaDeMesa.setBounds(100, 100, 450, 300);</span>
+<span class="nc" id="L42">		frmAltaDeMesa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L43">		frmAltaDeMesa.getContentPane().setLayout(null);</span>
+		
+<span class="nc" id="L45">		JLabel lblNumeroMesa = new JLabel(&quot;Numero de mesa&quot;);</span>
+<span class="nc" id="L46">		lblNumeroMesa.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L47">		lblNumeroMesa.setBounds(39, 24, 110, 21);</span>
+<span class="nc" id="L48">		frmAltaDeMesa.getContentPane().add(lblNumeroMesa);</span>
+		
+<span class="nc" id="L50">		JLabel lblCantSillas = new JLabel(&quot;Cantidad de sillas\r\n&quot;);</span>
+<span class="nc" id="L51">		lblCantSillas.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L52">		lblCantSillas.setBounds(41, 124, 126, 20);</span>
+<span class="nc" id="L53">		frmAltaDeMesa.getContentPane().add(lblCantSillas);</span>
+		
+<span class="nc" id="L55">		txtNumeroMesa = new JTextField();</span>
+<span class="nc" id="L56">		txtNumeroMesa.setBounds(200, 20, 184, 32);</span>
+<span class="nc" id="L57">		frmAltaDeMesa.getContentPane().add(txtNumeroMesa);</span>
+<span class="nc" id="L58">		txtNumeroMesa.setColumns(10);</span>
+<span class="nc" id="L59">		txtNumeroMesa.addKeyListener(this);</span>
+		
+<span class="nc" id="L61">		btnAceptar = new JButton(&quot;Aceptar&quot;);</span>
+<span class="nc" id="L62">		btnAceptar.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L63">		btnAceptar.setBounds(274, 205, 110, 32);</span>
+<span class="nc" id="L64">		frmAltaDeMesa.getContentPane().add(btnAceptar);</span>
+		
+<span class="nc" id="L66">		btnVolver = new JButton(&quot;Volver&quot;);</span>
+<span class="nc" id="L67">		btnVolver.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L68">		btnVolver.setBounds(39, 205, 110, 32);</span>
+<span class="nc" id="L69">		frmAltaDeMesa.getContentPane().add(btnVolver);</span>
+		
+<span class="nc" id="L71">		txtCantSillas = new JTextField();</span>
+<span class="nc" id="L72">		txtCantSillas.setColumns(10);</span>
+<span class="nc" id="L73">		txtCantSillas.setBounds(200, 120, 184, 32);</span>
+<span class="nc" id="L74">		frmAltaDeMesa.getContentPane().add(txtCantSillas);</span>
+<span class="nc" id="L75">		txtCantSillas.addKeyListener(this);</span>
+		
+<span class="nc" id="L77">		limpia();</span>
+		
+<span class="nc" id="L79">	}</span>
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+<span class="nc" id="L83">		this.btnAceptar.addActionListener(actionListener);</span>
+<span class="nc" id="L84">		this.btnVolver.addActionListener(actionListener);</span>
+<span class="nc" id="L85">	}</span>
+
+	@Override
+	public void mostrar() {
+<span class="nc" id="L89">		this.frmAltaDeMesa.setVisible(true);</span>
+<span class="nc" id="L90">	}</span>
+
+	@Override
+	public void esconder() {
+<span class="nc" id="L94">		this.frmAltaDeMesa.setVisible(false);</span>
+<span class="nc" id="L95">		this.limpia();</span>
+<span class="nc" id="L96">	}</span>
+
+	@Override
+	public void limpia() {
+<span class="nc" id="L100">		this.btnAceptar.setEnabled(false);</span>
+<span class="nc" id="L101">		this.txtNumeroMesa.setText(&quot;&quot;);</span>
+<span class="nc" id="L102">		this.txtCantSillas.setText(&quot;&quot;);</span>
+<span class="nc" id="L103">	}</span>
+
+	@Override
+	public void success(String msg) {
+<span class="nc" id="L107">		JOptionPane.showMessageDialog(this, msg);</span>
+<span class="nc" id="L108">	}</span>
+
+	@Override
+	public void failure(String msg) {
+<span class="nc" id="L112">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L113">	}</span>
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L119">	}</span>
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L125">	}</span>
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+<span class="nc bnc" id="L129" title="All 4 branches missed.">		this.btnAceptar.setEnabled( this.txtCantSillas.getText().length() &gt; 0 &amp;&amp; this.txtNumeroMesa.getText().length() &gt; 0 );</span>
+<span class="nc" id="L130">	}</span>
+
+	public int getNumeroMesa() {
+		try {
+<span class="nc" id="L134">			this.numeroMesa = Integer.parseInt(this.txtNumeroMesa.getText());</span>
+<span class="nc" id="L135">		}</span>
+<span class="nc" id="L136">		catch (Exception e){</span>
+<span class="nc" id="L137">			JOptionPane.showMessageDialog(null, &quot;Ingreso mal el numero de mesa&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L138">			this.txtNumeroMesa.setText(&quot;&quot;);</span>
+<span class="nc" id="L139">			return 0;</span>
+		}
+<span class="nc" id="L141">		return numeroMesa;</span>
+	}
+
+	public int getCantSillas() {
+		try {
+<span class="nc" id="L146">			this.cantSillas = Integer.parseInt(this.txtCantSillas.getText());</span>
+<span class="nc" id="L147">		}</span>
+<span class="nc" id="L148">		catch (Exception e){</span>
+<span class="nc" id="L149">			JOptionPane.showMessageDialog(null, &quot;Ingreso mal la cantidad de sillas&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L150">			this.txtCantSillas.setText(&quot;&quot;);</span>
+<span class="nc" id="L151">			return 0;</span>
+		}
+<span class="nc" id="L153">		return cantSillas;</span>
+	}
+
+	public JTextField getTxtNumeroMesa() {
+<span class="nc" id="L157">		return txtNumeroMesa;</span>
+	}
+
+	public void setTxtNumeroMesa(JTextField txtNumeroMesa) {
+<span class="nc" id="L161">		this.txtNumeroMesa = txtNumeroMesa;</span>
+<span class="nc" id="L162">	}</span>
+
+	public JTextField getTxtCantSillas() {
+<span class="nc" id="L165">		return txtCantSillas;</span>
+	}
+
+	public void setTxtCantSillas(JTextField txtCantSillas) {
+<span class="nc" id="L169">		this.txtCantSillas = txtCantSillas;</span>
+<span class="nc" id="L170">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

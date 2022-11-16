@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TestIntegracion.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">testIntegracion</a> &gt; <span class="el_source">TestIntegracion.java</span></div><h1>TestIntegracion.java</h1><pre class="source lang-java linenums">package testIntegracion;
+
+import enums.Dias;
+import excepciones.StockInsuficienteException;
+import modelo.*;
+import modelo.promociones.PromocionFija;
+import modelo.promociones.PromocionTemporal;
+import negocio.GestionDeComandas;
+import negocio.GestionDeMesas;
+import negocio.GestionDeMozos;
+import negocio.GestionDeProductos;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.List;
+
+<span class="fc" id="L18">public class TestIntegracion {</span>
+    private GestionDeMesas gestionDeMesas;
+    private GestionDeComandas gestionDeComandas;
+    private Empresa empresa;
+    private Producto prod1, prod2;
+    private PromocionFija promo1;
+    private PromocionTemporal promo2;
+
+    @Before
+    public void setUp() {
+<span class="fc" id="L28">        this.empresa = Empresa.getEmpresa();</span>
+<span class="fc" id="L29">        this.gestionDeMesas = GestionDeMesas.get();</span>
+<span class="fc" id="L30">        this.gestionDeComandas = GestionDeComandas.get();</span>
+<span class="fc" id="L31">        this.prod1 = new Producto(&quot;Coca cola&quot;, 100F, 50F, 10);</span>
+<span class="fc" id="L32">        this.prod2 = new Producto(&quot;Pepsi&quot;, 100F, 50F, 10);</span>
+<span class="fc" id="L33">        this.empresa.getProductos().add(prod1);</span>
+<span class="fc" id="L34">        this.empresa.getProductos().add(prod2);</span>
+<span class="fc" id="L35">        this.promo1 = new PromocionFija(&quot;Promo 1 Coca&quot;, List.of(Dias.LUNES, Dias.MARTES), prod1, true, false, 0, 0.0);</span>
+<span class="fc" id="L36">        this.promo2 = new PromocionTemporal(&quot;Promo 2 Coca&quot;, List.of(Dias.LUNES, Dias.MARTES), &quot;Efectivo&quot;, 25, true);</span>
+<span class="fc" id="L37">        this.empresa.getPromocionesFijas().add(promo1);</span>
+<span class="fc" id="L38">        this.empresa.getPromocionesTemporales().add(promo2);</span>
+<span class="fc" id="L39">    }</span>
+
+    @Test
+    public void testAgregarPedidos() throws StockInsuficienteException {
+<span class="fc" id="L43">        Mesa mesa = new Mesa(1000, 4);</span>
+<span class="fc" id="L44">        Mozo mozo = new Mozo(&quot;Mozo&quot;, &quot;2022-01-01&quot;, 10);</span>
+<span class="fc" id="L45">        mesa.setMozoAsignado(mozo);</span>
+<span class="fc" id="L46">        gestionDeComandas.abrirComanda(mesa);</span>
+
+<span class="nc" id="L48">        gestionDeComandas.cargarPedido(mesa, new Pedido(prod1, 2));</span>
+<span class="nc" id="L49">        gestionDeComandas.cargarPedido(mesa, new Pedido(prod2, 1));</span>
+
+<span class="nc" id="L51">        gestionDeMesas.totalMesa(mesa, &quot;Efectivo&quot;);</span>
+<span class="nc" id="L52">    }</span>
+
+    @After
+    public void tearDown() {
+<span class="fc" id="L56">        this.empresa.getProductos().remove(prod1);</span>
+<span class="fc" id="L57">        this.empresa.getProductos().remove(prod2);</span>
+<span class="fc" id="L58">        this.empresa.getPromocionesFijas().remove(promo1);</span>
+<span class="fc" id="L59">        this.empresa.getPromocionesTemporales().remove(promo2);</span>
+<span class="fc" id="L60">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

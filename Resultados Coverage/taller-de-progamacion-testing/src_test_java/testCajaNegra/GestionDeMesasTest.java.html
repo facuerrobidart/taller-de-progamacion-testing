@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GestionDeMesasTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">testCajaNegra</a> &gt; <span class="el_source">GestionDeMesasTest.java</span></div><h1>GestionDeMesasTest.java</h1><pre class="source lang-java linenums">package testCajaNegra;
+
+import dto.MesaDTO;
+import dto.MozoDTO;
+
+import excepciones.MesaExistenteException;
+import excepciones.StockInsuficienteException;
+import modelo.Mesa;
+import modelo.Pedido;
+import modelo.Producto;
+import negocio.GestionDeComandas;
+import negocio.GestionDeMesas;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+
+import java.util.Optional;
+
+import static org.junit.Assert.*;
+
+<span class="fc" id="L23">public class GestionDeMesasTest {</span>
+
+    private EscenarioMesaConDatos escenario;
+    private GestionDeMesas gestionDeMesas;
+
+    @Before
+    public void setUp() throws Exception {
+<span class="fc" id="L30">        this.gestionDeMesas = GestionDeMesas.get();</span>
+<span class="fc" id="L31">        escenario = new EscenarioMesaConDatos();</span>
+<span class="fc" id="L32">    }</span>
+
+    @After
+    public void tearDown() throws Exception {
+<span class="fc" id="L36">    }</span>
+
+    @Test
+    public void altaMesaOk() {
+
+<span class="fc" id="L41">        this.escenario.aplicaEscenarioMesaConDatos();</span>
+
+<span class="fc" id="L43">        MesaDTO mesaDTO = new MesaDTO( 1 , 3 );</span>
+        try {
+<span class="fc" id="L45">            this.gestionDeMesas.altaMesa(mesaDTO);</span>
+<span class="pc" id="L46">        } catch (MesaExistenteException e) {</span>
+<span class="nc" id="L47">            fail(&quot;No deberia lanzar excepcion&quot; + e.getMessage());</span>
+        }
+
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        Boolean seAgrego = this.gestionDeMesas.getMesas().stream().anyMatch( m -&gt; m.getNroMesa() == mesaDTO.getNroMesa() );</span>
+<span class="fc" id="L51">        this.gestionDeMesas.bajaMesa(mesaDTO.getNroMesa());</span>
+<span class="fc" id="L52">        assertEquals( &quot;La mesa no se ha agregado&quot;, seAgrego, true );</span>
+
+<span class="fc" id="L54">    }</span>
+
+    @Test
+    public void altaMesaFail() {
+
+<span class="fc" id="L59">        this.escenario.aplicaEscenarioMesaConDatos();</span>
+
+<span class="fc" id="L61">        Mesa mesaEscenario = this.escenario.getMesa();</span>
+
+<span class="fc" id="L63">        MesaDTO mesaDTO = new MesaDTO( mesaEscenario.getNroMesa() , mesaEscenario.getCantSillas() );</span>
+
+<span class="pc" id="L65">        assertThrows( &quot;No ha lanzado correctamente la excepcion&quot;, MesaExistenteException.class, () -&gt; this.gestionDeMesas.altaMesa(mesaDTO));</span>
+<span class="fc" id="L66">        this.gestionDeMesas.bajaMesa(mesaDTO.getNroMesa());</span>
+
+<span class="fc" id="L68">    }</span>
+
+    @Test
+    public void cerrarMesa() {
+
+<span class="fc" id="L73">        this.escenario.aplicaEscenarioMesaConDatos();</span>
+
+<span class="fc" id="L75">        Mesa mesaEscenario = this.escenario.getMesa();</span>
+<span class="fc" id="L76">        Producto productoEscenario = this.escenario.getProd();</span>
+
+<span class="fc" id="L78">        MesaDTO mesaDTO = new MesaDTO(mesaEscenario.getNroMesa() , mesaEscenario.getCantSillas() );</span>
+<span class="fc" id="L79">        Pedido pedido = new Pedido(new Producto(productoEscenario.getNombre() ,productoEscenario.getPrecio(), productoEscenario.getCosto(), productoEscenario.getStock()),3);</span>
+
+<span class="fc" id="L81">        GestionDeComandas gestionDeComandas = GestionDeComandas.get();</span>
+
+<span class="fc" id="L83">        gestionDeComandas.abrirComanda(mesaEscenario);</span>
+        try {
+<span class="nc" id="L85">            gestionDeComandas.cargarPedido(mesaEscenario,pedido);</span>
+<span class="nc" id="L86">        } catch (StockInsuficienteException e) {</span>
+<span class="nc" id="L87">            fail(&quot;No deberia lanzar excepcion&quot; + e.getMessage());</span>
+        }
+
+<span class="nc" id="L90">        mesaDTO.setComanda(mesaEscenario.getComanda());</span>
+<span class="nc" id="L91">        mesaDTO.setMozoAsignado(mesaEscenario.getMozoAsignado());</span>
+
+<span class="nc" id="L93">        double total = gestionDeMesas.cerrarMesa(mesaDTO,&quot;Efectivo&quot;);</span>
+
+<span class="nc" id="L95">        float expected = productoEscenario.getPrecio() * pedido.getCantidad();</span>
+
+<span class="nc" id="L97">        assertEquals(&quot;No realizo el calculo del total correctamente&quot;,total, expected,0.0f);</span>
+
+<span class="nc" id="L99">    }</span>
+
+    @Test
+    public void asignarMozoMesa() {
+
+<span class="fc" id="L104">        String nombreMozo = &quot;Pedro&quot;;</span>
+
+<span class="fc" id="L106">        MesaDTO mesa = new MesaDTO(5 , 3);</span>
+<span class="fc" id="L107">        MozoDTO mozo = new MozoDTO(nombreMozo, &quot;18/08/2000&quot;, 6);</span>
+
+<span class="fc" id="L109">        gestionDeMesas.asignarMozoMesa(mozo, mesa);</span>
+
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        Optional&lt;Mesa&gt; mesaEncontrada = gestionDeMesas.getMesas().stream().filter(m -&gt; m.getNroMesa() == mesa.getNroMesa()).findFirst();</span>
+
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if(mesaEncontrada.isPresent())</span>
+<span class="nc" id="L114">            assertEquals(&quot;El mozo no fue asignado correctamente&quot;, mesaEncontrada.get().getMozoAsignado(), nombreMozo);</span>
+
+<span class="fc" id="L116">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaLogin.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaLogin.java</span></div><h1>VistaLogin.java</h1><pre class="source lang-java linenums">package vistas;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.event.KeyListener;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import javax.swing.JPasswordField;
+public class VistaLogin extends JFrame implements KeyListener, ILogin {
+
+	private JPanel contentPane;
+	private JTextField usernameField;
+	private JButton loginButton;
+	private ActionListener actionListener;
+	private JPasswordField passwordField;
+
+	private String username;
+	private String contrasena;
+
+	public static void main(String[] args) {
+<span class="nc" id="L31">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L34">					VistaLogin window = new VistaLogin();</span>
+<span class="nc" id="L35">				} catch (Exception e) {</span>
+<span class="nc" id="L36">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L38">			}</span>
+		});
+<span class="nc" id="L40">	}</span>
+
+<span class="fc" id="L42">	public VistaLogin() {</span>
+		
+<span class="fc" id="L44">		setTitle(&quot;Administracion Gastronomica&quot;);</span>
+<span class="fc" id="L45">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="fc" id="L46">		setBounds(100, 100, 391, 240);</span>
+<span class="fc" id="L47">		contentPane = new JPanel();</span>
+<span class="fc" id="L48">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="fc" id="L49">		setContentPane(contentPane);</span>
+<span class="fc" id="L50">		contentPane.setLayout(new BorderLayout(0, 0));</span>
+
+<span class="fc" id="L52">		JPanel panelCentro = new JPanel();</span>
+<span class="fc" id="L53">		contentPane.add(panelCentro, BorderLayout.CENTER);</span>
+<span class="fc" id="L54">		panelCentro.setLayout(null);</span>
+
+<span class="fc" id="L56">		JLabel lblNewLabel = new JLabel(&quot;Username:&quot;);</span>
+<span class="fc" id="L57">		lblNewLabel.setBounds(0, 5, 505, 30);</span>
+<span class="fc" id="L58">		lblNewLabel.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="fc" id="L59">		lblNewLabel.setVerticalAlignment(SwingConstants.BOTTOM);</span>
+<span class="fc" id="L60">		panelCentro.add(lblNewLabel);</span>
+
+<span class="fc" id="L62">		JPanel panel_1 = new JPanel();</span>
+<span class="fc" id="L63">		panel_1.setBounds(0, 42, 505, 41);</span>
+<span class="fc" id="L64">		panelCentro.add(panel_1);</span>
+
+<span class="fc" id="L66">		usernameField = new JTextField();</span>
+<span class="fc" id="L67">		usernameField.setName(&quot;usernameField&quot;);</span>
+<span class="fc" id="L68">		usernameField.setBounds(5, 0, 358, 25);</span>
+<span class="fc" id="L69">		usernameField.addKeyListener(this);</span>
+<span class="fc" id="L70">		panel_1.setLayout(null);</span>
+<span class="fc" id="L71">		panel_1.add(usernameField);</span>
+<span class="fc" id="L72">		usernameField.setColumns(20);</span>
+
+<span class="fc" id="L74">		JLabel lblNewLabel_1 = new JLabel(&quot;Password:&quot;);</span>
+<span class="fc" id="L75">		lblNewLabel_1.setBounds(0, 85, 505, 20);</span>
+<span class="fc" id="L76">		lblNewLabel_1.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="fc" id="L77">		lblNewLabel_1.setVerticalAlignment(SwingConstants.BOTTOM);</span>
+<span class="fc" id="L78">		panelCentro.add(lblNewLabel_1);</span>
+		
+<span class="fc" id="L80">		passwordField = new JPasswordField();</span>
+<span class="fc" id="L81">		passwordField.setName(&quot;passwordField&quot;);</span>
+<span class="fc" id="L82">		passwordField.setColumns(20);</span>
+<span class="fc" id="L83">		passwordField.setBounds(5, 110, 357, 25);</span>
+<span class="fc" id="L84">		passwordField.addKeyListener(this);</span>
+<span class="fc" id="L85">		panelCentro.add(passwordField);</span>
+
+<span class="fc" id="L87">		JPanel panelSur = new JPanel();</span>
+<span class="fc" id="L88">		contentPane.add(panelSur, BorderLayout.SOUTH);</span>
+<span class="fc" id="L89">		panelSur.setLayout(new BorderLayout(0, 0));</span>
+
+<span class="fc" id="L91">		loginButton = new JButton(&quot;Entrar&quot;);</span>
+<span class="fc" id="L92">		loginButton.setName(&quot;loginButton&quot;);</span>
+<span class="fc" id="L93">		loginButton.setActionCommand(&quot;LOGIN&quot;);</span>
+<span class="fc" id="L94">		loginButton.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="fc" id="L95">		loginButton.setEnabled(false);</span>
+<span class="fc" id="L96">		panelSur.add(loginButton);</span>
+
+<span class="fc" id="L98">		this.setVisible(true);</span>
+<span class="fc" id="L99">	}</span>
+
+	public void keyPressed(KeyEvent e) {
+<span class="fc" id="L102">	}</span>
+
+	public void keyReleased(KeyEvent e) {
+<span class="fc" id="L105">		this.username = this.usernameField.getText();</span>
+<span class="fc" id="L106">		this.contrasena = new String(this.passwordField.getPassword());</span>
+
+<span class="pc bpc" id="L108" title="1 of 4 branches missed.">		this.loginButton.setEnabled(username.length() &gt; 0 &amp;&amp; contrasena.length() &gt; 0);</span>
+<span class="fc" id="L109">	}</span>
+
+	public void keyTyped(KeyEvent e) {
+<span class="fc" id="L112">	}</span>
+
+	@Override
+	public String getUsername() {
+<span class="fc" id="L116">		return this.username;</span>
+	}
+
+	@Override
+	public String getContrasena() {
+<span class="fc" id="L121">		return this.contrasena;</span>
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+<span class="fc" id="L126">		this.loginButton.addActionListener(actionListener);</span>
+<span class="fc" id="L127">		this.actionListener = actionListener;</span>
+<span class="fc" id="L128">	}</span>
+
+	public void usuarioNoEncontrado() {
+<span class="nc" id="L131">		JOptionPane.showMessageDialog(this, &quot;Usuario no encontrado&quot;);</span>
+<span class="nc" id="L132">	}</span>
+
+	public void contrasenaIncorrecta() {
+<span class="nc" id="L135">		JOptionPane.showMessageDialog(this, &quot;Usuario o contrasena incorrectos&quot;);</span>
+<span class="nc" id="L136">	}</span>
+
+	@Override
+	public void entrar() {
+<span class="nc" id="L140">	}</span>
+
+	@Override
+	public void mostrar() {
+<span class="nc" id="L144">		this.setVisible(true);</span>
+<span class="nc" id="L145">	}</span>
+
+	@Override
+	public void esconder() {
+<span class="fc" id="L149">		this.setVisible(false);</span>
+<span class="fc" id="L150">		limpiaCampos();</span>
+<span class="fc" id="L151">	}</span>
+
+	@Override
+	public void limpiaCampos() {
+<span class="fc" id="L155">		this.usernameField.setText(&quot;&quot;);</span>
+<span class="fc" id="L156">		this.passwordField.setText(&quot;&quot;);</span>
+<span class="fc" id="L157">		this.loginButton.setEnabled(false);</span>
+<span class="fc" id="L158">		this.username = null;</span>
+<span class="fc" id="L159">		this.contrasena = null;</span>
+<span class="fc" id="L160">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

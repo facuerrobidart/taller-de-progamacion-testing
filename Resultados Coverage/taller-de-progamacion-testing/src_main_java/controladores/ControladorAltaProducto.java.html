@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControladorAltaProducto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">controladores</a> &gt; <span class="el_source">ControladorAltaProducto.java</span></div><h1>ControladorAltaProducto.java</h1><pre class="source lang-java linenums">package controladores;
+
+import dto.ProductoDTO;
+import excepciones.CambioNombreException;
+import excepciones.ProductoExistenteException;
+import modelo.Producto;
+import negocio.GestionDeProductos;
+import vistas.VistaAltaProducto;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ControladorAltaProducto implements ActionListener {
+<span class="nc" id="L14">    private static ControladorAltaProducto controladorAltaProducto = null;</span>
+    private final GestionDeProductos gestionDeProductos;
+    private final VistaAltaProducto vistaAltaProducto;
+    private String op;
+    private Producto producto;
+
+<span class="nc" id="L20">    private ControladorAltaProducto() {</span>
+<span class="nc" id="L21">        this.vistaAltaProducto = new VistaAltaProducto();</span>
+<span class="nc" id="L22">        this.vistaAltaProducto.setActionListener(this);</span>
+<span class="nc" id="L23">        this.gestionDeProductos = GestionDeProductos.get();</span>
+<span class="nc" id="L24">    }</span>
+
+    public static ControladorAltaProducto getControladorAltaProducto(String op) {
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if (controladorAltaProducto == null) {</span>
+<span class="nc" id="L28">            controladorAltaProducto = new ControladorAltaProducto();</span>
+        }
+<span class="nc" id="L30">        controladorAltaProducto.op = op;</span>
+<span class="nc" id="L31">        controladorAltaProducto.vistaAltaProducto.mostrar();</span>
+
+<span class="nc" id="L33">        return controladorAltaProducto;</span>
+    }
+
+    public static ControladorAltaProducto getControladorAltaProducto(String op, Producto producto) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (controladorAltaProducto == null) {</span>
+<span class="nc" id="L38">            controladorAltaProducto = new ControladorAltaProducto();</span>
+        }
+<span class="nc" id="L40">        controladorAltaProducto.op = op;</span>
+<span class="nc" id="L41">        controladorAltaProducto.producto = producto;</span>
+<span class="nc" id="L42">        controladorAltaProducto.vistaAltaProducto.mostrar();</span>
+
+<span class="nc" id="L44">        return controladorAltaProducto;</span>
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L49">        String comando = e.getActionCommand();</span>
+        ControladorAltaProducto con;
+
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if( comando.equalsIgnoreCase(&quot;Aceptar&quot;) ){</span>
+<span class="nc" id="L53">            String nombre = this.vistaAltaProducto.getNombre();</span>
+<span class="nc" id="L54">            int stock = this.vistaAltaProducto.getStockInicial();</span>
+<span class="nc" id="L55">            float precioventa = this.vistaAltaProducto.getPrecioVenta();</span>
+<span class="nc" id="L56">            float precioCosto = this.vistaAltaProducto.getPrecioCosto();</span>
+<span class="nc bnc" id="L57" title="All 8 branches missed.">            if( stock &lt;= 0 || precioCosto &lt;= 0 || precioventa &lt;= 0 || precioventa &lt; precioCosto){</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                if(op.equalsIgnoreCase(&quot;Alta&quot;)){</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                    if( stock &lt;= 0 ){</span>
+<span class="nc" id="L60">                        vistaAltaProducto.failure(&quot;El STOCK debe ser un numero mayor a cero&quot;);</span>
+<span class="nc" id="L61">                        this.vistaAltaProducto.getTxtStockInicial().setText(&quot;&quot;);</span>
+                    }
+<span class="nc bnc" id="L63" title="All 2 branches missed.">                    if( precioCosto &lt;= 0 ){</span>
+<span class="nc" id="L64">                        vistaAltaProducto.failure(&quot;El PRECIO DE COSTO debe ser un numero mayor a cero&quot;);</span>
+<span class="nc" id="L65">                        this.vistaAltaProducto.getTxtPrecioCosto().setText(&quot;&quot;);</span>
+                    }
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                    if( precioventa &lt;= 0 ){</span>
+<span class="nc" id="L68">                        vistaAltaProducto.failure(&quot;El PRECIO DE VENTA debe ser un numero mayor a cero&quot;);</span>
+<span class="nc" id="L69">                        this.vistaAltaProducto.getTxtPrecioVenta().setText(&quot;&quot;);</span>
+                    }
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                    if( precioventa &lt; precioCosto ){</span>
+<span class="nc" id="L72">                        vistaAltaProducto.failure(&quot;El PRECIO DE VENTA debe ser mayor al PRECIO DE COSTO&quot;);</span>
+<span class="nc" id="L73">                        this.vistaAltaProducto.getTxtPrecioVenta().setText(&quot;&quot;);</span>
+<span class="nc" id="L74">                        this.vistaAltaProducto.getTxtPrecioCosto().setText(&quot;&quot;);</span>
+                    }
+<span class="nc" id="L76">                }</span>
+                else
+<span class="nc" id="L78">                    ControladorGestionProductos.getControladorGestionProductos();</span>
+<span class="nc" id="L79">            }</span>
+            else {
+<span class="nc" id="L81">                ProductoDTO productoDTO = new ProductoDTO(nombre, precioventa, precioCosto, stock);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                    if(op.equalsIgnoreCase(&quot;Alta&quot;)){</span>
+                        try {
+<span class="nc" id="L84">                            gestionDeProductos.altaProducto(productoDTO);</span>
+<span class="nc" id="L85">                            this.vistaAltaProducto.success(&quot;El producto: &quot; + productoDTO.getNombre() + &quot; fue dado de alta con exito&quot;);</span>
+<span class="nc" id="L86">                            this.vistaAltaProducto.esconder();</span>
+<span class="nc" id="L87">                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos();</span>
+<span class="nc" id="L88">                        }catch (ProductoExistenteException ex) {</span>
+<span class="nc" id="L89">                            this.vistaAltaProducto.failure(&quot;El producto: &quot; + productoDTO.getNombre() + &quot; ya se encuentra en el sistema&quot;);</span>
+<span class="nc" id="L90">                            this.vistaAltaProducto.esconder();</span>
+<span class="nc" id="L91">                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos();</span>
+                        }
+<span class="nc" id="L93">                    }else{</span>
+                        try {
+<span class="nc" id="L95">                            gestionDeProductos.modificaProducto(productoDTO);</span>
+<span class="nc" id="L96">                            this.vistaAltaProducto.success(&quot;El producto: &quot; + productoDTO.getNombre() + &quot; fue modificado con exito&quot;);</span>
+<span class="nc" id="L97">                            this.vistaAltaProducto.esconder();</span>
+<span class="nc" id="L98">                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos();</span>
+<span class="nc" id="L99">                        }</span>
+<span class="nc" id="L100">                        catch (CambioNombreException ex) {</span>
+<span class="nc" id="L101">                            this.vistaAltaProducto.failure(&quot;No se puede cambiar el nombre del producto a modificar&quot;);</span>
+<span class="nc" id="L102">                            vistaAltaProducto.limpia();</span>
+<span class="nc" id="L103">                            ControladorAltaProducto.getControladorAltaProducto(op,producto);</span>
+                        }
+                    }
+            }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        }else if( comando.equalsIgnoreCase(&quot;Volver&quot;) ){</span>
+<span class="nc" id="L108">            this.vistaAltaProducto.esconder();</span>
+<span class="nc" id="L109">            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos();</span>
+        }
+<span class="nc" id="L111">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

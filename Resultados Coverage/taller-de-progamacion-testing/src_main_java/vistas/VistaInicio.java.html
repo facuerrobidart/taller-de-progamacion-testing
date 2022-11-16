@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaInicio.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaInicio.java</span></div><h1>VistaInicio.java</h1><pre class="source lang-java linenums">package vistas;
+
+import java.awt.EventQueue;
+
+import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.GridLayout;
+
+public class VistaInicio extends JFrame implements IGenerica {
+
+	JFrame frmInicioOperario;
+	private JButton btnApertura,btnCerrarSesion,btnGestionPromos;
+	private JButton btnGestionProductos,btnGestionMesas,btnGestionOperarios,btnGestionMozos;
+	private ActionListener actionListener;
+
+	public static void main(String[] args) {
+<span class="nc" id="L19">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L22">					VistaInicio window = new VistaInicio();</span>
+<span class="nc" id="L23">					window.frmInicioOperario.setVisible(true);</span>
+<span class="nc" id="L24">				} catch (Exception e) {</span>
+<span class="nc" id="L25">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L27">			}</span>
+		});
+<span class="nc" id="L29">	}</span>
+
+<span class="nc" id="L31">	public VistaInicio() {</span>
+<span class="nc" id="L32">		initialize();</span>
+<span class="nc" id="L33">	}</span>
+
+	private void initialize() {
+<span class="nc" id="L36">		frmInicioOperario = new JFrame();</span>
+<span class="nc" id="L37">		frmInicioOperario.setTitle(&quot;Inicio Operario&quot;);</span>
+<span class="nc" id="L38">		frmInicioOperario.setBounds(100, 100, 532, 406);</span>
+<span class="nc" id="L39">		frmInicioOperario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L40">		frmInicioOperario.getContentPane().setLayout(new BorderLayout(0, 0));</span>
+
+<span class="nc" id="L42">		JPanel panelGral = new JPanel();</span>
+<span class="nc" id="L43">		frmInicioOperario.getContentPane().add(panelGral);</span>
+<span class="nc" id="L44">		panelGral.setLayout(null);</span>
+		
+<span class="nc" id="L46">		JPanel panel2 = new JPanel();</span>
+<span class="nc" id="L47">		panel2.setBounds(0, 0, 516, 303);</span>
+<span class="nc" id="L48">		panelGral.add(panel2);</span>
+<span class="nc" id="L49">		panel2.setLayout(null);</span>
+		
+<span class="nc" id="L51">		JPanel panelGrid = new JPanel();</span>
+<span class="nc" id="L52">		panelGrid.setBounds(0, 0, 516, 303);</span>
+<span class="nc" id="L53">		panel2.add(panelGrid);</span>
+<span class="nc" id="L54">		panelGrid.setLayout(null);</span>
+		
+<span class="nc" id="L56">		JPanel panelMo = new JPanel();</span>
+<span class="nc" id="L57">		panelMo.setBounds(0, 11, 253, 102);</span>
+<span class="nc" id="L58">		panelGrid.add(panelMo);</span>
+<span class="nc" id="L59">		panelMo.setLayout(null);</span>
+		
+<span class="nc" id="L61">		btnGestionMozos = new JButton(&quot;Gestionar Mozos&quot;);</span>
+<span class="nc" id="L62">		btnGestionMozos.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L63">		btnGestionMozos.setBounds(41, 11, 170, 80);</span>
+<span class="nc" id="L64">		panelMo.add(btnGestionMozos);</span>
+		
+<span class="nc" id="L66">		JPanel panelMo_1 = new JPanel();</span>
+<span class="nc" id="L67">		panelMo_1.setBounds(263, 11, 253, 102);</span>
+<span class="nc" id="L68">		panelMo_1.setLayout(null);</span>
+<span class="nc" id="L69">		panelGrid.add(panelMo_1);</span>
+		
+<span class="nc" id="L71">		btnGestionOperarios = new JButton(&quot;Gestionar Operarios&quot;);</span>
+<span class="nc" id="L72">		btnGestionOperarios.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L73">		btnGestionOperarios.setBounds(41, 11, 170, 80);</span>
+<span class="nc" id="L74">		panelMo_1.add(btnGestionOperarios);</span>
+		
+<span class="nc" id="L76">		JPanel panelMo_2 = new JPanel();</span>
+<span class="nc" id="L77">		panelMo_2.setBounds(0, 112, 253, 102);</span>
+<span class="nc" id="L78">		panelMo_2.setLayout(null);</span>
+<span class="nc" id="L79">		panelGrid.add(panelMo_2);</span>
+		
+<span class="nc" id="L81">		btnGestionMesas = new JButton(&quot;Gestionar Mesas&quot;);</span>
+<span class="nc" id="L82">		btnGestionMesas.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L83">		btnGestionMesas.setBounds(41, 11, 170, 80);</span>
+<span class="nc" id="L84">		panelMo_2.add(btnGestionMesas);</span>
+		
+<span class="nc" id="L86">		JPanel panelMo_3 = new JPanel();</span>
+<span class="nc" id="L87">		panelMo_3.setBounds(263, 112, 253, 102);</span>
+<span class="nc" id="L88">		panelMo_3.setLayout(null);</span>
+<span class="nc" id="L89">		panelGrid.add(panelMo_3);</span>
+		
+<span class="nc" id="L91">		btnGestionProductos = new JButton(&quot;Gestionar Productos&quot;);</span>
+<span class="nc" id="L92">		btnGestionProductos.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L93">		btnGestionProductos.setBounds(41, 11, 170, 80);</span>
+<span class="nc" id="L94">		panelMo_3.add(btnGestionProductos);</span>
+		
+<span class="nc" id="L96">		JPanel panelMo_4 = new JPanel();</span>
+<span class="nc" id="L97">		panelMo_4.setBounds(0, 213, 516, 102);</span>
+<span class="nc" id="L98">		panelMo_4.setLayout(null);</span>
+<span class="nc" id="L99">		panelGrid.add(panelMo_4);</span>
+		
+<span class="nc" id="L101">		btnGestionPromos = new JButton(&quot;Gestionar Promociones&quot;);</span>
+<span class="nc" id="L102">		btnGestionPromos.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L103">		btnGestionPromos.setBounds(169, 11, 190, 80);</span>
+<span class="nc" id="L104">		panelMo_4.add(btnGestionPromos);</span>
+		
+<span class="nc" id="L106">		JPanel panelSur = new JPanel();</span>
+<span class="nc" id="L107">		panelSur.setBounds(0, 314, 516, 53);</span>
+<span class="nc" id="L108">		panelGral.add(panelSur);</span>
+<span class="nc" id="L109">		panelSur.setLayout(null);</span>
+		
+<span class="nc" id="L111">		btnCerrarSesion = new JButton(&quot;Cerrar Sesion&quot;);</span>
+<span class="nc" id="L112">		btnCerrarSesion.setBounds(0, 11, 260, 42);</span>
+<span class="nc" id="L113">		btnCerrarSesion.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L114">		panelSur.add(btnCerrarSesion);</span>
+		
+<span class="nc" id="L116">		btnApertura = new JButton(&quot;Abrir Local&quot;);</span>
+<span class="nc" id="L117">		btnApertura.setBounds(256, 11, 260, 42);</span>
+<span class="nc" id="L118">		btnApertura.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L119">		panelSur.add(btnApertura);</span>
+<span class="nc" id="L120">	}</span>
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+<span class="nc" id="L124">		this.actionListener = actionListener;</span>
+<span class="nc" id="L125">		this.btnGestionMozos.addActionListener(actionListener);</span>
+<span class="nc" id="L126">		this.btnGestionOperarios.addActionListener(actionListener);</span>
+<span class="nc" id="L127">		this.btnGestionMesas.addActionListener(actionListener);</span>
+<span class="nc" id="L128">		this.btnGestionProductos.addActionListener(actionListener);</span>
+<span class="nc" id="L129">		this.btnCerrarSesion.addActionListener(actionListener);</span>
+<span class="nc" id="L130">		this.btnGestionPromos.addActionListener(actionListener);</span>
+<span class="nc" id="L131">		this.btnApertura.addActionListener(actionListener);</span>
+<span class="nc" id="L132">	}</span>
+
+	@Override
+	public void mostrar() {
+<span class="nc" id="L136">		this.frmInicioOperario.setVisible(true);</span>
+<span class="nc" id="L137">	}</span>
+
+	@Override
+	public void esconder() {
+<span class="nc" id="L141">		this.frmInicioOperario.setVisible(false);</span>
+<span class="nc" id="L142">	}</span>
+
+	@Override
+	public void limpia() {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L148">	}</span>
+
+	@Override
+	public void success(String msg) {
+<span class="nc" id="L152">		JOptionPane.showMessageDialog(this, msg, &quot;Resultado exitoso&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L153">	}</span>
+
+	@Override
+	public void failure(String msg) {
+<span class="nc" id="L157">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L158">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

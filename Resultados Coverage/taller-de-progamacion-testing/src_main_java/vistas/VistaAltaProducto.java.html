@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>VistaAltaProducto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">vistas</a> &gt; <span class="el_source">VistaAltaProducto.java</span></div><h1>VistaAltaProducto.java</h1><pre class="source lang-java linenums">package vistas;
+
+import java.awt.EventQueue;
+
+import javax.swing.*;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener {
+
+	private JFrame frmAltaDeProducto;
+	private JTextField txtNombre;
+	private JButton btnAceptar;
+	private JButton btnVolver;
+	private JTextField txtPrecioCosto;
+	private JTextField txtPrecioVenta;
+	private JTextField txtStockInicial;
+
+	private String nombre;
+	private float precioCosto;
+	private float precioVenta;
+	private int stockInicial;
+
+	public static void main(String[] args) {
+<span class="nc" id="L27">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L30">					VistaAltaProducto window = new VistaAltaProducto();</span>
+<span class="nc" id="L31">					window.frmAltaDeProducto.setVisible(true);</span>
+<span class="nc" id="L32">				} catch (Exception e) {</span>
+<span class="nc" id="L33">					e.printStackTrace();</span>
+				}
+<span class="nc" id="L35">			}</span>
+		});
+<span class="nc" id="L37">	}</span>
+
+<span class="nc" id="L39">	public VistaAltaProducto() {</span>
+<span class="nc" id="L40">		initialize();</span>
+<span class="nc" id="L41">	}</span>
+
+	private void initialize() {
+<span class="nc" id="L44">		frmAltaDeProducto = new JFrame();</span>
+<span class="nc" id="L45">		frmAltaDeProducto.setTitle(&quot;Nuevo Producto&quot;);</span>
+<span class="nc" id="L46">		frmAltaDeProducto.setBounds(100, 100, 450, 300);</span>
+<span class="nc" id="L47">		frmAltaDeProducto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L48">		frmAltaDeProducto.getContentPane().setLayout(null);</span>
+
+<span class="nc" id="L50">		JLabel lblNombre = new JLabel(&quot;Nombre producto&quot;);</span>
+<span class="nc" id="L51">		lblNombre.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L52">		lblNombre.setBounds(39, 24, 110, 21);</span>
+<span class="nc" id="L53">		frmAltaDeProducto.getContentPane().add(lblNombre);</span>
+
+<span class="nc" id="L55">		JLabel lblPrecioCosto = new JLabel(&quot;Precio Costo&quot;);</span>
+<span class="nc" id="L56">		lblPrecioCosto.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L57">		lblPrecioCosto.setBounds(39, 66, 126, 20);</span>
+<span class="nc" id="L58">		frmAltaDeProducto.getContentPane().add(lblPrecioCosto);</span>
+
+<span class="nc" id="L60">		JLabel lblPrecioVenta = new JLabel(&quot;Precio Venta&quot;);</span>
+<span class="nc" id="L61">		lblPrecioVenta.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L62">		lblPrecioVenta.setBounds(39, 106, 126, 32);</span>
+<span class="nc" id="L63">		frmAltaDeProducto.getContentPane().add(lblPrecioVenta);</span>
+
+<span class="nc" id="L65">		txtNombre = new JTextField();</span>
+<span class="nc" id="L66">		txtNombre.setBounds(200, 20, 184, 32);</span>
+<span class="nc" id="L67">		frmAltaDeProducto.getContentPane().add(txtNombre);</span>
+<span class="nc" id="L68">		txtNombre.setColumns(10);</span>
+<span class="nc" id="L69">		txtNombre.addKeyListener(this);</span>
+
+<span class="nc" id="L71">		btnAceptar = new JButton(&quot;Aceptar&quot;);</span>
+<span class="nc" id="L72">		btnAceptar.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L73">		btnAceptar.setBounds(274, 218, 110, 32);</span>
+<span class="nc" id="L74">		frmAltaDeProducto.getContentPane().add(btnAceptar);</span>
+
+<span class="nc" id="L76">		btnVolver = new JButton(&quot;Volver&quot;);</span>
+<span class="nc" id="L77">		btnVolver.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L78">		btnVolver.setBounds(39, 218, 110, 32);</span>
+<span class="nc" id="L79">		frmAltaDeProducto.getContentPane().add(btnVolver);</span>
+
+<span class="nc" id="L81">		txtPrecioCosto = new JTextField();</span>
+<span class="nc" id="L82">		txtPrecioCosto.setColumns(10);</span>
+<span class="nc" id="L83">		txtPrecioCosto.setBounds(200, 63, 184, 32);</span>
+<span class="nc" id="L84">		txtPrecioCosto.addKeyListener(this);</span>
+<span class="nc" id="L85">		frmAltaDeProducto.getContentPane().add(txtPrecioCosto);</span>
+
+<span class="nc" id="L87">		txtPrecioVenta = new JTextField();</span>
+<span class="nc" id="L88">		txtPrecioVenta.setColumns(10);</span>
+<span class="nc" id="L89">		txtPrecioVenta.setBounds(200, 108, 184, 32);</span>
+<span class="nc" id="L90">		txtPrecioVenta.addKeyListener(this);</span>
+<span class="nc" id="L91">		frmAltaDeProducto.getContentPane().add(txtPrecioVenta);</span>
+
+<span class="nc" id="L93">		JLabel lblStockInicial = new JLabel(&quot;Stock Inicial&quot;);</span>
+<span class="nc" id="L94">		lblStockInicial.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L95">		lblStockInicial.setBounds(39, 153, 126, 32);</span>
+<span class="nc" id="L96">		frmAltaDeProducto.getContentPane().add(lblStockInicial);</span>
+
+<span class="nc" id="L98">		txtStockInicial = new JTextField();</span>
+<span class="nc" id="L99">		txtStockInicial.setColumns(10);</span>
+<span class="nc" id="L100">		txtStockInicial.setBounds(200, 155, 184, 32);</span>
+<span class="nc" id="L101">		txtStockInicial.addKeyListener(this);</span>
+<span class="nc" id="L102">		frmAltaDeProducto.getContentPane().add(txtStockInicial);</span>
+
+<span class="nc" id="L104">		limpia();</span>
+
+<span class="nc" id="L106">	}</span>
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+<span class="nc" id="L110">	}</span>
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+<span class="nc" id="L114">	}</span>
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+<span class="nc" id="L118">		this.nombre = this.txtNombre.getText();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">		if( nombre.length() &gt; 0 &amp;&amp;</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">			txtPrecioCosto.getText().length() &gt; 0 &amp;&amp;</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">			txtPrecioVenta.getText().length() &gt; 0 &amp;&amp;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">			txtStockInicial.getText().length() &gt; 0) {</span>
+<span class="nc" id="L123">			this.btnAceptar.setEnabled(true);</span>
+		}
+
+<span class="nc" id="L126">	}</span>
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+<span class="nc" id="L130">		this.btnAceptar.addActionListener(actionListener);</span>
+<span class="nc" id="L131">		this.btnVolver.addActionListener(actionListener);</span>
+<span class="nc" id="L132">	}</span>
+
+	@Override
+	public void mostrar() {
+<span class="nc" id="L136">		this.frmAltaDeProducto.setVisible(true);</span>
+<span class="nc" id="L137">	}</span>
+
+	@Override
+	public void esconder() {
+<span class="nc" id="L141">		this.frmAltaDeProducto.setVisible(false);</span>
+<span class="nc" id="L142">		limpia();</span>
+<span class="nc" id="L143">	}</span>
+
+	@Override
+	public void limpia() {
+<span class="nc" id="L147">		this.btnAceptar.setEnabled(false);</span>
+<span class="nc" id="L148">		this.txtNombre.setText(&quot;&quot;);</span>
+<span class="nc" id="L149">		this.txtPrecioCosto.setText(&quot;&quot;);</span>
+<span class="nc" id="L150">		this.txtPrecioVenta.setText(&quot;&quot;);</span>
+<span class="nc" id="L151">		this.txtStockInicial.setText(&quot;&quot;);</span>
+<span class="nc" id="L152">	}</span>
+
+	@Override
+	public void success(String msg) {
+<span class="nc" id="L156">		JOptionPane.showMessageDialog(this, msg, &quot;Resultado exitoso&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L157">	}</span>
+
+	@Override
+	public void failure(String msg) {
+<span class="nc" id="L161">		JOptionPane.showMessageDialog(this, msg, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L162">	}</span>
+
+	public String getNombre() {
+<span class="nc" id="L165">		return nombre;</span>
+	}
+
+	public float getPrecioCosto() {
+
+		try {
+<span class="nc" id="L171">			precioCosto = Float.parseFloat(this.txtPrecioCosto.getText());</span>
+<span class="nc" id="L172">		}</span>
+<span class="nc" id="L173">		catch (Exception e){</span>
+<span class="nc" id="L174">			JOptionPane.showMessageDialog(null, &quot;Ingreso mal el costo del producto&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L175">			this.txtPrecioCosto.setText(&quot;&quot;);</span>
+<span class="nc" id="L176">			return 0;</span>
+		}
+<span class="nc" id="L178">		return precioCosto;</span>
+	}
+
+	public float getPrecioVenta() {
+
+		try {
+<span class="nc" id="L184">			this.precioVenta = Float.parseFloat(this.txtPrecioVenta.getText());</span>
+<span class="nc" id="L185">		}</span>
+<span class="nc" id="L186">		catch (Exception e){</span>
+<span class="nc" id="L187">			JOptionPane.showMessageDialog(null, &quot;Ingreso mal el precio de venta del producto&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L188">			this.txtPrecioVenta.setText(&quot;&quot;);</span>
+<span class="nc" id="L189">			return 0;</span>
+		}
+<span class="nc" id="L191">		return precioVenta;</span>
+	}
+
+	public int getStockInicial(){
+		try {
+<span class="nc" id="L196">			stockInicial = Integer.parseInt(this.txtStockInicial.getText());</span>
+<span class="nc" id="L197">		}</span>
+<span class="nc" id="L198">		catch (Exception e){</span>
+<span class="nc" id="L199">			JOptionPane.showMessageDialog(null, &quot;Ingreso mal el stock inicial del producto&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L200">			this.txtStockInicial.setText(&quot;&quot;);</span>
+<span class="nc" id="L201">			return 0;</span>
+		}
+<span class="nc" id="L203">		return stockInicial;</span>
+	}
+
+	public JTextField getTxtNombre() {
+<span class="nc" id="L207">		return txtNombre;</span>
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+<span class="nc" id="L211">		this.txtNombre = txtNombre;</span>
+<span class="nc" id="L212">	}</span>
+
+	public JTextField getTxtPrecioCosto() {
+<span class="nc" id="L215">		return txtPrecioCosto;</span>
+	}
+
+	public void setTxtPrecioCosto(JTextField txtPrecioCosto) {
+<span class="nc" id="L219">		this.txtPrecioCosto = txtPrecioCosto;</span>
+<span class="nc" id="L220">	}</span>
+
+	public JTextField getTxtPrecioVenta() {
+<span class="nc" id="L223">		return txtPrecioVenta;</span>
+	}
+
+	public void setTxtPrecioVenta(JTextField txtPrecioVenta) {
+<span class="nc" id="L227">		this.txtPrecioVenta = txtPrecioVenta;</span>
+<span class="nc" id="L228">	}</span>
+
+	public JTextField getTxtStockInicial() {
+<span class="nc" id="L231">		return txtStockInicial;</span>
+	}
+
+	public void setTxtStockInicial(JTextField txtStockInicial) {
+<span class="nc" id="L235">		this.txtStockInicial = txtStockInicial;</span>
+<span class="nc" id="L236">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

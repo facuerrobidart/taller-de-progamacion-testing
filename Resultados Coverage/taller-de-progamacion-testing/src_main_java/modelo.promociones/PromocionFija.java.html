@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>PromocionFija.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">modelo.promociones</a> &gt; <span class="el_source">PromocionFija.java</span></div><h1>PromocionFija.java</h1><pre class="source lang-java linenums">package modelo.promociones;
+
+import enums.Dias;
+import modelo.Producto;
+
+import java.util.List;
+
+public class PromocionFija extends Promocion{
+
+    Producto producto;
+    boolean dosPorUno;
+    boolean dtoPorCant;
+    int dtoPorCantMin;
+    double dtoPorCantPrecioU;
+
+<span class="fc" id="L16">    public PromocionFija(){}</span>
+
+    public PromocionFija(String nombre, List&lt;Dias&gt; diasPromo, Producto producto, boolean dosPorUno, boolean dtoPorCant, int dtoPorCantMin, double dtoPorCantPrecioU) {
+<span class="fc" id="L19">        super(nombre, diasPromo);</span>
+<span class="fc" id="L20">        this.producto = producto;</span>
+<span class="fc" id="L21">        this.dosPorUno = dosPorUno;</span>
+<span class="fc" id="L22">        this.dtoPorCant = dtoPorCant;</span>
+<span class="fc" id="L23">        this.dtoPorCantMin = dtoPorCantMin;</span>
+<span class="fc" id="L24">        this.dtoPorCantPrecioU = dtoPorCantPrecioU;</span>
+<span class="fc" id="L25">    }</span>
+
+    public Producto getProducto() {
+<span class="fc" id="L28">        return producto;</span>
+    }
+
+    public void setProducto(Producto producto) {
+<span class="fc" id="L32">        this.producto = producto;</span>
+<span class="fc" id="L33">    }</span>
+
+    public boolean isDosPorUno() {
+<span class="fc" id="L36">        return dosPorUno;</span>
+    }
+
+    public void setDosPorUno(boolean dosPorUno) {
+<span class="fc" id="L40">        this.dosPorUno = dosPorUno;</span>
+<span class="fc" id="L41">    }</span>
+
+    public boolean isDtoPorCant() {
+<span class="fc" id="L44">        return dtoPorCant;</span>
+    }
+
+    public void setDtoPorCant(boolean dtoPorCant) {
+<span class="fc" id="L48">        this.dtoPorCant = dtoPorCant;</span>
+<span class="fc" id="L49">    }</span>
+
+    public int getDtoPorCantMin() {
+<span class="fc" id="L52">        return dtoPorCantMin;</span>
+    }
+
+    public void setDtoPorCantMin(int dtoPorCantMin) {
+<span class="fc" id="L56">        this.dtoPorCantMin = dtoPorCantMin;</span>
+<span class="fc" id="L57">    }</span>
+
+    public double getDtoPorCantPrecioU() {
+<span class="fc" id="L60">        return dtoPorCantPrecioU;</span>
+    }
+
+    public void setDtoPorCantPrecioU(double dtoPorCantPrecioU) {
+<span class="fc" id="L64">        this.dtoPorCantPrecioU = dtoPorCantPrecioU;</span>
+<span class="fc" id="L65">    }</span>
+
+    public String toString() {
+<span class="nc" id="L68">        return &quot;Nombre: &quot; + nombre +</span>
+<span class="nc" id="L69">                &quot; | Activo: &quot; + activo;</span>
+    }
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

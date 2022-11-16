@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TestEditPromocionCajaNegra.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">testCajaNegra</a> &gt; <span class="el_source">TestEditPromocionCajaNegra.java</span></div><h1>TestEditPromocionCajaNegra.java</h1><pre class="source lang-java linenums">package testCajaNegra;
+
+import dto.PromocionProductoDTO;
+import modelo.Empresa;
+import modelo.promociones.PromocionFija;
+import negocio.GestionDePromociones;
+import org.junit.Assert;
+import org.junit.Test;
+import testCajaBlanca.EscenariosEditPromociones;
+
+<span class="fc" id="L11">public class TestEditPromocionCajaNegra {</span>
+<span class="fc" id="L12">    private EscenariosEditPromociones escenarios = new EscenariosEditPromociones();</span>
+<span class="fc" id="L13">    private GestionDePromociones g = GestionDePromociones.get();</span>
+<span class="fc" id="L14">    private Empresa empresa = Empresa.getEmpresa();</span>
+
+    @Test
+    public void testEditPromocionExito() {
+<span class="fc" id="L18">        escenarios.cargarListaPromociones();</span>
+<span class="fc" id="L19">        PromocionFija promo = escenarios.getPromo1();</span>
+<span class="fc" id="L20">        String nombre = promo.getNombre();</span>
+
+<span class="fc" id="L22">        promo.setDtoPorCantPrecioU(80.0);</span>
+
+<span class="fc" id="L24">        g.modificaPromocionFija(</span>
+<span class="fc" id="L25">                new PromocionProductoDTO(</span>
+<span class="fc" id="L26">                        promo.getNombre(),</span>
+<span class="fc" id="L27">                        promo.isActivo(),</span>
+<span class="fc" id="L28">                        promo.getDiasPromo(),</span>
+<span class="fc" id="L29">                        promo.getProducto(),</span>
+<span class="fc" id="L30">                        promo.isDosPorUno(),</span>
+<span class="fc" id="L31">                        promo.isDtoPorCant(),</span>
+<span class="fc" id="L32">                        promo.getDtoPorCantMin(),</span>
+<span class="fc" id="L33">                        promo.getDtoPorCantPrecioU()</span>
+                ));
+
+<span class="fc" id="L36">        Assert.assertTrue(</span>
+<span class="fc" id="L37">                empresa.getPromocionesFijas()</span>
+<span class="fc" id="L38">                        .stream()</span>
+<span class="pc bpc" id="L39" title="1 of 4 branches missed.">                        .anyMatch(p -&gt; p.getNombre().equalsIgnoreCase(nombre) &amp;&amp; p.getDtoPorCantPrecioU() == 80.0)</span>
+        );
+        //me fijo que la promo se haya modificado
+
+<span class="fc" id="L43">        escenarios.removerListaPromociones();</span>
+<span class="fc" id="L44">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

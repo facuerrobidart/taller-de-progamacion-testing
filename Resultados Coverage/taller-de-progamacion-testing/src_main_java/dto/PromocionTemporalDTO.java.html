@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>PromocionTemporalDTO.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">dto</a> &gt; <span class="el_source">PromocionTemporalDTO.java</span></div><h1>PromocionTemporalDTO.java</h1><pre class="source lang-java linenums">package dto;
+
+import enums.Dias;
+
+import java.util.List;
+
+public class PromocionTemporalDTO extends PromocionDTO{
+
+    private String formaPago;
+    private float porcentajeDescuento;
+    private boolean acumulable;
+
+    public PromocionTemporalDTO(String nombre,boolean activo, List&lt;Dias&gt; diasPromo, String formaPago, float porcentajeDescuento, boolean esAcumulable) {
+<span class="nc" id="L14">        super(nombre,activo, diasPromo);</span>
+<span class="nc" id="L15">        this.formaPago = formaPago;</span>
+<span class="nc" id="L16">        this.porcentajeDescuento = porcentajeDescuento;</span>
+<span class="nc" id="L17">        this.acumulable = esAcumulable;</span>
+<span class="nc" id="L18">    }</span>
+
+    public String getFormaPago() {
+<span class="nc" id="L21">        return formaPago;</span>
+    }
+
+    public float getPorcentajeDescuento() {
+<span class="nc" id="L25">        return porcentajeDescuento;</span>
+    }
+
+    public boolean isAcumulable() {
+<span class="nc" id="L29">        return acumulable;</span>
+    }
+
+    public void setFormaPago(String formaPago) {
+<span class="nc" id="L33">        this.formaPago = formaPago;</span>
+<span class="nc" id="L34">    }</span>
+
+    public void setPorcentajeDescuento(float porcentajeDescuento) {
+<span class="nc" id="L37">        this.porcentajeDescuento = porcentajeDescuento;</span>
+<span class="nc" id="L38">    }</span>
+
+    public void setAcumulable(boolean acumulable) {
+<span class="nc" id="L41">        this.acumulable = acumulable;</span>
+<span class="nc" id="L42">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>

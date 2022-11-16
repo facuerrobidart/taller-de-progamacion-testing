@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GestionDeMesas.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">taller-de-progamacion-testing (15 nov. 2022 21:17:36)</a> &gt; <a href="../../index.html" class="el_group">taller-de-progamacion-testing</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">negocio</a> &gt; <span class="el_source">GestionDeMesas.java</span></div><h1>GestionDeMesas.java</h1><pre class="source lang-java linenums">package negocio;
+
+import dto.MesaDTO;
+import dto.MozoDTO;
+import enums.EstadoMesa;
+import excepciones.MesaExistenteException;
+import excepciones.MesaNoExistenteException;
+import modelo.*;
+import modelo.promociones.Promocion;
+import modelo.promociones.PromocionFija;
+import modelo.promociones.PromocionTemporal;
+import persistencia.IPersistencia;
+import persistencia.PersistenciaXML;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+public class GestionDeMesas {
+
+    private final Empresa empresa;
+<span class="fc" id="L23">    private static GestionDeMesas gestionDeMesas = null;</span>
+
+<span class="fc" id="L25">    private static GestionDePromociones gestionDePromociones = null;</span>
+    private Set&lt;Mozo&gt; mozos;
+
+<span class="fc" id="L28">    private GestionDeMesas() {</span>
+<span class="fc" id="L29">        this.empresa = Empresa.getEmpresa();</span>
+<span class="fc" id="L30">        this.mozos = Empresa.getEmpresa().getMozos();</span>
+<span class="fc" id="L31">        this.gestionDePromociones = GestionDePromociones.get();</span>
+<span class="fc" id="L32">    }</span>
+
+    public static GestionDeMesas get() {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if( gestionDeMesas == null )</span>
+<span class="fc" id="L36">            gestionDeMesas = new GestionDeMesas();</span>
+<span class="fc" id="L37">        return gestionDeMesas;</span>
+    }
+
+    /**
+     * Persistencia de la coleccion de mesas
+     */
+    public void persistirMesas(){
+<span class="fc" id="L44">        IPersistencia&lt;Set&lt;Mesa&gt;&gt; persistencia = new PersistenciaXML();</span>
+        try {
+<span class="fc" id="L46">            persistencia.abrirOutput(&quot;mesas.xml&quot;);</span>
+<span class="fc" id="L47">            persistencia.escribir(this.empresa.getMesas());</span>
+<span class="fc" id="L48">            persistencia.cerrarOutput();</span>
+<span class="pc" id="L49">        } catch (IOException e) {</span>
+
+        }
+<span class="fc" id="L52">    }</span>
+
+    /**
+     * Carga la mesa ala coleccion
+     * precondition: MesaDTO != null &amp;&amp; mesas != null
+     * @param mesa
+     * @throws MesaExistenteException
+     */
+    public void altaMesa(MesaDTO mesa) throws MesaExistenteException {
+
+<span class="fc" id="L62">        Set&lt;Mesa&gt; mesas = this.empresa.getMesas();</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        boolean existeMesa = mesas.stream().anyMatch(m -&gt; m.getNroMesa() == mesa.getNroMesa() );</span>
+
+<span class="fc" id="L65">        Mesa mesaNueva = new Mesa(mesa.getNroMesa(),mesa.getCantSillas());</span>
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if(!existeMesa){</span>
+<span class="fc" id="L68">            mesas.add(mesaNueva);</span>
+<span class="fc" id="L69">            persistirMesas();</span>
+<span class="fc" id="L70">        }</span>
+        else
+<span class="fc" id="L72">            throw new MesaExistenteException();</span>
+<span class="fc" id="L73">    }</span>
+
+    /**
+     * Elimina una mesa recibida y la vuelve a agregar
+     * precondition: MesaDTO!=null
+     * @param mesa
+     */
+    public double cerrarMesa(MesaDTO mesa,String medioDePago){
+
+<span class="nc" id="L82">        double total = 0;</span>
+<span class="nc" id="L83">        Set&lt;Mesa&gt; mesas = this.empresa.getMesas();</span>
+<span class="nc" id="L84">        Iterator&lt;Mesa&gt; it = mesas.iterator();</span>
+
+<span class="nc" id="L86">        Mesa mesaMod = new Mesa(mesa.getNroMesa(),mesa.getCantSillas());</span>
+
+<span class="nc" id="L88">        boolean encontreMesa = false;</span>
+<span class="nc" id="L89">        Mesa m = null;</span>
+
+<span class="nc bnc" id="L91" title="All 4 branches missed.">        while(it.hasNext() &amp;&amp; !encontreMesa) {</span>
+<span class="nc" id="L92">            m = it.next();</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            if(m.getNroMesa() == mesaMod.getNroMesa()){</span>
+<span class="nc" id="L94">                encontreMesa = true;</span>
+            }
+        }
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if(encontreMesa) {</span>
+<span class="nc" id="L98">            total = this.totalMesa(m, medioDePago);</span>
+<span class="nc" id="L99">            mesas.remove(m);</span>
+<span class="nc" id="L100">            m.setEstadoMesa(EstadoMesa.LIBRE);</span>
+<span class="nc" id="L101">            m.setMozoAsignado(mesa.getMozoAsignado());</span>
+<span class="nc" id="L102">            m.setVentas(mesa.getVentas() + total);</span>
+<span class="nc" id="L103">            m.setCantCuentasCerradas(mesa.getCantCuentasCerradas() + 1);</span>
+<span class="nc" id="L104">            m.setComanda(null);</span>
+<span class="nc" id="L105">            mesas.add(m);</span>
+<span class="nc" id="L106">            this.empresa.setMesas(mesas);</span>
+
+            //Actualizo las ventas del mozo
+
+<span class="nc" id="L110">            Set&lt;Mozo&gt; mozos = empresa.getMozos();</span>
+<span class="nc" id="L111">            Iterator&lt;Mozo&gt; itMozos = mozos.iterator();</span>
+<span class="nc" id="L112">            boolean encontre = false;</span>
+            Mozo mGenerico;
+<span class="nc bnc" id="L114" title="All 4 branches missed.">            while (itMozos.hasNext() &amp;&amp; !encontre) {</span>
+<span class="nc" id="L115">                mGenerico = itMozos.next();</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                if (mGenerico.getNombreCompleto().equalsIgnoreCase(mesa.getMozoAsignado().getNombreCompleto())) {</span>
+<span class="nc" id="L117">                    mozos.remove(mGenerico);</span>
+<span class="nc" id="L118">                    mGenerico.setVentas(mGenerico.getVentas() + total);</span>
+<span class="nc" id="L119">                    encontre = true;</span>
+<span class="nc" id="L120">                    mozos.add(mGenerico);</span>
+                }
+            }
+<span class="nc" id="L123">            empresa.setMozos(mozos);</span>
+        }
+<span class="nc" id="L125">        return total;</span>
+    }
+
+    public void modificaMesa(MesaDTO mesa)  {
+<span class="nc" id="L129">        Set&lt;Mesa&gt; mesas = this.empresa.getMesas();</span>
+<span class="nc" id="L130">        Iterator&lt;Mesa&gt; it = mesas.iterator();</span>
+
+<span class="nc" id="L132">        Mesa mesaMod = new Mesa(mesa.getNroMesa(),mesa.getCantSillas());</span>
+
+<span class="nc" id="L134">        boolean encontreMesa = false;</span>
+<span class="nc" id="L135">        Mesa m = null;</span>
+
+<span class="nc bnc" id="L137" title="All 4 branches missed.">        while(it.hasNext() &amp;&amp; !encontreMesa) {</span>
+<span class="nc" id="L138">            m = it.next();</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">            if(m.getNroMesa() == mesaMod.getNroMesa()){</span>
+<span class="nc" id="L140">                encontreMesa = true;</span>
+            }
+        }
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if(encontreMesa) {</span>
+<span class="nc" id="L144">            mesaMod.setEstadoMesa( mesa.getEstadoMesa() );</span>
+<span class="nc" id="L145">            mesaMod.setCantCuentasCerradas( mesa.getCantCuentasCerradas() );</span>
+<span class="nc" id="L146">            mesaMod.setComanda(mesa.getComanda());</span>
+<span class="nc" id="L147">            mesaMod.setMozoAsignado(mesa.getMozoAsignado());</span>
+<span class="nc" id="L148">            mesaMod.setVentas(mesa.getVentas());</span>
+<span class="nc" id="L149">            mesas.remove(m);</span>
+<span class="nc" id="L150">            mesas.add(mesaMod);</span>
+<span class="nc" id="L151">            this.empresa.setMesas(mesas);</span>
+<span class="nc" id="L152">            persistirMesas();</span>
+        }
+<span class="nc" id="L154">    }</span>
+
+    /**
+     * Elimina la mesa seleccionada
+     * @param nroMesa
+     */
+    public void bajaMesa(int nroMesa) {
+<span class="fc" id="L161">        Set&lt;Mesa&gt; mesas = this.empresa.getMesas();</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">        Optional&lt;Mesa&gt; mesa = mesas.stream().filter(m -&gt; m.getNroMesa() == nroMesa).findFirst();</span>
+
+<span class="pc bpc" id="L164" title="1 of 2 branches missed.">        if(mesa.isPresent()){</span>
+<span class="fc" id="L165">            mesas.remove(mesa.get());</span>
+<span class="fc" id="L166">            this.empresa.setMesas(mesas);</span>
+<span class="fc" id="L167">            persistirMesas();</span>
+        }
+<span class="fc" id="L169">    }</span>
+
+    /**
+     * Asigna el mozo enviado a la mesa enviada
+     * precondition: MesaDTO!=null &amp;&amp; MozoDTO!=null
+     * @param mozo
+     * @param mesa
+     */
+
+    public void asignarMozoMesa(MozoDTO mozo, MesaDTO mesa) {
+
+<span class="fc" id="L180">        boolean existeMozo = this.empresa.getMozos().stream().anyMatch(m -&gt; m.getNombreCompleto().equalsIgnoreCase(mozo.getNombreCompleto()) );</span>
+<span class="fc" id="L181">        Set&lt;Mesa&gt; mesas = this.empresa.getMesas();</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        boolean existeMesa = mesas.stream().anyMatch(m -&gt; m.getNroMesa() == mesa.getNroMesa());</span>
+
+<span class="fc bfc" id="L184" title="All 2 branches covered.">            if( existeMesa ){</span>
+<span class="fc" id="L185">                Mesa mesaM = new Mesa(mesa.getNroMesa(), mesa.getCantSillas());</span>
+<span class="fc" id="L186">                Mozo mozoA = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">                mesas.removeIf(m -&gt; m.getNroMesa() == mesaM.getNroMesa());</span>
+<span class="fc" id="L188">                mesaM.setMozoAsignado(mozoA);</span>
+<span class="fc" id="L189">                mesas.add(mesaM);</span>
+<span class="fc" id="L190">                this.empresa.setMesas(mesas);</span>
+            }
+<span class="fc" id="L192">    }</span>
+
+    /**
+     * Cierra la mesa enviada
+     * precondition: mesa!=null
+     * @param mesa
+     * @return
+     */
+    public double totalMesa(Mesa mesa,String medioDePago){
+<span class="nc" id="L201">        DateFormat dateFormat = new SimpleDateFormat(&quot;EEEEE&quot;);</span>
+<span class="nc" id="L202">        String dia = dateFormat.format(Calendar.getInstance().getTime());//Dia de hoy en letras</span>
+<span class="nc" id="L203">        boolean seAplicoPromo = false; //Uso global para saber si ya se aplico alguna promocion y si se estan acumulando o no promociones</span>
+        boolean aplique; //Uso local del while para aniadir el costo si no se aplico ninguna promo
+
+<span class="nc" id="L206">        double total=0,bruto=0;</span>
+<span class="nc" id="L207">        List&lt;Pedido&gt; pedidosMesa = mesa.getComanda().getPedidos();</span>
+<span class="nc" id="L208">        Iterator&lt;Pedido&gt; itPedidos = pedidosMesa.iterator();</span>
+        Pedido pedido;
+
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        while(itPedidos.hasNext()) {</span>
+<span class="nc" id="L212">            pedido = itPedidos.next();</span>
+<span class="nc" id="L213">            Set&lt;PromocionFija&gt; promocionesFijas = empresa.getPromocionesFijas();</span>
+<span class="nc" id="L214">            Iterator&lt;PromocionFija&gt; itPF = promocionesFijas.iterator();</span>
+            PromocionFija promoFija;
+<span class="nc" id="L216">            aplique = false;</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">            while (itPF.hasNext()) {</span>
+<span class="nc" id="L218">                promoFija = itPF.next();</span>
+<span class="nc bnc" id="L219" title="All 6 branches missed.">                if(promoFija.isActivo() &amp;&amp; gestionDePromociones.isDiaIncluido(promoFija,dia) &amp;&amp; promoFija.getProducto()==pedido.getProducto()) {</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">                    if (promoFija.isDosPorUno()) {</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">                        if (pedido.getCantidad() % 2 == 0) {</span>
+<span class="nc" id="L222">                            bruto += pedido.getProducto().getPrecio() * pedido.getCantidad() * 0.5; //2x1 de una cantidad par = %50 de descuento</span>
+<span class="nc" id="L223">                            seAplicoPromo = true;</span>
+<span class="nc" id="L224">                            aplique = true;</span>
+<span class="nc" id="L225">                        }</span>
+                        else {
+<span class="nc" id="L227">                            bruto += (pedido.getProducto().getPrecio() * (pedido.getCantidad() - 1) * 0.5) + pedido.getProducto().getPrecio(); //Le sumo el impar</span>
+<span class="nc" id="L228">                            seAplicoPromo = true;</span>
+<span class="nc" id="L229">                            aplique = true;</span>
+                        }
+<span class="nc bnc" id="L231" title="All 2 branches missed.">                        } else if (pedido.getCantidad() &gt; promoFija.getDtoPorCantMin()) { //Si supero la cant minima</span>
+<span class="nc" id="L232">                            bruto += pedido.getCantidad() * promoFija.getDtoPorCantPrecioU();</span>
+<span class="nc" id="L233">                             seAplicoPromo = true;</span>
+<span class="nc" id="L234">                             aplique = true;</span>
+<span class="nc" id="L235">                        }</span>
+                        else
+<span class="nc" id="L237">                            bruto += pedido.getCantidad() * pedido.getProducto().getPrecio();</span>
+                }
+            }
+<span class="nc bnc" id="L240" title="All 2 branches missed.">            if(!aplique)</span>
+<span class="nc" id="L241">                bruto += pedido.getCantidad() * pedido.getProducto().getPrecio();</span>
+        }
+
+        //Calculo final de promociones temporales
+<span class="nc" id="L245">        Set&lt;PromocionTemporal&gt; promocionesTemporales = empresa.getPromocionesTemporales();</span>
+<span class="nc" id="L246">        Iterator&lt;PromocionTemporal&gt; itPT = promocionesTemporales.iterator();</span>
+        PromocionTemporal promo;
+<span class="nc" id="L248">        aplique=false;</span>
+<span class="nc bnc" id="L249" title="All 4 branches missed.">        while (itPT.hasNext() &amp;&amp; aplique==false) {</span>
+<span class="nc" id="L250">            promo = itPT.next();</span>
+<span class="nc bnc" id="L251" title="All 6 branches missed.">            if (promo.isActivo() &amp;&amp; gestionDePromociones.isDiaIncluido(promo, dia) &amp;&amp; promo.getFormaPago().equalsIgnoreCase(medioDePago)) {</span>
+<span class="nc bnc" id="L252" title="All 4 branches missed.">                    if (promo.isEsAcumulable() || seAplicoPromo==false) {</span>
+<span class="nc" id="L253">                        total = bruto * (1 - (promo.getPorcentajeDescuento() / 100));</span>
+<span class="nc" id="L254">                        aplique=true;</span>
+                    }
+<span class="nc" id="L256">            }</span>
+            else
+<span class="nc" id="L258">                total = bruto;</span>
+        }
+
+<span class="nc" id="L261">        return total;</span>
+    }
+
+    public Set&lt;Mesa&gt; getMesas(){
+<span class="fc" id="L265">        return this.empresa.getMesas();</span>
+    }
+
+    /**
+     * trae el consumo promedio de una mesa
+     * @param nroMesa
+     * @return consumo promedio de la mesa enviada
+     * @throws MesaNoExistenteException
+     */
+    public float calculaConsumoPromedio(int nroMesa) throws MesaNoExistenteException {
+<span class="nc" id="L275">        return (float) empresa.consumoPromedioMesa(nroMesa);</span>
+    }
+
+    public Set&lt;Mozo&gt; getMozos() {
+<span class="nc" id="L279">        return mozos;</span>
+    }
+
+    public void setMozos(Set&lt;Mozo&gt; mozos) {
+<span class="nc" id="L283">        this.mozos = mozos;</span>
+<span class="nc" id="L284">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>taller-de-progamacion-testing (15 nov. 2022 21:17:36)</div></body></html>
